@@ -1,0 +1,10 @@
+.social-icon {
+  font-size: 1.5em;
+  transition: 1s;
+  cursor: pointer;
+}
+
+.social-icon:hover {
+  color: var(--discover-red);
+  transition: 1s;
+}
