@@ -18,10 +18,6 @@ export default function Contact() {
             Send us an email using the form below, or contact us on{" "}
             <Link to="https://www.facebook.com/Recoverworld">Facebook</Link>.
           </p>
-          <p>
-            <b>PLEASE NOTE:</b> All demo submissions must follow the procedure
-            on our <Link to="/demos">demos page</Link>.
-          </p>
 
           <Form>
             <Form.Group className="mb-3" controlId="formGroupEmail">
@@ -32,6 +28,12 @@ export default function Contact() {
               <Form.Label>Message</Form.Label>
               <Form.Control as="textarea" rows={5} />
             </Form.Group>
+            <Form.Check
+              className="mb-3"
+              type="checkbox"
+              id="form-accept"
+              label="I confirm this message is not related to Demo Submissions."
+            />
             <Button variant="primary" type="submit">
               Submit
             </Button>
