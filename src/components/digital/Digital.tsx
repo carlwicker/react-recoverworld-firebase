@@ -10,7 +10,7 @@ export default function Vinyl() {
     <Container>
       <Row>
         <Col
-          md={6}
+          md={12}
           style={{
             textAlign: "left",
             display: "flex",
@@ -38,17 +38,33 @@ export default function Vinyl() {
                     justifyContent: "center",
                   }}
                 >
-                  <Card.Subtitle className="mb-2 text-muted">
-                    IC008 | Iconise Records
+                  <Card.Subtitle className="text-muted">
+                    <Badge bg="warning">New Release</Badge>
+                    <div style={{ fontWeight: "200" }} className="pt-2">
+                      IC008 | Iconise Records
+                    </div>
                   </Card.Subtitle>
-                  <Card.Title as={"h3"} style={{ marginBottom: "0" }}>
-                    Reactivate{" "}
-                  </Card.Title>{" "}
-                  <Card.Title as={"h4"}>Carl Wicker</Card.Title>{" "}
-                </Col>
-
-                <Col md="auto">
-                  <Badge bg="warning">New Release</Badge>
+                  <Card.Title
+                    as={"h3"}
+                    style={{
+                      marginBottom: "0",
+                      paddingTop: "0",
+                      textTransform: "uppercase",
+                      fontWeight: "800",
+                    }}
+                  >
+                    Reactivate EP
+                  </Card.Title>
+                  <Card.Title
+                    style={{
+                      marginBottom: "0",
+                      paddingTop: "0",
+                      textTransform: "uppercase",
+                      fontWeight: "200",
+                    }}
+                  >
+                    Carl Wicker
+                  </Card.Title>
                 </Col>
               </Row>
 
