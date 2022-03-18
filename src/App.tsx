@@ -6,6 +6,8 @@ import Home from "./components/home/Home";
 import Demos from "./components/demos/Demos";
 import Contact from "./components/contact/Contact";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Vinyl from "./components/vinyl/Vinyl";
+import Digital from "./components/digital/Digital";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="demos" element={<Demos />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="vinyl" element={<Vinyl />} />
+        <Route path="digital" element={<Digital />} />
       </Routes>
     </div>
   );

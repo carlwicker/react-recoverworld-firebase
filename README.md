@@ -1,3 +1,5 @@
-# RecoverWorld Hub (React/Firebase)
+# RecoverWorld Hub (TypeScript/React/Firebase)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Work in Progress
+
+https://recoverworld-d5ab4.web.app

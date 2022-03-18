@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 export default function Demos() {
   return (
     <Container>
+      <h1>Demos</h1>
       <Row>
         <Col
           md={6}
@@ -13,8 +14,6 @@ export default function Demos() {
             paddingBottom: "50px",
           }}
         >
-          <h1>Demos</h1>
-
           <p>
             We love new music and are proud to say that a significant number of
             our new releases have come from demo submissions.
@@ -77,7 +76,6 @@ export default function Demos() {
             Good luck – we look forward to hearing from you and hopefully
             working with you in the future!
           </p>
-          <h2>Send Your Demo To</h2>
           <p>
             <a href="mailto:demos@recoverworld.com">demos@recoverworld.com</a>
           </p>

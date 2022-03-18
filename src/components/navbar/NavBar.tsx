@@ -22,8 +22,12 @@ export default function NavBar() {
             </Nav.Link>
 
             <NavDropdown title="Shop" id="basic-nav-dropdown">
-              <NavDropdown.Item>Vinyl</NavDropdown.Item>
-              <NavDropdown.Item>MP3 / WAV / AAC</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/vinyl">
+                Vinyl
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/digital">
+                MP3 / WAV / AAC
+              </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link as={Link} to="/demos">
               Demos
