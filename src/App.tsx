@@ -8,6 +8,7 @@ import Contact from "./components/contact/Contact";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Vinyl from "./components/vinyl/Vinyl";
 import Digital from "./components/digital/Digital";
+import Social from "./components/social/Social";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="vinyl" element={<Vinyl />} />
         <Route path="digital" element={<Digital />} />
       </Routes>
+      <Social />
     </div>
   );
 }

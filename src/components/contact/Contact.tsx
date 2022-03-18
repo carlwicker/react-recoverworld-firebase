@@ -1,4 +1,4 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Contact() {
@@ -22,6 +22,20 @@ export default function Contact() {
             <b>PLEASE NOTE:</b> All demo submissions must follow the procedure
             on our <Link to="/demos">demos page</Link>.
           </p>
+
+          <Form>
+            <Form.Group className="mb-3" controlId="formGroupEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGroupMessage">
+              <Form.Label>Message</Form.Label>
+              <Form.Control as="textarea" rows={5} />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
         </Col>
       </Row>
     </Container>

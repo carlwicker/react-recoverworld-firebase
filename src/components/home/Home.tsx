@@ -11,9 +11,7 @@ export default function Home() {
             display: "flex",
             flexDirection: "column",
           }}
-        >
-          <h1>Home</h1>
-        </Col>
+        ></Col>
       </Row>
     </Container>
   );

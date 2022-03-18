@@ -1,6 +1,5 @@
 import { Container, Navbar, NavDropdown, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Social from "../social/Social";
 
 export default function NavBar() {
   return (
@@ -37,7 +36,6 @@ export default function NavBar() {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-        <Social />
       </Container>
     </Navbar>
   );

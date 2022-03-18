@@ -11,7 +11,6 @@ export default function Demos() {
             textAlign: "left",
             display: "flex",
             flexDirection: "column",
-            paddingBottom: "50px",
           }}
         >
           <p>
