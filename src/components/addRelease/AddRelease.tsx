@@ -59,7 +59,6 @@ export default function AddRelease() {
             }}
           >
             <Form.Group className="mb-3" controlId="addReleaseLabel">
-              <Form.Label>Label:</Form.Label>
               <Form.Select
                 aria-label="Select a label..."
                 className="mb-3"
@@ -68,7 +67,7 @@ export default function AddRelease() {
                   console.log(release);
                 }}
               >
-                <option>Select a label...</option>
+                <option disabled>Select a label...</option>
                 <option value="Discover Records">Discover Records</option>
                 <option value="Discover Dark">Discover Dark</option>
                 <option value="Eve Records">Eve Records</option>
