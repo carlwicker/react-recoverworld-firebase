@@ -9,8 +9,22 @@ export default function AddTrackModal({
   const [trackObj, setTrackObj] = useState<any>({});
 
   useEffect(() => {
-    console.log(modalTrackShow);
-  }, [modalTrackShow]);
+    console.log(trackObj);
+  }, [trackObj]);
+
+  const initTrackObj: any = {
+    artist: undefined,
+    title: undefined,
+    mix: "Original Mix",
+    beatport: "http://www.beatport.com/",
+    youtube: "http://www.youtube.com/",
+    spotify: "http://www.spotify.com/",
+    soundcloud: "http://www.soundcloud.com/",
+  };
+
+  useEffect(() => {
+    setTrackObj(initTrackObj);
+  }, []);
 
   return (
     <Modal
@@ -31,7 +45,7 @@ export default function AddTrackModal({
           <Form.Label>Track Artist:</Form.Label>
           <Form.Control
             type="string"
-            placeholder=""
+            value={trackObj.artist}
             onChange={(e) => {
               setTrackObj({ ...trackObj, artist: e.target.value });
             }}
@@ -41,7 +55,7 @@ export default function AddTrackModal({
           <Form.Label>Track Title:</Form.Label>
           <Form.Control
             type="string"
-            placeholder=""
+            value={trackObj.title}
             onChange={(e) => {
               setTrackObj({ ...trackObj, title: e.target.value });
             }}
@@ -51,7 +65,7 @@ export default function AddTrackModal({
           <Form.Label>Track Mix:</Form.Label>
           <Form.Control
             type="string"
-            defaultValue="Original Mix"
+            value={trackObj.mix}
             onChange={(e) => {
               setTrackObj({ ...trackObj, mix: e.target.value });
             }}
@@ -102,6 +116,8 @@ export default function AddTrackModal({
           className="my-5"
           onClick={() => {
             applyTrackToTracklisting(trackObj);
+            setTrackObj(initTrackObj);
+            hideTrackModal();
           }}
         >
           Apply Track To Release

@@ -1,5 +1,14 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Form, Button, Col, Table } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Form,
+  Button,
+  Col,
+  Table,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
 import { BsYoutube, BsSpotify } from "react-icons/bs";
 import { SiBeatport, SiSoundcloud, SiSpotify } from "react-icons/si";
 import AddTrackModal from "./AddTrackModal";
@@ -11,7 +20,7 @@ export default function AddRelease() {
   const [showTrackModal, setShowTrackModal] = useState<any>(false);
 
   useEffect(() => {
-    // console.log(release);
+    console.log(release);
     // console.log(tracks);
     // console.log(modalTrackShow);
   }, [release, showTrackModal]);
@@ -55,7 +64,8 @@ export default function AddRelease() {
                 aria-label="Select a label..."
                 className="mb-3"
                 onChange={(e) => {
-                  setRelease({ ...release, label: e.target.value });
+                  setRelease({ ...release, catNum: e.target.value });
+                  console.log(release);
                 }}
               >
                 <option>Select a label...</option>
@@ -66,28 +76,34 @@ export default function AddRelease() {
                 <option value="Iconise Records">Iconise Records</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group className="mb-3 " controlId="addReleaseCatalogNumber">
-              <Form.Label>Catalog Number:</Form.Label>
-              <Form.Control
+            <InputGroup className="mb-3">
+              <InputGroup.Text id="catNum" style={{ width: "130px" }}>
+                Cat Number:
+              </InputGroup.Text>
+              <FormControl
                 type="string"
-                placeholder=""
                 onChange={(e) => {
-                  setRelease({ ...release, catNum: e.target.value });
+                  setRelease({ ...release, label: e.target.value });
                 }}
               />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="addReleaseArtist">
-              <Form.Label>Artist:</Form.Label>
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+              <InputGroup.Text id="input-artist" style={{ width: "130px" }}>
+                Artist:
+              </InputGroup.Text>
               <Form.Control
                 type="string"
-                placeholder=""
                 onChange={(e) => {
                   setRelease({ ...release, artist: e.target.value });
                 }}
               />
-            </Form.Group>
-            <Form.Group className="mb-3 " controlId="addReleaseTitle">
-              <Form.Label>Title:</Form.Label>
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+              <InputGroup.Text id="input-title" style={{ width: "130px" }}>
+                Title:
+              </InputGroup.Text>
               <Form.Control
                 type="string"
                 placeholder=""
@@ -95,17 +111,21 @@ export default function AddRelease() {
                   setRelease({ ...release, title: e.target.value });
                 }}
               />
-            </Form.Group>
-            <Form.Group className="mb-3 " controlId="addReleaseImageLink">
-              <Form.Label>Link to Release Image:</Form.Label>
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+              <InputGroup.Text id="input-image" style={{ width: "130px" }}>
+                Image URL:
+              </InputGroup.Text>
               <Form.Control
                 type="string"
-                placeholder="https://"
+                placeholder=""
                 onChange={(e) => {
                   setRelease({ ...release, img: e.target.value });
                 }}
               />
-            </Form.Group>
+            </InputGroup>
+
             {/* Tracklisting Table */}
             <Table striped bordered hover variant="dark" className="mt-5">
               <thead>
