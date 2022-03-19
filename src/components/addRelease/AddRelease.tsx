@@ -67,7 +67,7 @@ export default function AddRelease() {
                   console.log(release);
                 }}
               >
-                <option disabled>Select a label...</option>
+                <option>Select a label...</option>
                 <option value="Discover Records">Discover Records</option>
                 <option value="Discover Dark">Discover Dark</option>
                 <option value="Eve Records">Eve Records</option>
