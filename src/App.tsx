@@ -5,10 +5,11 @@ import NavBar from "./components/navbar/NavBar";
 import Home from "./components/home/Home";
 import Demos from "./components/demos/Demos";
 import Contact from "./components/contact/Contact";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Vinyl from "./components/vinyl/Vinyl";
 import Digital from "./components/digital/Digital";
 import Social from "./components/social/Social";
+import AddRelease from "./components/addRelease/AddRelease";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="vinyl" element={<Vinyl />} />
         <Route path="digital" element={<Digital />} />
+        <Route path="digital/addRelease" element={<AddRelease />} />
       </Routes>
       <Social />
     </div>

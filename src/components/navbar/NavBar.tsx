@@ -6,7 +6,7 @@ export default function NavBar() {
     <Navbar expand="lg" variant="dark">
       <Container>
         <Navbar.Brand
-          href="#home"
+          href="/"
           style={{
             textTransform: "uppercase",
             fontWeight: "800",
@@ -14,7 +14,10 @@ export default function NavBar() {
         >
           RecoverWorld
         </Navbar.Brand>
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse
+          id="basic-navbar-nav"
+          style={{ textTransform: "uppercase" }}
+        >
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/about">
               About
@@ -25,7 +28,7 @@ export default function NavBar() {
                 Vinyl
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/digital">
-                MP3 / WAV / AAC
+                Digital Hub
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link as={Link} to="/demos">

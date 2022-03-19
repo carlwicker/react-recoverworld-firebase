@@ -58,7 +58,7 @@ export default function Demos() {
             </li>
           </ol>
 
-          <h2>Submittion Details</h2>
+          <h2>Submission Details</h2>
           <p>
             Initially, we now ask for all tracks to be submitted as SoundCloud
             links, MySpace, YouTube, or any other streaming format. We can then

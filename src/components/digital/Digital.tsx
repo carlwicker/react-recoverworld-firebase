@@ -1,13 +1,40 @@
-import { Container, Row, Col, Card, ListGroup, Badge } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  ListGroup,
+  Badge,
+  Button,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BsSpotify, BsYoutube } from "react-icons/bs";
 import { SiBeatport, SiSoundcloud } from "react-icons/si";
+import DigitalFilter from "./DigitalFilter";
 
-export default function Vinyl() {
+export default function Digital() {
   const releaseImg = require("../../img/iconise1.webp");
 
   return (
-    <Container>
+    <Container style={{ textAlign: "left" }}>
+      <Row
+        style={{
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <Col>
+          <h1>Digital Hub</h1>
+        </Col>
+        <Col style={{ display: "flex", justifyContent: "end" }}>
+          <Link to="/digital/addRelease">
+            <Button variant="primary">Add Release</Button>
+          </Link>
+        </Col>
+      </Row>
+
+      <DigitalFilter />
+
       <Row>
         <Col
           md={12}
@@ -17,8 +44,6 @@ export default function Vinyl() {
             flexDirection: "column",
           }}
         >
-          <h1>Digital Hub</h1>
-
           <Card>
             <Card.Body>
               <Row className="pb-3">
@@ -39,7 +64,7 @@ export default function Vinyl() {
                   }}
                 >
                   <Card.Subtitle className="text-muted">
-                    <Badge bg="warning">New Release</Badge>
+                    <Badge bg="primary">New Release</Badge>
                     <div style={{ fontWeight: "200" }} className="pt-2">
                       IC008 | Iconise Records
                     </div>
@@ -77,7 +102,9 @@ export default function Vinyl() {
                     >
                       <Col>
                         <div className="ms-2 me-auto">
-                          <div className="fw-bold">Reactivate</div>
+                          <div className="fw-bold">
+                            Carl Wicker - Reactivate
+                          </div>
                           Original Mix
                         </div>
                       </Col>
@@ -91,16 +118,24 @@ export default function Vinyl() {
                         }}
                       >
                         <Link to={"#"}>
-                          <BsYoutube style={{ fontSize: "2em" }} />
+                          <BsYoutube
+                            style={{ fontSize: "2em", color: "white" }}
+                          />
                         </Link>
                         <Link to={"#"}>
-                          <BsSpotify style={{ fontSize: "2em" }} />
+                          <BsSpotify
+                            style={{ fontSize: "2em", color: "white" }}
+                          />
                         </Link>
                         <Link to={"#"}>
-                          <SiSoundcloud style={{ fontSize: "2em" }} />
+                          <SiSoundcloud
+                            style={{ fontSize: "2em", color: "white" }}
+                          />
                         </Link>
                         <Link to={"#"}>
-                          <SiBeatport style={{ fontSize: "2em" }} />
+                          <SiBeatport
+                            style={{ fontSize: "2em", color: "white" }}
+                          />
                         </Link>
                       </Col>
                     </ListGroup.Item>
@@ -110,8 +145,8 @@ export default function Vinyl() {
                     >
                       <Col>
                         <div className="ms-2 me-auto">
-                          <div className="fw-bold">Bong Go</div>
-                          Deep Depression Mix
+                          <div className="fw-bold">Carl Wicker - Bong Go</div>
+                          Deeper Disco Mix
                         </div>
                       </Col>
 
@@ -124,13 +159,19 @@ export default function Vinyl() {
                         }}
                       >
                         <Link to={"#"}>
-                          <BsYoutube style={{ fontSize: "2em" }} />
+                          <BsYoutube
+                            style={{ fontSize: "2em", color: "white" }}
+                          />
                         </Link>
                         <Link to={"#"}>
-                          <BsSpotify style={{ fontSize: "2em" }} />
+                          <BsSpotify
+                            style={{ fontSize: "2em", color: "white" }}
+                          />
                         </Link>
                         <Link to={"#"}>
-                          <SiBeatport style={{ fontSize: "2em" }} />
+                          <SiBeatport
+                            style={{ fontSize: "2em", color: "white" }}
+                          />
                         </Link>
                       </Col>
                     </ListGroup.Item>
