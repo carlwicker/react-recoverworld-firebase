@@ -9,9 +9,13 @@ import {
   InputGroup,
   FormControl,
 } from "react-bootstrap";
-import { BsYoutube, BsSpotify } from "react-icons/bs";
+import { BsYoutube } from "react-icons/bs";
 import { SiBeatport, SiSoundcloud, SiSpotify } from "react-icons/si";
 import AddTrackModal from "./AddTrackModal";
+import { db } from "../../../firebase";
+import { Link } from "react-router-dom";
+
+import { collection, addDoc } from "firebase/firestore";
 
 export default function AddRelease() {
   const [release, setRelease] = useState<any>();
@@ -20,10 +24,10 @@ export default function AddRelease() {
   const [showTrackModal, setShowTrackModal] = useState<any>(false);
 
   useEffect(() => {
-    console.log(release);
+    // console.log(release);
     // console.log(tracks);
     // console.log(modalTrackShow);
-  }, [release, showTrackModal]);
+  }, [release, showTrackModal, tracks]);
 
   function deleteTrackFromTrackListing(index: number) {
     let newArr = tracks
@@ -39,6 +43,15 @@ export default function AddRelease() {
 
   function hideTrackModal() {
     setShowTrackModal(false);
+  }
+
+  async function addToFireStoreReleases() {
+    // Add a new document with a generated id.
+    const docRef = await addDoc(collection(db, "releases"), {
+      ...release,
+      trackListing: tracks,
+    });
+    console.log(docRef, docRef.id);
   }
 
   return (
@@ -63,7 +76,7 @@ export default function AddRelease() {
                 aria-label="Select a label..."
                 className="mb-3"
                 onChange={(e) => {
-                  setRelease({ ...release, catNum: e.target.value });
+                  setRelease({ ...release, label: e.target.value });
                   console.log(release);
                 }}
               >
@@ -82,7 +95,7 @@ export default function AddRelease() {
               <FormControl
                 type="string"
                 onChange={(e) => {
-                  setRelease({ ...release, label: e.target.value });
+                  setRelease({ ...release, catNum: e.target.value });
                 }}
               />
             </InputGroup>
@@ -114,13 +127,13 @@ export default function AddRelease() {
 
             <InputGroup className="mb-3">
               <InputGroup.Text id="input-image" style={{ width: "130px" }}>
-                Image URL:
+                Artwork URL:
               </InputGroup.Text>
               <Form.Control
                 type="string"
                 placeholder=""
                 onChange={(e) => {
-                  setRelease({ ...release, img: e.target.value });
+                  setRelease({ ...release, artwork: e.target.value });
                 }}
               />
             </InputGroup>
@@ -176,7 +189,7 @@ export default function AddRelease() {
             </Table>
             {/* Add Track  */}
             <Row>
-              <Col>
+              <Col style={{ display: "flex", gap: "10px" }}>
                 <Button
                   variant="primary"
                   onClick={() => setShowTrackModal(true)}
@@ -184,6 +197,16 @@ export default function AddRelease() {
                 >
                   Add Track
                 </Button>
+
+                <Link to="/digital">
+                  <Button
+                    variant="danger"
+                    className="my-5"
+                    onClick={() => addToFireStoreReleases()}
+                  >
+                    Submit Release
+                  </Button>
+                </Link>
               </Col>
             </Row>
           </Form>

@@ -9,7 +9,7 @@ export default function AddTrackModal({
   const [trackObj, setTrackObj] = useState<any>({});
 
   useEffect(() => {
-    console.log(trackObj);
+    // console.log(trackObj);
   }, [trackObj]);
 
   const initTrackObj: any = {
@@ -113,14 +113,14 @@ export default function AddTrackModal({
         </Form.Group>
         <Button
           variant="primary"
-          className="my-5"
+          className="mt-5"
           onClick={() => {
             applyTrackToTracklisting(trackObj);
             setTrackObj(initTrackObj);
             hideTrackModal();
           }}
         >
-          Apply Track To Release
+          Add Track To Release
         </Button>
       </Modal.Body>
     </Modal>

@@ -9,7 +9,7 @@ import { Routes, Route } from "react-router-dom";
 import Vinyl from "./components/vinyl/Vinyl";
 import Digital from "./components/digital/Digital";
 import Social from "./components/social/Social";
-import AddRelease from "./components/addRelease/AddRelease";
+import AddRelease from "./components/digital/addRelease/AddRelease";
 
 function App() {
   return (

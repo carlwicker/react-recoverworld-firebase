@@ -15,7 +15,7 @@ export interface IReleases {
   artist: string;
   title: string;
   label: string;
-  img: string;
+  artwork: string;
   catNum: string;
   tracklisting: ITrack[];
   releaseDate: Date;
