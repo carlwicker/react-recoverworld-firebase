@@ -1,17 +1,8 @@
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  ListGroup,
-  Badge,
-  Button,
-} from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { BsSpotify, BsYoutube } from "react-icons/bs";
-import { SiBeatport, SiSoundcloud } from "react-icons/si";
+
 import DigitalFilter from "./DigitalFilter";
-import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import DigitalTracklisting from "./DigitalTracklisting";
@@ -27,7 +18,8 @@ export default function Digital() {
       await getDocs(releasesRef).then((snapshot) => {
         let releaseArr: any[] = [];
         snapshot.forEach((release) => {
-          releaseArr.push(release.data());
+          console.log(release.id);
+          releaseArr.push({ ...release.data(), id: release.id });
         });
         setReleases(releaseArr);
       });

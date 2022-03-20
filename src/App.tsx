@@ -10,6 +10,7 @@ import Vinyl from "./components/vinyl/Vinyl";
 import Digital from "./components/digital/Digital";
 import Social from "./components/social/Social";
 import AddRelease from "./components/digital/addRelease/AddRelease";
+import EditRelease from "./components/digital/editRelease/EditRelease";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="vinyl" element={<Vinyl />} />
         <Route path="digital" element={<Digital />} />
         <Route path="digital/addRelease" element={<AddRelease />} />
+        <Route path="digital/:releaseId/edit" element={<EditRelease />} />
       </Routes>
       <Social />
     </div>

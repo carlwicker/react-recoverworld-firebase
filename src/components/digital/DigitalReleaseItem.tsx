@@ -63,9 +63,9 @@ export default function DigitalReleaseItem({ release }: IDigitalReleaseItem) {
             }}
           >
             <div>
-              <Button variant="outline-warning" className="">
-                Edit
-              </Button>
+              <Link to={"/digital/" + release.id + "/edit"}>
+                <Button variant="outline-warning">Edit</Button>
+              </Link>
             </div>
           </Col>
         </Row>
