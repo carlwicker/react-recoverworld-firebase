@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -8,13 +9,71 @@ import {
   Col,
   Button,
 } from "react-bootstrap";
-
+import { doc, getDoc } from "firebase/firestore";
 import { Link, useParams } from "react-router-dom";
+import { db } from "../../../firebase";
+import { BsYoutube } from "react-icons/bs";
+import { SiBeatport, SiSoundcloud, SiSpotify } from "react-icons/si";
+import EditTrackModal from "../addRelease/AddTrackModal";
 
 export default function EditRelease() {
   let { releaseId }: any = useParams();
+
+  const [releaseObj, setReleaseObj] = useState<any | {}>({});
+
+  const labels: string[] = [
+    "Discover Records",
+    "Discover Dark",
+    "Eve Records",
+    "Flux Delux",
+    "Iconise Records",
+  ];
+
+  const [tracks, setTracks] = useState<any | []>([]);
+  const [showEditTrackModal, setShowEditTrackModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    async function getReleaseById() {
+      const docRef = doc(db, "releases", releaseId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setReleaseObj({ ...docSnap.data(), id: docSnap.id });
+      } else {
+        console.log("No such document!");
+      }
+    }
+
+    getReleaseById();
+  }, []);
+
+  useEffect(() => {
+    setTracks(releaseObj?.trackListing);
+    console.log(releaseObj);
+  }, [releaseObj]);
+
+  function deleteTrackFromTrackListing(index: number) {
+    let newArr = tracks
+      .slice(0, index)
+      .concat(tracks.slice(index + 1, tracks.length));
+    setTracks(newArr);
+  }
+
+  function hideTrackModal() {
+    setShowEditTrackModal(false);
+  }
+
+  function applyTrackToTracklisting(trackObj: any) {
+    setTracks([...tracks, trackObj]);
+  }
+
   return (
     <>
+      <EditTrackModal
+        modalTrackShow={showEditTrackModal}
+        hideTrackModal={hideTrackModal}
+        applyTrackToTracklisting={applyTrackToTracklisting}
+      />
       <Container>
         <Row style={{ textAlign: "left" }}>
           <h1>Edit Release</h1>
@@ -24,32 +83,37 @@ export default function EditRelease() {
               e.preventDefault();
             }}
           >
-            <Form.Group className="mb-3" controlId="addReleaseLabel">
+            <Form.Group
+              className="mb-3"
+              controlId="addReleaseLabel"
+              style={{ color: "black" }}
+            >
               <Form.Select
-                aria-label="Select a label..."
-                className="mb-3"
+                value={releaseObj.label}
                 onChange={(e) => {
-                  //   setRelease({ ...release, label: e.target.value });
-                  //   console.log(release);
+                  setReleaseObj({ ...releaseObj, label: e.target.value });
                 }}
               >
-                <option>Select a label...</option>
-                <option value="Discover Records">Discover Records</option>
-                <option value="Discover Dark">Discover Dark</option>
-                <option value="Eve Records">Eve Records</option>
-                <option value="Flux Delux">Flux Delux</option>
-                <option value="Iconise Records">Iconise Records</option>
+                {labels.map((label: string, index: number) => {
+                  return (
+                    <option key={index} value={label}>
+                      {label}
+                    </option>
+                  );
+                })}
               </Form.Select>
             </Form.Group>
+
             <InputGroup className="mb-3">
               <InputGroup.Text id="catNum" style={{ width: "130px" }}>
                 Cat Number:
               </InputGroup.Text>
               <FormControl
                 type="string"
-                // onChange={(e) => {
-                //   setRelease({ ...release, catNum: e.target.value });
-                // }}
+                onChange={(e) => {
+                  setReleaseObj({ ...releaseObj, catNum: e.target.value });
+                }}
+                defaultValue={releaseObj.catNum}
               />
             </InputGroup>
 
@@ -59,9 +123,10 @@ export default function EditRelease() {
               </InputGroup.Text>
               <Form.Control
                 type="string"
-                // onChange={(e) => {
-                //   setRelease({ ...release, artist: e.target.value });
-                // }}
+                onChange={(e) => {
+                  setReleaseObj({ ...releaseObj, artist: e.target.value });
+                }}
+                defaultValue={releaseObj.artist}
               />
             </InputGroup>
 
@@ -72,9 +137,10 @@ export default function EditRelease() {
               <Form.Control
                 type="string"
                 placeholder=""
-                // onChange={(e) => {
-                //   setRelease({ ...release, title: e.target.value });
-                // }}
+                onChange={(e) => {
+                  setReleaseObj({ ...releaseObj, title: e.target.value });
+                }}
+                defaultValue={releaseObj.title}
               />
             </InputGroup>
 
@@ -85,9 +151,10 @@ export default function EditRelease() {
               <Form.Control
                 type="string"
                 placeholder=""
-                // onChange={(e) => {
-                //   setRelease({ ...release, artwork: e.target.value });
-                // }}
+                onChange={(e) => {
+                  setReleaseObj({ ...releaseObj, artwork: e.target.value });
+                }}
+                defaultValue={releaseObj.artwork}
               />
             </InputGroup>
 
@@ -104,7 +171,7 @@ export default function EditRelease() {
                 </tr>
               </thead>
               <tbody>
-                {/* {tracks?.map((track: any, index: number) => {
+                {tracks?.map((track: any, index: number) => {
                   return (
                     <tr key={index}>
                       <td>{index + 1}</td>
@@ -112,10 +179,22 @@ export default function EditRelease() {
                       <td>{track.artist}</td>
                       <td>{track.mix}</td>
                       <td>
-                        <SiBeatport style={{ marginRight: "10px" }} />
-                        <BsYoutube style={{ marginRight: "10px" }} />
-                        <SiSoundcloud style={{ marginRight: "10px" }} />
-                        <SiSpotify />
+                        {track.beatport !== "" ? (
+                          <SiBeatport style={{ marginRight: "10px" }} />
+                        ) : (
+                          ""
+                        )}
+                        {track.youtube !== "" ? (
+                          <BsYoutube style={{ marginRight: "10px" }} />
+                        ) : (
+                          ""
+                        )}
+                        {track.soundcloud !== "" ? (
+                          <SiSoundcloud style={{ marginRight: "10px" }} />
+                        ) : (
+                          ""
+                        )}
+                        {track.spotify !== "" ? <SiSpotify /> : ""}
                       </td>
                       <td>
                         <Button
@@ -137,7 +216,7 @@ export default function EditRelease() {
                       </td>
                     </tr>
                   );
-                })} */}
+                })}
               </tbody>
             </Table>
             {/* Add Track  */}
@@ -145,7 +224,7 @@ export default function EditRelease() {
               <Col style={{ display: "flex", gap: "10px" }}>
                 <Button
                   variant="primary"
-                  //   onClick={() => setShowTrackModal(true)}
+                  onClick={() => setShowEditTrackModal(true)}
                   className="my-5"
                 >
                   Add Track

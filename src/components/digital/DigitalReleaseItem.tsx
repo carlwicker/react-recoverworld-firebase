@@ -96,20 +96,42 @@ export default function DigitalReleaseItem({ release }: IDigitalReleaseItem) {
                       alignSelf: "center",
                     }}
                   >
-                    <a href={track.youtube} target="blank">
-                      <BsYoutube style={{ fontSize: "2em", color: "white" }} />
-                    </a>
-                    <a href={track.spotify} target="blank">
-                      <BsSpotify style={{ fontSize: "2em", color: "white" }} />
-                    </a>
-                    <a href={track.soundcloud} target="blank">
-                      <SiSoundcloud
-                        style={{ fontSize: "2em", color: "white" }}
-                      />
-                    </a>
-                    <a href={track.beatport} target="blank">
-                      <SiBeatport style={{ fontSize: "2em", color: "white" }} />
-                    </a>
+                    {track.youtube !== "" ? (
+                      <a href={track.youtube} target="blank">
+                        <BsYoutube
+                          style={{ fontSize: "2em", color: "white" }}
+                        />
+                      </a>
+                    ) : (
+                      ""
+                    )}
+                    {track.spotify !== "" ? (
+                      <a href={track.spotify} target="blank">
+                        <BsSpotify
+                          style={{ fontSize: "2em", color: "white" }}
+                        />
+                      </a>
+                    ) : (
+                      ""
+                    )}
+                    {track.soundcloud !== "" ? (
+                      <a href={track.soundcloud} target="blank">
+                        <SiSoundcloud
+                          style={{ fontSize: "2em", color: "white" }}
+                        />
+                      </a>
+                    ) : (
+                      ""
+                    )}
+                    {track.beatport !== "" ? (
+                      <a href={track.beatport} target="blank">
+                        <SiBeatport
+                          style={{ fontSize: "2em", color: "white" }}
+                        />
+                      </a>
+                    ) : (
+                      ""
+                    )}
                   </Col>
                 </ListGroup.Item>
               );

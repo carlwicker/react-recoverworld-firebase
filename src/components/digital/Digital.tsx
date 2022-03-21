@@ -15,10 +15,9 @@ export default function Digital() {
     async function getReleases() {
       const releasesRef = await collection(db, "releases");
 
-      await getDocs(releasesRef).then((snapshot) => {
+      getDocs(releasesRef).then((snapshot) => {
         let releaseArr: any[] = [];
         snapshot.forEach((release) => {
-          console.log(release.id);
           releaseArr.push({ ...release.data(), id: release.id });
         });
         setReleases(releaseArr);
@@ -28,9 +27,9 @@ export default function Digital() {
     getReleases();
   }, []);
 
-  useEffect(() => {
-    console.log(releases);
-  }, [releases]);
+  // useEffect(() => {
+  //   console.log(releases);
+  // }, [releases]);
 
   return (
     <Container style={{ textAlign: "left" }}>
