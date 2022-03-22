@@ -14,7 +14,8 @@ import { Link, useParams } from "react-router-dom";
 import { db } from "../../../firebase";
 import { BsYoutube } from "react-icons/bs";
 import { SiBeatport, SiSoundcloud, SiSpotify } from "react-icons/si";
-import EditTrackModal from "../addRelease/AddTrackModal";
+import EditTrackModal from "../addRelease/EditTrackModal";
+import AddTrackModal from "../addRelease/AddTrackModal";
 
 export default function EditRelease() {
   let { releaseId }: any = useParams();
@@ -59,7 +60,7 @@ export default function EditRelease() {
     setTracks(newArr);
   }
 
-  function hideTrackModal() {
+  function hideEditTrackModal() {
     setShowEditTrackModal(false);
   }
 
@@ -69,11 +70,6 @@ export default function EditRelease() {
 
   return (
     <>
-      <EditTrackModal
-        modalTrackShow={showEditTrackModal}
-        hideTrackModal={hideTrackModal}
-        applyTrackToTracklisting={applyTrackToTracklisting}
-      />
       <Container>
         <Row style={{ textAlign: "left" }}>
           <h1>Edit Release</h1>

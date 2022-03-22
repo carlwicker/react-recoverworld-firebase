@@ -14,6 +14,7 @@ import { SiBeatport, SiSoundcloud, SiSpotify } from "react-icons/si";
 import AddTrackModal from "./AddTrackModal";
 import { db } from "../../../firebase";
 import { Link } from "react-router-dom";
+import EditTrackModal from "./EditTrackModal";
 
 import { collection, addDoc } from "firebase/firestore";
 
@@ -21,13 +22,14 @@ export default function AddRelease() {
   const [release, setRelease] = useState<any>();
   const [tracks, setTracks] = useState<any>([]);
 
-  const [showTrackModal, setShowTrackModal] = useState<any>(false);
+  const [showAddTrackModal, setAddShowTrackModal] = useState<any>(false);
+  const [showEditTrackModal, setEditShowTrackModal] = useState<any>(false);
 
   useEffect(() => {
     // console.log(release);
     // console.log(tracks);
     // console.log(modalTrackShow);
-  }, [release, showTrackModal, tracks]);
+  }, [release, showAddTrackModal, tracks]);
 
   function deleteTrackFromTrackListing(index: number) {
     let newArr = tracks
@@ -41,8 +43,12 @@ export default function AddRelease() {
     setTracks([...tracks, trackObj]);
   }
 
-  function hideTrackModal() {
-    setShowTrackModal(false);
+  function hideAddTrackModal() {
+    setAddShowTrackModal(false);
+  }
+
+  function hideEditTrackModal() {
+    setEditShowTrackModal(false);
   }
 
   async function addToFireStoreReleases() {
@@ -57,9 +63,14 @@ export default function AddRelease() {
   return (
     <>
       <AddTrackModal
-        modalTrackShow={showTrackModal}
-        hideTrackModal={hideTrackModal}
+        showAddTrackModal={showAddTrackModal}
+        hideTrackModal={hideAddTrackModal}
         applyTrackToTracklisting={applyTrackToTracklisting}
+      />
+
+      <EditTrackModal
+        showEditTrackModal={showEditTrackModal}
+        hideEditTrackModal={hideEditTrackModal}
       />
 
       <Container>
@@ -169,6 +180,9 @@ export default function AddRelease() {
                           variant="outline-warning"
                           size="sm"
                           style={{ marginRight: "10px" }}
+                          onClick={() => {
+                            setEditShowTrackModal(true);
+                          }}
                         >
                           Edit
                         </Button>
@@ -192,7 +206,7 @@ export default function AddRelease() {
               <Col style={{ display: "flex", gap: "10px" }}>
                 <Button
                   variant="primary"
-                  onClick={() => setShowTrackModal(true)}
+                  onClick={() => setAddShowTrackModal(true)}
                   className="my-5"
                 >
                   Add Track

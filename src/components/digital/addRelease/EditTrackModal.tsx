@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
-export default function AddTrackModal({
-  showAddTrackModal,
-  hideTrackModal,
-  applyTrackToTracklisting,
+export default function EditTrackModal({
+  showEditTrackModal,
+  hideEditTrackModal,
 }: any) {
   const [trackObj, setTrackObj] = useState<any>({});
 
@@ -31,12 +30,12 @@ export default function AddTrackModal({
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      show={showAddTrackModal}
-      onHide={() => hideTrackModal()}
+      show={showEditTrackModal}
+      onHide={() => hideEditTrackModal()}
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter" as="h3">
-          Add Track
+          Edit Track
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -114,9 +113,9 @@ export default function AddTrackModal({
           variant="primary"
           className="mt-5"
           onClick={() => {
-            applyTrackToTracklisting(trackObj);
+            // applyTrackToTracklisting(trackObj);
             setTrackObj(initTrackObj);
-            hideTrackModal();
+            hideEditTrackModal();
           }}
         >
           Add Track To Release
