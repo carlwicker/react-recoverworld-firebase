@@ -16,10 +16,10 @@ export default function AddTrackModal({
     artist: undefined,
     title: undefined,
     mix: "Original Mix",
-    beatport: "http://www.beatport.com/",
-    youtube: "http://www.youtube.com/",
-    spotify: "http://www.spotify.com/",
-    soundcloud: "http://www.soundcloud.com/",
+    beatport: "",
+    youtube: "",
+    spotify: "",
+    soundcloud: "",
   };
 
   useEffect(() => {
@@ -74,7 +74,6 @@ export default function AddTrackModal({
           <Form.Label>Track Beatport Link:</Form.Label>
           <Form.Control
             type="url"
-            defaultValue="http://www.beatport.com/"
             onChange={(e) => {
               setTrackObj({ ...trackObj, beatport: e.target.value });
             }}
@@ -84,7 +83,6 @@ export default function AddTrackModal({
           <Form.Label>Track YouTube Link:</Form.Label>
           <Form.Control
             type="url"
-            defaultValue="http://www.youtube.com/"
             onChange={(e) => {
               setTrackObj({ ...trackObj, youtube: e.target.value });
             }}
@@ -94,7 +92,6 @@ export default function AddTrackModal({
           <Form.Label>Track Spotify Link:</Form.Label>
           <Form.Control
             type="url"
-            defaultValue="http://www.spotify.com/"
             onChange={(e) => {
               setTrackObj({ ...trackObj, spotify: e.target.value });
             }}
@@ -104,7 +101,6 @@ export default function AddTrackModal({
           <Form.Label>Track SoundCloud Link:</Form.Label>
           <Form.Control
             type="url"
-            defaultValue="http://www.soundcloud.com/"
             onChange={(e) => {
               setTrackObj({ ...trackObj, spotify: e.target.value });
             }}

@@ -24,6 +24,7 @@ export default function AddRelease() {
 
   const [showAddTrackModal, setAddShowTrackModal] = useState<any>(false);
   const [showEditTrackModal, setEditShowTrackModal] = useState<any>(false);
+  const [trackToEdit, setTrackToEdit] = useState<any>({});
 
   useEffect(() => {
     // console.log(release);
@@ -66,11 +67,6 @@ export default function AddRelease() {
         showAddTrackModal={showAddTrackModal}
         hideTrackModal={hideAddTrackModal}
         applyTrackToTracklisting={applyTrackToTracklisting}
-      />
-
-      <EditTrackModal
-        showEditTrackModal={showEditTrackModal}
-        hideEditTrackModal={hideEditTrackModal}
       />
 
       <Container>
@@ -170,10 +166,22 @@ export default function AddRelease() {
                       <td>{track.artist}</td>
                       <td>{track.mix}</td>
                       <td>
-                        <SiBeatport style={{ marginRight: "10px" }} />
-                        <BsYoutube style={{ marginRight: "10px" }} />
-                        <SiSoundcloud style={{ marginRight: "10px" }} />
-                        <SiSpotify />
+                        {track.beatport !== "" ? (
+                          <SiBeatport style={{ marginRight: "10px" }} />
+                        ) : (
+                          ""
+                        )}
+                        {track.youtube !== "" ? (
+                          <BsYoutube style={{ marginRight: "10px" }} />
+                        ) : (
+                          ""
+                        )}
+                        {track.soundcloud !== "" ? (
+                          <SiSoundcloud style={{ marginRight: "10px" }} />
+                        ) : (
+                          ""
+                        )}
+                        {track.spotify !== "" ? <SiSpotify /> : ""}
                       </td>
                       <td>
                         <Button
@@ -182,6 +190,7 @@ export default function AddRelease() {
                           style={{ marginRight: "10px" }}
                           onClick={() => {
                             setEditShowTrackModal(true);
+                            setTrackToEdit(track);
                           }}
                         >
                           Edit
@@ -196,6 +205,11 @@ export default function AddRelease() {
                           Delete
                         </Button>
                       </td>
+                      <EditTrackModal
+                        showEditTrackModal={showEditTrackModal}
+                        hideEditTrackModal={hideEditTrackModal}
+                        track={trackToEdit}
+                      />
                     </tr>
                   );
                 })}
