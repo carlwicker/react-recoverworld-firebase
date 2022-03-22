@@ -60,6 +60,7 @@ export default function EditTrackModal({
           <Form.Label>Track Beatport Link:</Form.Label>
           <Form.Control
             type="url"
+            value={trackObj.beatport}
             onChange={(e) => {
               setTrackObj({ ...trackObj, beatport: e.target.value });
             }}
@@ -69,6 +70,7 @@ export default function EditTrackModal({
           <Form.Label>Track YouTube Link:</Form.Label>
           <Form.Control
             type="url"
+            value={trackObj.youtube}
             onChange={(e) => {
               setTrackObj({ ...trackObj, youtube: e.target.value });
             }}
@@ -78,6 +80,7 @@ export default function EditTrackModal({
           <Form.Label>Track Spotify Link:</Form.Label>
           <Form.Control
             type="url"
+            value={trackObj.spotify}
             onChange={(e) => {
               setTrackObj({ ...trackObj, spotify: e.target.value });
             }}
@@ -87,6 +90,7 @@ export default function EditTrackModal({
           <Form.Label>Track SoundCloud Link:</Form.Label>
           <Form.Control
             type="url"
+            value={trackObj.soundcloud}
             onChange={(e) => {
               setTrackObj({ ...trackObj, spotify: e.target.value });
             }}
