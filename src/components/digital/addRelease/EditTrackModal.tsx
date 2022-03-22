@@ -92,7 +92,7 @@ export default function EditTrackModal({
             type="url"
             value={trackObj.soundcloud}
             onChange={(e) => {
-              setTrackObj({ ...trackObj, spotify: e.target.value });
+              setTrackObj({ ...trackObj, soundcloud: e.target.value });
             }}
           />
         </Form.Group>

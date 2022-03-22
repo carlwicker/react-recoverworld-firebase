@@ -13,8 +13,8 @@ export default function AddTrackModal({
   }, [trackObj]);
 
   const initTrackObj: any = {
-    artist: undefined,
-    title: undefined,
+    artist: "",
+    title: "",
     mix: "Original Mix",
     beatport: "",
     youtube: "",
@@ -102,7 +102,7 @@ export default function AddTrackModal({
           <Form.Control
             type="url"
             onChange={(e) => {
-              setTrackObj({ ...trackObj, spotify: e.target.value });
+              setTrackObj({ ...trackObj, soundcloud: e.target.value });
             }}
           />
         </Form.Group>
