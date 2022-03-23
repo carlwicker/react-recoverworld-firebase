@@ -27,7 +27,7 @@ export default function EditTrackModal({
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter" as="h3">
-          Edit Track {trackIndex}
+          Edit Track
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

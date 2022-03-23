@@ -5,27 +5,31 @@ import DigitalFilter from "./DigitalFilter";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
-import DigitalTracklisting from "./DigitalTracklisting";
+import DigitalReleaseList from "./DigitalReleaseList";
 
 export default function Digital() {
   const releaseImg = require("../../img/iconise1.webp");
   const [releases, setReleases] = useState<any | []>([]);
 
-  useEffect(() => {
-    async function getReleases() {
-      const releasesRef = await collection(db, "releases");
+  async function getReleases() {
+    const releasesRef = await collection(db, "releases");
 
-      getDocs(releasesRef).then((snapshot) => {
-        let releaseArr: any[] = [];
-        snapshot.forEach((release) => {
-          releaseArr.push({ ...release.data(), id: release.id });
-        });
-        setReleases(releaseArr);
+    getDocs(releasesRef).then((snapshot) => {
+      let releaseArr: any[] = [];
+      snapshot.forEach((release) => {
+        releaseArr.push({ ...release.data(), id: release.id });
       });
-    }
+      setReleases(releaseArr);
+    });
+  }
 
+  useEffect(() => {
     getReleases();
   }, []);
+
+  function updateReleaseList() {
+    getReleases();
+  }
 
   // useEffect(() => {
   //   console.log(releases);
@@ -50,7 +54,10 @@ export default function Digital() {
       </Row>
 
       <DigitalFilter />
-      <DigitalTracklisting releases={releases} />
+      <DigitalReleaseList
+        releases={releases}
+        updateReleaseList={updateReleaseList}
+      />
     </Container>
   );
 }

@@ -4,12 +4,23 @@ import { BsSpotify, BsYoutube } from "react-icons/bs";
 import { SiBeatport, SiSoundcloud } from "react-icons/si";
 import IRelease from "../../interfaces/IRelease";
 import ITrack from "../../interfaces/ITrack";
+import { doc, deleteDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 interface IDigitalReleaseItem {
   release: IRelease;
+  updateReleaseList: Function;
 }
 
-export default function DigitalReleaseItem({ release }: IDigitalReleaseItem) {
+export default function DigitalReleaseItem({
+  release,
+  updateReleaseList,
+}: IDigitalReleaseItem) {
+  async function deleteRelease(releaseId: string) {
+    await deleteDoc(doc(db, "releases", releaseId));
+    updateReleaseList();
+  }
+
   return (
     <Card className="mb-2">
       <Card.Body>
@@ -17,8 +28,8 @@ export default function DigitalReleaseItem({ release }: IDigitalReleaseItem) {
           <Col md="auto">
             <Card.Img
               variant="top"
-              src={"../img/" + release.artwork}
-              style={{ borderRadius: "50%", width: "130px" }}
+              src={release.artwork}
+              style={{ width: "130px" }}
             />
           </Col>
 
@@ -66,8 +77,21 @@ export default function DigitalReleaseItem({ release }: IDigitalReleaseItem) {
           >
             <div>
               <Link to={"/digital/" + release.id + "/edit"}>
-                <Button variant="outline-warning">Edit</Button>
+                <Button
+                  variant="outline-warning"
+                  style={{ marginRight: "10px" }}
+                >
+                  Edit
+                </Button>
               </Link>
+              <Button
+                variant="outline-danger"
+                onClick={() => {
+                  deleteRelease(release.id);
+                }}
+              >
+                Delete
+              </Button>
             </div>
           </Col>
         </Row>
