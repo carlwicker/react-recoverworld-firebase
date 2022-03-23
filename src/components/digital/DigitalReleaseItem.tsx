@@ -2,9 +2,11 @@ import { Card, Row, Col, Badge, ListGroup, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BsSpotify, BsYoutube } from "react-icons/bs";
 import { SiBeatport, SiSoundcloud } from "react-icons/si";
+import IRelease from "../../interfaces/IRelease";
+import ITrack from "../../interfaces/ITrack";
 
 interface IDigitalReleaseItem {
-  release: any;
+  release: IRelease;
 }
 
 export default function DigitalReleaseItem({ release }: IDigitalReleaseItem) {
@@ -72,7 +74,7 @@ export default function DigitalReleaseItem({ release }: IDigitalReleaseItem) {
 
         <Card>
           <ListGroup as="ol" numbered>
-            {release.trackListing.map((track: any, index: number) => {
+            {release.trackListing.map((track: ITrack, index: number) => {
               return (
                 <ListGroup.Item
                   key={index}

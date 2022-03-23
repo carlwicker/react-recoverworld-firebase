@@ -1,23 +1,12 @@
-interface ITrack {
-  releaseId: number;
-  trackNum: number;
-  artist: string;
-  title: string;
-  mix: string;
-  beatport: string;
-  youtube: string;
-  soundcloud: string;
-  spotify: string;
-}
+import ITrack from "./ITrack";
 
-export interface IReleases {
-  releaseId: string;
+export default interface IReleases {
+  id: string;
   artist: string;
   title: string;
   label: string;
   artwork: string;
   catNum: string;
-  tracklisting: ITrack[];
-  releaseDate: Date;
+  trackListing: ITrack[];
   isActive: boolean;
 }

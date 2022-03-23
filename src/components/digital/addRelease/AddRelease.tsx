@@ -15,22 +15,27 @@ import AddTrackModal from "./AddTrackModal";
 import { db } from "../../../firebase";
 import { Link } from "react-router-dom";
 import EditTrackModal from "./EditTrackModal";
-
 import { collection, addDoc } from "firebase/firestore";
+import ITrack from "../../../interfaces/ITrack";
+import IRelease from "../../../interfaces/IRelease";
 
 export default function AddRelease() {
-  const [release, setRelease] = useState<any>();
-  const [tracks, setTracks] = useState<any>([]);
+  const [release, setRelease] = useState<IRelease | {}>({});
+  const [tracks, setTracks] = useState<ITrack[] | []>([]);
 
-  const [showAddTrackModal, setAddShowTrackModal] = useState<any>(false);
+  const [showAddTrackModal, setAddShowTrackModal] = useState<boolean>(false);
   const [showEditTrackModal, setEditShowTrackModal] = useState<any>(false);
-  const [trackToEdit, setTrackToEdit] = useState<any>({});
+  const [trackToEdit, setTrackToEdit] = useState<ITrack | {}>({});
+  const [trackIndex, setTrackIndex] = useState<Number>();
 
   useEffect(() => {
     // console.log(release);
-    // console.log(tracks);
+    // tracks.forEach((track, index) =>
+    //   console.log(track.title, track.artist, index)
+    // );
+    // console.log(trackIndex);
     // console.log(modalTrackShow);
-  }, [release, showAddTrackModal, tracks]);
+  }, [trackIndex]);
 
   function deleteTrackFromTrackListing(index: number) {
     let newArr = tracks
@@ -40,8 +45,23 @@ export default function AddRelease() {
     setTracks(newArr);
   }
 
-  function applyTrackToTracklisting(trackObj: any) {
+  function applyTrackToTracklisting(trackObj: ITrack) {
     setTracks([...tracks, trackObj]);
+  }
+
+  async function applyEditToTracklisting(trackObj: any, trackIndex: number) {
+    // Working here
+    let newTracksArr: any[] = [];
+    console.log(trackIndex);
+
+    tracks.forEach((track: any, index: number) => {
+      if (index === trackIndex) {
+        // console.log(index);
+        newTracksArr.push(trackObj);
+      } else newTracksArr.push(track);
+    });
+    // console.log(newTracksArr);
+    setTracks(newTracksArr);
   }
 
   function hideAddTrackModal() {
@@ -53,7 +73,6 @@ export default function AddRelease() {
   }
 
   async function addToFireStoreReleases() {
-    // Add a new document with a generated id.
     const docRef = await addDoc(collection(db, "releases"), {
       ...release,
       trackListing: tracks,
@@ -67,6 +86,14 @@ export default function AddRelease() {
         showAddTrackModal={showAddTrackModal}
         hideTrackModal={hideAddTrackModal}
         applyTrackToTracklisting={applyTrackToTracklisting}
+      />
+
+      <EditTrackModal
+        showEditTrackModal={showEditTrackModal}
+        hideEditTrackModal={hideEditTrackModal}
+        applyEditToTracklisting={applyEditToTracklisting}
+        tracks={tracks}
+        trackIndex={trackIndex}
       />
 
       <Container>
@@ -159,29 +186,30 @@ export default function AddRelease() {
               </thead>
               <tbody>
                 {tracks?.map((track: any, index: number) => {
+                  let trackIndex = index;
                   return (
                     <tr key={index}>
                       <td>{index + 1}</td>
-                      <td>{track.title}</td>
-                      <td>{track.artist}</td>
-                      <td>{track.mix}</td>
+                      <td>{track?.title}</td>
+                      <td>{track?.artist}</td>
+                      <td>{track?.mix}</td>
                       <td>
-                        {track.beatport !== "" ? (
+                        {track?.beatport !== "" ? (
                           <SiBeatport style={{ marginRight: "10px" }} />
                         ) : (
                           ""
                         )}
-                        {track.youtube !== "" ? (
+                        {track?.youtube !== "" ? (
                           <BsYoutube style={{ marginRight: "10px" }} />
                         ) : (
                           ""
                         )}
-                        {track.soundcloud !== "" ? (
+                        {track?.soundcloud !== "" ? (
                           <SiSoundcloud style={{ marginRight: "10px" }} />
                         ) : (
                           ""
                         )}
-                        {track.spotify !== "" ? <SiSpotify /> : ""}
+                        {track?.spotify !== "" ? <SiSpotify /> : ""}
                       </td>
                       <td>
                         <Button
@@ -191,6 +219,7 @@ export default function AddRelease() {
                           onClick={() => {
                             setEditShowTrackModal(true);
                             setTrackToEdit(track);
+                            setTrackIndex(trackIndex);
                           }}
                         >
                           Edit
@@ -205,11 +234,6 @@ export default function AddRelease() {
                           Delete
                         </Button>
                       </td>
-                      <EditTrackModal
-                        showEditTrackModal={showEditTrackModal}
-                        hideEditTrackModal={hideEditTrackModal}
-                        track={trackToEdit}
-                      />
                     </tr>
                   );
                 })}
@@ -220,7 +244,9 @@ export default function AddRelease() {
               <Col style={{ display: "flex", gap: "10px" }}>
                 <Button
                   variant="primary"
-                  onClick={() => setAddShowTrackModal(true)}
+                  onClick={() => {
+                    setAddShowTrackModal(true);
+                  }}
                   className="my-5"
                 >
                   Add Track
