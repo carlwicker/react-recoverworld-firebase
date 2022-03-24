@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import ITrack from "../../../interfaces/ITrack";
+
+interface IAddTrackModal {
+  showAddTrackModal: boolean;
+  hideTrackModal: Function;
+  applyTrackToTracklisting: Function;
+}
 
 export default function AddTrackModal({
   showAddTrackModal,
   hideTrackModal,
   applyTrackToTracklisting,
-}: any) {
-  const [trackObj, setTrackObj] = useState<any>({});
+}: IAddTrackModal) {
+  const [trackObj, setTrackObj] = useState<any | {}>({});
 
-  useEffect(() => {
-    // console.log(trackObj);
-  }, [trackObj]);
-
-  const initTrackObj: any = {
+  const initTrackObj: ITrack = {
     artist: "",
     title: "",
     mix: "Original Mix",

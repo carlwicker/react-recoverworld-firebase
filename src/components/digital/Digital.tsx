@@ -1,16 +1,16 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import DigitalFilter from "./DigitalFilter";
+import DigitalSearchFilter from "./DigitalSearchFilter";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import DigitalReleaseList from "./DigitalReleaseList";
 
 export default function Digital() {
-  const releaseImg = require("../../img/iconise1.webp");
   const [releases, setReleases] = useState<any | []>([]);
 
+  // Get All Releases from Firestore
   async function getReleases() {
     const releasesRef = await collection(db, "releases");
 
@@ -27,16 +27,14 @@ export default function Digital() {
     getReleases();
   }, []);
 
+  // Actions
   function updateReleaseList() {
     getReleases();
   }
 
-  // useEffect(() => {
-  //   console.log(releases);
-  // }, [releases]);
-
   return (
     <Container style={{ textAlign: "left" }}>
+      {/* Header And Admin Controls */}
       <Row
         style={{
           display: "flex",
@@ -53,7 +51,10 @@ export default function Digital() {
         </Col>
       </Row>
 
-      <DigitalFilter />
+      {/* Search And Filter */}
+      <DigitalSearchFilter />
+
+      {/* Release list */}
       <DigitalReleaseList
         releases={releases}
         updateReleaseList={updateReleaseList}

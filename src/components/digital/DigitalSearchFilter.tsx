@@ -1,6 +1,6 @@
 import { Container, Row, Col, Form } from "react-bootstrap";
 
-export default function DigitalFilter() {
+export default function DigitalSearchFilter() {
   return (
     <Container>
       <Form>

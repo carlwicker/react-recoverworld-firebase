@@ -1,14 +1,5 @@
-import { useEffect, useState } from "react";
-import {
-  Container,
-  Row,
-  Form,
-  Button,
-  Col,
-  Table,
-  InputGroup,
-  FormControl,
-} from "react-bootstrap";
+import { useState } from "react";
+import { Container, Row, Form, Button, Col, Table } from "react-bootstrap";
 import { BsYoutube } from "react-icons/bs";
 import { SiBeatport, SiSoundcloud, SiSpotify } from "react-icons/si";
 import AddTrackModal from "./AddTrackModal";
@@ -18,15 +9,16 @@ import EditTrackModal from "./EditTrackModal";
 import { collection, addDoc } from "firebase/firestore";
 import ITrack from "../../../interfaces/ITrack";
 import IRelease from "../../../interfaces/IRelease";
+import AddForm from "./AddForm";
 
 export default function AddRelease() {
   const [release, setRelease] = useState<IRelease | {}>({});
   const [tracks, setTracks] = useState<ITrack[] | []>([]);
-
   const [showAddTrackModal, setAddShowTrackModal] = useState<boolean>(false);
   const [showEditTrackModal, setEditShowTrackModal] = useState<any>(false);
   const [trackIndex, setTrackIndex] = useState<Number>();
 
+  // Actions
   function deleteTrackFromTrackListing(index: number) {
     let newArr = tracks
       .slice(0, index)
@@ -51,6 +43,7 @@ export default function AddRelease() {
     setTracks(newTracksArr);
   }
 
+  // Modal Controllers
   function hideAddTrackModal() {
     setAddShowTrackModal(false);
   }
@@ -59,6 +52,7 @@ export default function AddRelease() {
     setEditShowTrackModal(false);
   }
 
+  // Add Release to Firestore
   async function addToFireStoreReleases() {
     const docRef = await addDoc(collection(db, "releases"), {
       ...release,
@@ -69,6 +63,7 @@ export default function AddRelease() {
 
   return (
     <>
+      {/* Add / Edit Modals */}
       <AddTrackModal
         showAddTrackModal={showAddTrackModal}
         hideTrackModal={hideAddTrackModal}
@@ -83,81 +78,17 @@ export default function AddRelease() {
         trackIndex={trackIndex}
       />
 
+      {/* Main Page */}
       <Container>
         <Row style={{ textAlign: "left" }}>
           <h1>Add Release</h1>
-
           <Form
             onSubmit={(e) => {
               e.preventDefault();
             }}
           >
-            <Form.Group className="mb-3" controlId="addReleaseLabel">
-              <Form.Select
-                aria-label="Select a label..."
-                className="mb-3"
-                onChange={(e) => {
-                  setRelease({ ...release, label: e.target.value });
-                  console.log(release);
-                }}
-              >
-                <option>Select a label...</option>
-                <option value="Discover Records">Discover Records</option>
-                <option value="Discover Dark">Discover Dark</option>
-                <option value="Eve Records">Eve Records</option>
-                <option value="Flux Delux">Flux Delux</option>
-                <option value="Iconise Records">Iconise Records</option>
-              </Form.Select>
-            </Form.Group>
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="catNum" style={{ width: "130px" }}>
-                Cat Number:
-              </InputGroup.Text>
-              <FormControl
-                type="string"
-                onChange={(e) => {
-                  setRelease({ ...release, catNum: e.target.value });
-                }}
-              />
-            </InputGroup>
-
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="input-artist" style={{ width: "130px" }}>
-                Artist:
-              </InputGroup.Text>
-              <Form.Control
-                type="string"
-                onChange={(e) => {
-                  setRelease({ ...release, artist: e.target.value });
-                }}
-              />
-            </InputGroup>
-
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="input-title" style={{ width: "130px" }}>
-                Title:
-              </InputGroup.Text>
-              <Form.Control
-                type="string"
-                placeholder=""
-                onChange={(e) => {
-                  setRelease({ ...release, title: e.target.value });
-                }}
-              />
-            </InputGroup>
-
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="input-image" style={{ width: "130px" }}>
-                Artwork URL:
-              </InputGroup.Text>
-              <Form.Control
-                type="string"
-                placeholder=""
-                onChange={(e) => {
-                  setRelease({ ...release, artwork: e.target.value });
-                }}
-              />
-            </InputGroup>
+            {/* Track Details Form */}
+            <AddForm setRelease={setRelease} release={release} />
 
             {/* Tracklisting Table */}
             <Table striped bordered hover variant="dark" className="mt-5">

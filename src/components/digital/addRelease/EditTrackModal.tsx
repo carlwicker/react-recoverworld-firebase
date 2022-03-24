@@ -16,10 +16,6 @@ export default function EditTrackModal({
     }
   }, [tracks, trackIndex]);
 
-  useEffect(() => {
-    console.log(trackObj);
-  }, [trackObj]);
-
   return (
     <Modal
       size="lg"

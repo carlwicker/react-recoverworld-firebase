@@ -1,6 +1,6 @@
 import { Card, Container } from "react-bootstrap";
 import { useEffect } from "react";
-import DigitalReleaseItem from "./DigitalReleaseItem";
+import DigitalReleaseItem from "./digitalReleaseItem/DigitalReleaseItem";
 
 interface IDigitalReleaseList {
   releases: any;
