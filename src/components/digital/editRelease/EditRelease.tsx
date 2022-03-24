@@ -85,8 +85,8 @@ export default function EditRelease() {
   }, []);
 
   useEffect(() => {
-    setTracks(releaseObj?.trackListing);
-  }, [releaseObj]);
+    setTracks(releaseObj.trackListing);
+  }, [releaseObj.trackListing]);
 
   // Update Release in Firestore
   async function updateFireStoreReleases() {
