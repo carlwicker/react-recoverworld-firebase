@@ -13,7 +13,6 @@ export default function EditTrackModal({
   useEffect(() => {
     if (trackIndex !== undefined && tracks !== []) {
       setTrackObj(tracks[trackIndex]);
-      console.log(trackIndex, tracks);
     }
   }, [tracks, trackIndex]);
 

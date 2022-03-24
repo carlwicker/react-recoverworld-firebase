@@ -9,7 +9,7 @@ import {
   Col,
   Button,
 } from "react-bootstrap";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { Link, useParams } from "react-router-dom";
 import { db } from "../../../firebase";
 import { BsYoutube } from "react-icons/bs";
@@ -51,7 +51,6 @@ export default function EditRelease() {
 
   async function applyEditToTracklisting(trackObj: any, trackIndex: number) {
     let newTracksArr: any[] = [];
-    console.log(trackIndex);
 
     tracks.forEach((track: any, index: number) => {
       if (index === trackIndex) {
@@ -88,6 +87,13 @@ export default function EditRelease() {
   useEffect(() => {
     setTracks(releaseObj?.trackListing);
   }, [releaseObj]);
+
+  // Update Release in Firestore
+  async function updateFireStoreReleases() {
+    const releaseRef = await doc(db, "releases", releaseId);
+    console.log({ ...releaseObj, trackListing: tracks });
+    setDoc(releaseRef, { ...releaseObj, trackListing: tracks });
+  }
 
   return (
     <>
@@ -269,7 +275,10 @@ export default function EditRelease() {
                   <Button
                     variant="danger"
                     className="my-5"
-                    // onClick={() => addToFireStoreReleases()}
+                    onClick={() => {
+                      updateFireStoreReleases();
+                      setAddShowTrackModal(false);
+                    }}
                   >
                     Update Release
                   </Button>
