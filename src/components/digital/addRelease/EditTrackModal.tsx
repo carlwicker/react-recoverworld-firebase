@@ -11,12 +11,15 @@ export default function EditTrackModal({
   const [trackObj, setTrackObj] = useState<any | {}>({});
 
   useEffect(() => {
-    setTrackObj(tracks[trackIndex]);
+    if (trackIndex !== undefined && tracks !== []) {
+      setTrackObj(tracks[trackIndex]);
+      console.log(trackIndex, tracks);
+    }
   }, [tracks, trackIndex]);
 
   useEffect(() => {
-    console.log(tracks);
-  }, [tracks]);
+    console.log(trackObj);
+  }, [trackObj]);
 
   return (
     <Modal

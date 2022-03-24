@@ -25,17 +25,7 @@ export default function AddRelease() {
 
   const [showAddTrackModal, setAddShowTrackModal] = useState<boolean>(false);
   const [showEditTrackModal, setEditShowTrackModal] = useState<any>(false);
-  const [trackToEdit, setTrackToEdit] = useState<ITrack | {}>({});
   const [trackIndex, setTrackIndex] = useState<Number>();
-
-  useEffect(() => {
-    // console.log(release);
-    // tracks.forEach((track, index) =>
-    //   console.log(track.title, track.artist, index)
-    // );
-    // console.log(trackIndex);
-    // console.log(modalTrackShow);
-  }, [trackIndex]);
 
   function deleteTrackFromTrackListing(index: number) {
     let newArr = tracks
@@ -50,17 +40,14 @@ export default function AddRelease() {
   }
 
   async function applyEditToTracklisting(trackObj: any, trackIndex: number) {
-    // Working here
     let newTracksArr: any[] = [];
     console.log(trackIndex);
 
     tracks.forEach((track: any, index: number) => {
       if (index === trackIndex) {
-        // console.log(index);
         newTracksArr.push(trackObj);
       } else newTracksArr.push(track);
     });
-    // console.log(newTracksArr);
     setTracks(newTracksArr);
   }
 
@@ -218,7 +205,6 @@ export default function AddRelease() {
                           style={{ marginRight: "10px" }}
                           onClick={() => {
                             setEditShowTrackModal(true);
-                            setTrackToEdit(track);
                             setTrackIndex(trackIndex);
                           }}
                         >

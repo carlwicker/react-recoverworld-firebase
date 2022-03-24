@@ -16,10 +16,11 @@ import { BsYoutube } from "react-icons/bs";
 import { SiBeatport, SiSoundcloud, SiSpotify } from "react-icons/si";
 import EditTrackModal from "../addRelease/EditTrackModal";
 import AddTrackModal from "../addRelease/AddTrackModal";
+import ITrack from "../../../interfaces/ITrack";
+import IRelease from "../../../interfaces/IRelease";
 
 export default function EditRelease() {
   let { releaseId }: any = useParams();
-
   const [releaseObj, setReleaseObj] = useState<any | {}>({});
 
   const labels: string[] = [
@@ -30,9 +31,45 @@ export default function EditRelease() {
     "Iconise Records",
   ];
 
-  const [tracks, setTracks] = useState<any | []>([]);
-  const [showEditTrackModal, setShowEditTrackModal] = useState<boolean>(false);
+  const [release, setRelease] = useState<IRelease | {}>({});
+  const [tracks, setTracks] = useState<ITrack[] | []>([]);
+  const [showAddTrackModal, setAddShowTrackModal] = useState<boolean>(false);
+  const [showEditTrackModal, setEditShowTrackModal] = useState<any>(false);
+  const [trackIndex, setTrackIndex] = useState<Number | undefined>(undefined);
 
+  function deleteTrackFromTrackListing(index: number) {
+    let newArr: ITrack[] = tracks
+      .slice(0, index)
+      .concat(tracks.slice(index + 1, tracks.length));
+    console.log(newArr);
+    setTracks(newArr);
+  }
+
+  function applyTrackToTracklisting(trackObj: ITrack) {
+    setTracks([...tracks, trackObj]);
+  }
+
+  async function applyEditToTracklisting(trackObj: any, trackIndex: number) {
+    let newTracksArr: any[] = [];
+    console.log(trackIndex);
+
+    tracks.forEach((track: any, index: number) => {
+      if (index === trackIndex) {
+        newTracksArr.push(trackObj);
+      } else newTracksArr.push(track);
+    });
+    setTracks(newTracksArr);
+  }
+
+  function hideAddTrackModal() {
+    setAddShowTrackModal(false);
+  }
+
+  function hideEditTrackModal() {
+    setEditShowTrackModal(false);
+  }
+
+  // Get Release by URL Id from Firebase.
   useEffect(() => {
     async function getReleaseById() {
       const docRef = doc(db, "releases", releaseId);
@@ -50,26 +87,24 @@ export default function EditRelease() {
 
   useEffect(() => {
     setTracks(releaseObj?.trackListing);
-    console.log(releaseObj);
   }, [releaseObj]);
-
-  function deleteTrackFromTrackListing(index: number) {
-    let newArr = tracks
-      .slice(0, index)
-      .concat(tracks.slice(index + 1, tracks.length));
-    setTracks(newArr);
-  }
-
-  function hideEditTrackModal() {
-    setShowEditTrackModal(false);
-  }
-
-  function applyTrackToTracklisting(trackObj: any) {
-    setTracks([...tracks, trackObj]);
-  }
 
   return (
     <>
+      <AddTrackModal
+        showAddTrackModal={showAddTrackModal}
+        hideTrackModal={hideAddTrackModal}
+        applyTrackToTracklisting={applyTrackToTracklisting}
+      />
+
+      <EditTrackModal
+        showEditTrackModal={showEditTrackModal}
+        hideEditTrackModal={hideEditTrackModal}
+        applyEditToTracklisting={applyEditToTracklisting}
+        tracks={tracks}
+        trackIndex={trackIndex}
+      />
+
       <Container>
         <Row style={{ textAlign: "left" }}>
           <h1>Edit Release</h1>
@@ -197,6 +232,10 @@ export default function EditRelease() {
                           variant="outline-warning"
                           size="sm"
                           style={{ marginRight: "10px" }}
+                          onClick={() => {
+                            setTrackIndex(index);
+                            setEditShowTrackModal(true);
+                          }}
                         >
                           Edit
                         </Button>
@@ -220,7 +259,7 @@ export default function EditRelease() {
               <Col style={{ display: "flex", gap: "10px" }}>
                 <Button
                   variant="primary"
-                  onClick={() => setShowEditTrackModal(true)}
+                  onClick={() => setAddShowTrackModal(true)}
                   className="my-5"
                 >
                   Add Track
