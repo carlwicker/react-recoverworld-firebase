@@ -76,14 +76,11 @@ export default function DigitalSearchFilter({
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="releasesSearch">
-              <Form.Label>Search</Form.Label>
+              <Form.Label>Search Releases [CatNum, Artist, Title]</Form.Label>
               <Form.Control
                 type="text"
                 onChange={(e) => {
                   setSearchTerm(e.target.value.toLocaleLowerCase());
-                  if (searchTerm === "") {
-                    setLabelFilteredResults(releases);
-                  }
                 }}
                 placeholder="Search..."
               />
@@ -95,6 +92,7 @@ export default function DigitalSearchFilter({
               <Form.Select
                 onChange={(e: any) => {
                   setSelectedLabel(e.target.value);
+                  setLabelFilteredResults(filteredReleases);
                 }}
               >
                 {labels.map((label: string, index: number) => {
