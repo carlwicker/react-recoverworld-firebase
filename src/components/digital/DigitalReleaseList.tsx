@@ -1,7 +1,5 @@
-import { Card, Container } from "react-bootstrap";
 import { useEffect } from "react";
 import DigitalReleaseItem from "./digitalReleaseItem/DigitalReleaseItem";
-import IRelease from "../../interfaces/IRelease";
 
 interface IDigitalReleaseList {
   releases: any;
@@ -17,7 +15,7 @@ export default function DigitalReleaseList({
 
   return (
     <>
-      {labelFilteredResults.map((release: any, index: number) => {
+      {labelFilteredResults?.map((release: any, index: number) => {
         return (
           <DigitalReleaseItem
             key={index}

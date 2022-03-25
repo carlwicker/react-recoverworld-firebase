@@ -45,6 +45,10 @@ export default function DigitalSearchFilter({
   }, [searchTerm]);
 
   useEffect(() => {
+    setFilteredReleases(releases);
+  }, []);
+
+  useEffect(() => {
     console.log(filteredReleases);
     console.log(labelFilteredResults);
   }, [filteredReleases, labelFilteredResults]);
