@@ -48,10 +48,10 @@ export default function DigitalSearchFilter({
     setFilteredReleases(releases);
   }, []);
 
-  useEffect(() => {
-    console.log(filteredReleases);
-    console.log(labelFilteredResults);
-  }, [filteredReleases, labelFilteredResults]);
+  // useEffect(() => {
+  //   console.log(filteredReleases);
+  //   console.log(labelFilteredResults);
+  // }, [filteredReleases, labelFilteredResults]);
 
   // Label Filter
   useEffect(() => {
@@ -81,6 +81,9 @@ export default function DigitalSearchFilter({
                 type="text"
                 onChange={(e) => {
                   setSearchTerm(e.target.value.toLocaleLowerCase());
+                  if (searchTerm === "") {
+                    setLabelFilteredResults(releases);
+                  }
                 }}
                 placeholder="Search..."
               />
