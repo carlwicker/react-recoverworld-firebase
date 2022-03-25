@@ -59,7 +59,7 @@ export default function DigitalSearchFilter({
       if (selectedLabel === "No Filter...") {
         setLabelFilteredResults(releases);
       } else {
-        const result = filteredReleases.filter((release) =>
+        const result = filteredReleases?.filter((release) =>
           release.label
             .toLocaleLowerCase()
             .includes(selectedLabel.toLocaleLowerCase())
@@ -68,7 +68,6 @@ export default function DigitalSearchFilter({
       }
     }
     labelFilter();
-    console.log(selectedLabel);
   }, [selectedLabel, filteredReleases]);
 
   return (
