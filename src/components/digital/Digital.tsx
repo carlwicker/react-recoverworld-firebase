@@ -6,9 +6,14 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import DigitalReleaseList from "./DigitalReleaseList";
+import IRelease from "../../interfaces/IRelease";
 
 export default function Digital() {
   const [releases, setReleases] = useState<any | []>([]);
+  const [filteredReleases, setFilteredReleases] = useState<IRelease[] | []>([]);
+  const [labelFilteredResults, setLabelFilteredResults] = useState<any | []>(
+    []
+  );
 
   // Get All Releases from Firestore
   async function getReleases() {
@@ -52,12 +57,19 @@ export default function Digital() {
       </Row>
 
       {/* Search And Filter */}
-      <DigitalSearchFilter />
+      <DigitalSearchFilter
+        releases={releases}
+        setFilteredReleases={setFilteredReleases}
+        filteredReleases={filteredReleases}
+        labelFilteredResults={labelFilteredResults}
+        setLabelFilteredResults={setLabelFilteredResults}
+      />
 
       {/* Release list */}
       <DigitalReleaseList
         releases={releases}
         updateReleaseList={updateReleaseList}
+        labelFilteredResults={labelFilteredResults}
       />
     </Container>
   );

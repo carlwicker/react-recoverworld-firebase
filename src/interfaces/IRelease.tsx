@@ -1,6 +1,6 @@
 import ITrack from "./ITrack";
 
-export default interface IReleases {
+export default interface IRelease {
   id: string;
   artist: string;
   title: string;

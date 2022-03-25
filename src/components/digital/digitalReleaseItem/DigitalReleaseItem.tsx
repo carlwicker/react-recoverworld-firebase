@@ -27,6 +27,7 @@ export default function DigitalReleaseItem({
 
         <Card>
           <ListGroup as="ol" numbered>
+            {/* List Tracks */}
             {release.trackListing.map((track: ITrack, index: number) => {
               return <DigitalTrack track={track} key={index} />;
             })}

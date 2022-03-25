@@ -71,7 +71,6 @@ export default function EditRelease() {
         console.log("No such document!");
       }
     }
-
     getReleaseById();
   }, []);
 
