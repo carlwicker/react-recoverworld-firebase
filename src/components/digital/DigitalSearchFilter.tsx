@@ -48,16 +48,16 @@ export default function DigitalSearchFilter({
     setFilteredReleases(releases);
   }, []);
 
-  // useEffect(() => {
-  //   console.log(filteredReleases);
-  //   console.log(labelFilteredResults);
-  // }, [filteredReleases, labelFilteredResults]);
+  useEffect(() => {
+    // console.log(filteredReleases);
+    console.log(labelFilteredResults);
+  }, [filteredReleases, labelFilteredResults]);
 
   // Label Filter
   useEffect(() => {
     function labelFilter() {
       if (selectedLabel === "No Filter...") {
-        setLabelFilteredResults(filteredReleases);
+        setLabelFilteredResults(releases);
       } else {
         const result = filteredReleases.filter((release) =>
           release.label
@@ -68,6 +68,7 @@ export default function DigitalSearchFilter({
       }
     }
     labelFilter();
+    console.log(selectedLabel);
   }, [selectedLabel, filteredReleases]);
 
   return (
