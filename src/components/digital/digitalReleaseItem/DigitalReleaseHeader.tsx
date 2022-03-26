@@ -49,7 +49,7 @@ export default function DigitalReleaseHeader({
           style={{
             marginBottom: "0",
             paddingTop: "0",
-            textTransform: "uppercase",
+            textTransform: "capitalize",
             fontWeight: "200",
           }}
         >
