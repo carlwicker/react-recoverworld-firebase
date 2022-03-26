@@ -34,10 +34,10 @@ export default function DigitalReleaseItem({
         <DigitalReleaseHeader release={release} deleteRelease={deleteRelease} />
 
         <div>
-          <div style={{ width: "100%", borderTop: "1px solid grey" }}>
+          <div style={{ width: "100%", borderTop: "1px solid #222" }}>
             {/* List Tracks */}
             {release.trackListing.map((track: ITrack, index: number) => {
-              return <DigitalTrack track={track} key={index} />;
+              return <DigitalTrack track={track} key={index} index={index} />;
             })}
           </div>
         </div>
