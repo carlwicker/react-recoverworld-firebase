@@ -41,16 +41,11 @@ export default function DigitalSearchFilter({
       );
       setFilteredReleases(result);
     }
-  }, [searchTerm]);
-
-  // Initialise list
-  useEffect(() => {
-    setFilteredReleases(releases);
-  }, []);
+  }, [searchTerm, selectedLabel]);
 
   useEffect(() => {
     // console.log(filteredReleases);
-    // console.log(labelFilteredResults);
+    console.log(labelFilteredResults);
   }, [filteredReleases, labelFilteredResults]);
 
   // Label Filter
@@ -76,7 +71,7 @@ export default function DigitalSearchFilter({
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="releasesSearch">
-              <Form.Label>Search Releases [CatNum, Artist, Title]</Form.Label>
+              <Form.Label>Search Releases</Form.Label>
               <Form.Control
                 type="text"
                 onChange={(e) => {

@@ -15,10 +15,6 @@ export default function Digital() {
     []
   );
 
-  useEffect(() => {
-    setLabelFilteredResults(releases);
-  }, [releases]);
-
   // Get All Releases from Firestore
   async function getReleases() {
     const releasesRef = await collection(db, "releases");
@@ -35,6 +31,11 @@ export default function Digital() {
   useEffect(() => {
     getReleases();
   }, []);
+
+  // Initalise Release List
+  useEffect(() => {
+    setLabelFilteredResults(releases);
+  }, [releases]);
 
   // Actions
   function updateReleaseList() {

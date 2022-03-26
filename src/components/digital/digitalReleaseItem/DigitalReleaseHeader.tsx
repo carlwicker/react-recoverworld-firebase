@@ -17,7 +17,7 @@ export default function DigitalReleaseHeader({
         <Card.Img
           variant="top"
           src={release.artwork}
-          style={{ width: "130px" }}
+          style={{ width: "100px" }}
         />
       </Col>
 
@@ -36,7 +36,6 @@ export default function DigitalReleaseHeader({
           </div>
         </Card.Subtitle>
         <Card.Title
-          as={"h3"}
           style={{
             marginBottom: "0",
             paddingTop: "0",

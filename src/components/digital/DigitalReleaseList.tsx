@@ -15,11 +15,20 @@ export default function DigitalReleaseList({
     <>
       {labelFilteredResults?.map((release: any, index: number) => {
         return (
-          <DigitalReleaseItem
+          <div
             key={index}
-            release={release}
-            updateReleaseList={updateReleaseList}
-          />
+            style={{
+              padding: "5px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "10px",
+            }}
+          >
+            <DigitalReleaseItem
+              release={release}
+              updateReleaseList={updateReleaseList}
+            />
+          </div>
         );
       })}
     </>

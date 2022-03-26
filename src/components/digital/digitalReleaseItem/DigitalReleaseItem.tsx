@@ -21,19 +21,28 @@ export default function DigitalReleaseItem({
   }
 
   return (
-    <Card className="mb-2">
+    <div
+      className="mb-2"
+      style={{
+        display: "flex",
+        gap: "5px",
+        backgroundColor: "#111",
+        borderRadius: "15px",
+      }}
+    >
       <Card.Body>
         <DigitalReleaseHeader release={release} deleteRelease={deleteRelease} />
 
-        <Card>
-          <ListGroup as="ol" numbered>
+        <div>
+          <div style={{ width: "100%", borderTop: "1px solid grey" }}>
             {/* List Tracks */}
             {release.trackListing.map((track: ITrack, index: number) => {
               return <DigitalTrack track={track} key={index} />;
             })}
-          </ListGroup>
-        </Card>
+          </div>
+        </div>
       </Card.Body>
-    </Card>
+      <hr />
+    </div>
   );
 }
