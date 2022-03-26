@@ -37,27 +37,27 @@ export default function DigitalSearchFilter({
       const result = releases.filter(
         (release) =>
           release.title.toLocaleLowerCase().includes(searchTerm) ||
-          release.artist.toLocaleLowerCase().includes(searchTerm) ||
-          release.catNum.toLocaleLowerCase().includes(searchTerm)
+          release.artist.toLocaleLowerCase().includes(searchTerm)
       );
       setFilteredReleases(result);
     }
   }, [searchTerm]);
 
+  // Initialise list
   useEffect(() => {
     setFilteredReleases(releases);
   }, []);
 
   useEffect(() => {
     // console.log(filteredReleases);
-    console.log(labelFilteredResults);
+    // console.log(labelFilteredResults);
   }, [filteredReleases, labelFilteredResults]);
 
   // Label Filter
   useEffect(() => {
     function labelFilter() {
       if (selectedLabel === "No Filter...") {
-        setLabelFilteredResults(releases);
+        setLabelFilteredResults(filteredReleases);
       } else {
         const result = filteredReleases?.filter((release) =>
           release.label
@@ -68,7 +68,7 @@ export default function DigitalSearchFilter({
       }
     }
     labelFilter();
-  }, [selectedLabel, filteredReleases]);
+  }, [selectedLabel, filteredReleases, searchTerm]);
 
   return (
     <Container>

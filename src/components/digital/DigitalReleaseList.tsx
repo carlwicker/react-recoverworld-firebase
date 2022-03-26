@@ -11,8 +11,6 @@ export default function DigitalReleaseList({
   updateReleaseList,
   labelFilteredResults,
 }: IDigitalReleaseList) {
-  useEffect(() => {}, []);
-
   return (
     <>
       {labelFilteredResults?.map((release: any, index: number) => {
