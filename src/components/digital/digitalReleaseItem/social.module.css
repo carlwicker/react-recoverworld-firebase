@@ -1,0 +1,18 @@
+.social {
+  color: white;
+  animation: fadeIn 0.5s;
+  cursor: pointer;
+}
+
+.social:hover {
+  color: #1db954;
+  transition: 0.5s;
+}
+
+.social:visited,
+.social:focus,
+.social:active,
+a {
+  color: white;
+  transition: 0.5s;
+}

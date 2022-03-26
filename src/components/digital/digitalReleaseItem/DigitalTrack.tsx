@@ -1,6 +1,6 @@
-import { Card, Col } from "react-bootstrap";
 import { BsSpotify, BsYoutube } from "react-icons/bs";
 import { SiBeatport, SiSoundcloud } from "react-icons/si";
+import css from "./social.module.css";
 import ITrack from "../../../interfaces/ITrack";
 
 interface IDigitalTrack {
@@ -12,14 +12,15 @@ export default function DigitalTrack({ track, index }: IDigitalTrack) {
   return (
     <>
       <div
-        className="d-flex justify-content-between align-items-center"
+        className="d-flex align-items-center"
         style={{
           padding: "5px",
+          width: "100%",
           borderBottom: "1px solid #222",
           gap: "10px",
         }}
       >
-        <span style={{ color: "#333", fontSize: "20px", fontWeight: "800" }}>
+        <span style={{ color: "#222", fontSize: "20px", fontWeight: "800" }}>
           {index + 1 + "  "}
         </span>
         <div
@@ -32,28 +33,28 @@ export default function DigitalTrack({ track, index }: IDigitalTrack) {
         >
           {track.youtube !== "" ? (
             <a href={track.youtube} target="blank">
-              <BsYoutube style={{ fontSize: "20px", color: "white" }} />
+              <BsYoutube style={{ fontSize: "20px" }} className={css.social} />
             </a>
           ) : (
             ""
           )}
           {track.spotify !== "" ? (
             <a href={track.spotify} target="blank">
-              <BsSpotify style={{ fontSize: "20px", color: "white" }} />
+              <BsSpotify style={{ fontSize: "20px" }} />
             </a>
           ) : (
             ""
           )}
           {track.soundcloud !== "" ? (
             <a href={track.soundcloud} target="blank">
-              <SiSoundcloud style={{ fontSize: "20px", color: "white" }} />
+              <SiSoundcloud style={{ fontSize: "20px" }} />
             </a>
           ) : (
             ""
           )}
           {track.beatport !== "" ? (
             <a href={track.beatport} target="blank">
-              <SiBeatport style={{ fontSize: "20px", color: "white" }} />
+              <SiBeatport style={{ fontSize: "20px" }} />
             </a>
           ) : (
             ""

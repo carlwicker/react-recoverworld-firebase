@@ -1,6 +1,8 @@
 import { Card, Row, Col, Badge, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import IRelease from "../../../interfaces/IRelease";
+import ITrack from "../../../interfaces/ITrack";
+import DigitalTrack from "./DigitalTrack";
 
 interface IDigitalReleaseHeader {
   release: IRelease;
@@ -17,7 +19,7 @@ export default function DigitalReleaseHeader({
         <Card.Img
           variant="top"
           src={release.artwork}
-          style={{ width: "80px" }}
+          style={{ width: "160px" }}
         />
       </Col>
 
@@ -55,14 +57,21 @@ export default function DigitalReleaseHeader({
         >
           {release.artist}
         </Card.Title>
-      </Col>
-      <Col
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-        }}
-      >
-        <div>
+
+        {/* Track Listing */}
+        <div
+          style={{
+            borderTop: "1px solid #222",
+            marginTop: "20px",
+          }}
+        >
+          {release.trackListing.map((track: ITrack, index: number) => {
+            return <DigitalTrack track={track} key={index} index={index} />;
+          })}
+        </div>
+
+        {/* Buttons */}
+        <div style={{ marginTop: "20px" }}>
           <Link to={"/digital/" + release.id + "/edit"}>
             <Button variant="outline-warning" style={{ marginRight: "10px" }}>
               Edit
