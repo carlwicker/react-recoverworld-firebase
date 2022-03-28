@@ -14,6 +14,7 @@ export default function Digital() {
   const [labelFilteredResults, setLabelFilteredResults] = useState<any | []>(
     []
   );
+  const isAdmin: boolean = false;
 
   // Get All Releases from Firestore
   async function getReleases() {
@@ -54,11 +55,16 @@ export default function Digital() {
         <Col>
           <h1>Digital Hub</h1>
         </Col>
-        <Col style={{ display: "flex", justifyContent: "end" }}>
-          <Link to="/digital/addRelease">
-            <Button variant="primary">Add Release</Button>
-          </Link>
-        </Col>
+        {/* Admin Add Release Button */}
+        {isAdmin ? (
+          <Col style={{ display: "flex", justifyContent: "end" }}>
+            <Link to="/digital/addRelease">
+              <Button variant="primary">Add Release</Button>
+            </Link>
+          </Col>
+        ) : (
+          ""
+        )}
       </Row>
 
       {/* Search And Filter */}

@@ -1,3 +1,4 @@
+import { Timestamp } from "firebase/firestore";
 import ITrack from "./ITrack";
 
 export default interface IRelease {
@@ -8,5 +9,5 @@ export default interface IRelease {
   artwork: string;
   catNum: string;
   trackListing: ITrack[];
-  isActive: boolean;
+  releaseDate: Timestamp;
 }

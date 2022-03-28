@@ -13,6 +13,7 @@ export default function DigitalReleaseHeader({
   release,
   deleteRelease,
 }: IDigitalReleaseHeader) {
+  const isAdmin: boolean = false;
   return (
     <Row style={{ padding: "5px 5px 20px 5px" }}>
       <Col md="auto">
@@ -70,22 +71,26 @@ export default function DigitalReleaseHeader({
           })}
         </div>
 
-        {/* Buttons */}
-        <div style={{ marginTop: "20px" }}>
-          <Link to={"/digital/" + release.id + "/edit"}>
-            <Button variant="outline-warning" style={{ marginRight: "10px" }}>
-              Edit
+        {/* Admin Edit / Delete Buttons */}
+        {isAdmin ? (
+          <div style={{ marginTop: "20px" }}>
+            <Link to={"/digital/" + release.id + "/edit"}>
+              <Button variant="outline-warning" style={{ marginRight: "10px" }}>
+                Edit
+              </Button>
+            </Link>
+            <Button
+              variant="outline-danger"
+              onClick={() => {
+                deleteRelease(release.id);
+              }}
+            >
+              Delete
             </Button>
-          </Link>
-          <Button
-            variant="outline-danger"
-            onClick={() => {
-              deleteRelease(release.id);
-            }}
-          >
-            Delete
-          </Button>
-        </div>
+          </div>
+        ) : (
+          ""
+        )}
       </Col>
     </Row>
   );

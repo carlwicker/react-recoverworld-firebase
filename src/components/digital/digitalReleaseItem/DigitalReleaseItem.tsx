@@ -24,15 +24,15 @@ export default function DigitalReleaseItem({
       style={{
         display: "flex",
         gap: "5px",
-        backgroundColor: "#333",
+        // backgroundColor: "#333",
         borderRadius: "15px 0px 15px 0px",
-        boxShadow: "0px 0px 15px -2px rgba(0,0,0,0.57)",
+        // boxShadow: "0px 0px 15px -2px rgba(0,0,0,0.57)",
+        borderBottom: "1px dashed #555",
       }}
     >
       <Card.Body>
         <DigitalReleaseHeader release={release} deleteRelease={deleteRelease} />
       </Card.Body>
-      <hr />
     </div>
   );
 }
