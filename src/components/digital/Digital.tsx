@@ -52,9 +52,8 @@ export default function Digital() {
           alignItems: "center",
         }}
       >
-        <Col>
-          <h1>Digital Hub</h1>
-        </Col>
+        <h1>Digital Hub</h1>
+
         {/* Admin Add Release Button */}
         {isAdmin ? (
           <Col style={{ display: "flex", justifyContent: "end" }}>

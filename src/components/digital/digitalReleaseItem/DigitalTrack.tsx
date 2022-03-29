@@ -16,11 +16,10 @@ export default function DigitalTrack({ track, index }: IDigitalTrack) {
         style={{
           padding: "5px",
           width: "100%",
-          borderBottom: "1px solid #222",
           gap: "10px",
         }}
       >
-        <span style={{ color: "#222", fontSize: "20px", fontWeight: "800" }}>
+        <span style={{ color: "#555", fontSize: "20px", fontWeight: "800" }}>
           {index + 1 + "  "}
         </span>
         <div

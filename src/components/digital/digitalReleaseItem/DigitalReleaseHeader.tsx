@@ -62,7 +62,6 @@ export default function DigitalReleaseHeader({
         {/* Track Listing */}
         <div
           style={{
-            borderTop: "1px solid #222",
             marginTop: "20px",
           }}
         >
