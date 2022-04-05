@@ -10,4 +10,5 @@ export default interface IRelease {
   catNum: string;
   trackListing: ITrack[];
   releaseDate: Timestamp;
+  ampsuiteReleaseId: number;
 }

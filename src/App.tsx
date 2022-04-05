@@ -11,6 +11,7 @@ import Digital from "./components/digital/Digital";
 import Social from "./components/social/Social";
 import AddRelease from "./components/digital/addRelease/AddRelease";
 import EditRelease from "./components/digital/editRelease/EditRelease";
+import Test from "./Test";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="digital/:releaseId/edit" element={<EditRelease />} />
       </Routes>
       <Social />
+      <Test />
     </div>
   );
 }
