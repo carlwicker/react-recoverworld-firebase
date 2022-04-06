@@ -23,6 +23,8 @@ export default function AddTrackModal({
     youtube: "",
     spotify: "",
     soundcloud: "",
+    recoverworld: "",
+    itunes: "",
   };
 
   useEffect(() => {

@@ -6,4 +6,6 @@ export default interface ITrack {
   spotify: string;
   soundcloud: string;
   youtube: string;
+  recoverworld: string;
+  itunes: string;
 }
