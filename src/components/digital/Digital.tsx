@@ -2,7 +2,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import DigitalSearchFilter from "./DigitalSearchFilter";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, limit } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import DigitalReleaseList from "./DigitalReleaseList";

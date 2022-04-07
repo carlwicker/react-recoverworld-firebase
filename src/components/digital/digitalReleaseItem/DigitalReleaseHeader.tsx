@@ -13,15 +13,15 @@ export default function DigitalReleaseHeader({
   release,
   deleteRelease,
 }: IDigitalReleaseHeader) {
-  const isAdmin: boolean = false;
+  const isAdmin: boolean = true;
   return (
     <Row style={{ padding: "5px 5px 20px 5px" }}>
       <Col md="auto">
-        <Card.Img
+        {/* <Card.Img
           variant="top"
-          src={release.artwork}
+          src={release?.artwork}
           style={{ width: "160px" }}
-        />
+        /> */}
       </Col>
 
       <Col
@@ -33,7 +33,7 @@ export default function DigitalReleaseHeader({
         }}
       >
         <Card.Subtitle className="text-muted">
-          <Badge bg="primary">New Release</Badge>
+          {/* <Badge bg="primary">New Release</Badge> */}
           <div style={{ fontWeight: "200", fontSize: "12px" }} className="pt-2">
             {release.catNum} | {release.label}
           </div>

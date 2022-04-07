@@ -28,7 +28,7 @@ function App() {
         <Route path="digital/:releaseId/edit" element={<EditRelease />} />
       </Routes>
       <Social />
-      <Test />
+      {/* <Test /> */}
     </div>
   );
 }
