@@ -17,11 +17,11 @@ export default function DigitalReleaseHeader({
   return (
     <Row style={{ padding: "5px 5px 20px 5px" }}>
       <Col md="auto">
-        {/* <Card.Img
+        <Card.Img
           variant="top"
           src={release?.artwork}
           style={{ width: "160px" }}
-        /> */}
+        />
       </Col>
 
       <Col

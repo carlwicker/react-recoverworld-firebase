@@ -8,6 +8,8 @@ interface IDigitalSearchFilter {
   filteredReleases: IRelease[];
   labelFilteredResults: any;
   setLabelFilteredResults: any;
+  setSelectedLabel: any;
+  selectedLabel: string;
 }
 
 export default function DigitalSearchFilter({
@@ -16,18 +18,24 @@ export default function DigitalSearchFilter({
   filteredReleases,
   labelFilteredResults,
   setLabelFilteredResults,
+  selectedLabel,
+  setSelectedLabel,
 }: IDigitalSearchFilter) {
   const labels = [
     "No Filter...",
     "Discover Records",
     "Discover Dark",
-    "Eve Records",
+    "EVE Records",
     "Flux Delux",
-    "Iconise Records",
+    "Iconise",
+    "Discover Digital",
   ];
 
-  const [searchTerm, setSearchTerm] = useState<any>("");
-  const [selectedLabel, setSelectedLabel] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  useEffect(() => {
+    setSearchTerm("");
+  }, [selectedLabel]);
 
   // Filter Releases by Search Term
   useEffect(() => {
@@ -44,7 +52,7 @@ export default function DigitalSearchFilter({
   }, [searchTerm, selectedLabel]);
 
   useEffect(() => {
-    // console.log(filteredReleases);
+    console.log(filteredReleases);
     console.log(labelFilteredResults);
   }, [filteredReleases, labelFilteredResults]);
 
@@ -73,6 +81,7 @@ export default function DigitalSearchFilter({
             <Form.Group className="mb-3" controlId="releasesSearch">
               <Form.Label>Search Releases</Form.Label>
               <Form.Control
+                defaultValue={searchTerm}
                 type="text"
                 onChange={(e) => {
                   setSearchTerm(e.target.value.toLocaleLowerCase());

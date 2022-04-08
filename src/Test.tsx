@@ -29,7 +29,7 @@ export default function Test() {
     const releasesArr = data.releases.release;
 
     releasesArr.forEach((release: any, index: number) => {
-      // console.log(release);
+      console.log(release);
 
       // Create Links Obj
       let retailerLinks = release.retailer_links.retailer_link;

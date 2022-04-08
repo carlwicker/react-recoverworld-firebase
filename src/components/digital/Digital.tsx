@@ -2,41 +2,55 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import DigitalSearchFilter from "./DigitalSearchFilter";
-import { collection, getDocs, limit } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  limit,
+  where,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import DigitalReleaseList from "./DigitalReleaseList";
 import IRelease from "../../interfaces/IRelease";
 
 export default function Digital() {
-  const [releases, setReleases] = useState<any | []>([]);
+  const [releases, setReleases] = useState<IRelease[] | []>([]);
   const [filteredReleases, setFilteredReleases] = useState<IRelease[] | []>([]);
-  const [labelFilteredResults, setLabelFilteredResults] = useState<any | []>(
-    []
-  );
+  const [labelFilteredResults, setLabelFilteredResults] = useState<
+    IRelease[] | []
+  >([]);
   const isAdmin: boolean = false;
+  const [selectedLabel, setSelectedLabel] = useState<string>("");
 
   // Get All Releases from Firestore
   async function getReleases() {
-    const releasesRef = await collection(db, "releases");
+    const q = await query(
+      collection(db, "releases"),
+      where("label", "==", selectedLabel),
+      limit(500),
+      orderBy("releaseDate", "desc")
+    );
 
-    getDocs(releasesRef).then((snapshot) => {
-      let releaseArr: any[] = [];
-      snapshot.forEach((release) => {
-        releaseArr.push({ ...release.data(), id: release.id });
-      });
-      setReleases(releaseArr);
+    const querySnapshot = await getDocs(q);
+    let releaseArr: any[] = [];
+    querySnapshot.forEach((release) => {
+      releaseArr.push({ ...release.data(), id: release.id });
     });
-  }
 
-  useEffect(() => {
-    getReleases();
-  }, []);
+    setReleases(releaseArr);
+    releaseArr = [];
+  }
 
   // Initalise Release List
   useEffect(() => {
     setLabelFilteredResults(releases);
   }, [releases]);
+
+  useEffect(() => {
+    getReleases();
+  }, [selectedLabel]);
 
   // Actions
   function updateReleaseList() {
@@ -73,6 +87,8 @@ export default function Digital() {
         filteredReleases={filteredReleases}
         labelFilteredResults={labelFilteredResults}
         setLabelFilteredResults={setLabelFilteredResults}
+        selectedLabel={selectedLabel}
+        setSelectedLabel={setSelectedLabel}
       />
 
       {/* Release list */}
