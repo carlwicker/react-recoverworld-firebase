@@ -1,9 +1,10 @@
 import { Container, Row, Carousel } from "react-bootstrap";
+import Merchantise from "../merchantise/Merchandise";
 
 export default function Home() {
   return (
-    <Carousel
-      style={{ height: "450px", width: "100%", overflow: "hidden" }}
-    ></Carousel>
+    <Container>
+      <Merchantise />
+    </Container>
   );
 }

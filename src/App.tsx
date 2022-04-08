@@ -11,7 +11,9 @@ import Digital from "./components/digital/Digital";
 import Social from "./components/social/Social";
 import AddRelease from "./components/digital/addRelease/AddRelease";
 import EditRelease from "./components/digital/editRelease/EditRelease";
-import Test from "./Test";
+import Test from "./AmpsuiteImporter";
+import Merchantise from "./components/merchantise/Merchandise";
+import { Container } from "react-bootstrap";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path="digital/:releaseId/edit" element={<EditRelease />} />
       </Routes>
       <Social />
+
+      {/* <Merchantise /> */}
       {/* <Test /> */}
     </div>
   );
