@@ -68,10 +68,12 @@ export default function Merchantise() {
                   src={item?.image_link}
                   style={{
                     width: "150px",
+                    height: "150px",
                     borderRadius: "20px",
                     opacity: "0.75",
+                    backgroundColor: "red",
                   }}
-                />{" "}
+                />
               </div>
 
               <div

@@ -15,8 +15,11 @@
 body {
   font-size: 16px;
   font-family: "Barlow Semi Condensed";
-  background-image: url("../build/img/backgroundTest1.png");
+  background-image: url("../build/img/testBackground4.png");
+  background-size: cover;
   background-repeat: no-repeat;
+  background-position: top;
+  background-attachment: fixed;
 }
 
 .App {
