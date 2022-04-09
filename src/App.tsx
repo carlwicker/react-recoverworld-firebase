@@ -12,6 +12,7 @@ import Social from "./components/social/Social";
 import AddRelease from "./components/digital/addRelease/AddRelease";
 import EditRelease from "./components/digital/editRelease/EditRelease";
 import Test from "./AmpsuiteImporter";
+import Merchandise from "./components/merchantise/Merchandise";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="vinyl" element={<Vinyl />} />
         <Route path="digital" element={<Digital />} />
+        <Route path="merchandise" element={<Merchandise />} />
         <Route path="digital/addRelease" element={<AddRelease />} />
         <Route path="digital/:releaseId/edit" element={<EditRelease />} />
       </Routes>

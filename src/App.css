@@ -12,6 +12,10 @@
   margin: 0;
 }
 
+body::-webkit-scrollbar {
+  display: none; /* Chrome scroll */
+}
+
 body {
   font-size: 16px;
   font-family: "Barlow Semi Condensed";
@@ -20,6 +24,9 @@ body {
   background-repeat: no-repeat;
   background-position: top;
   background-attachment: fixed;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge scroll */
+  scrollbar-width: none; /* for Firefox scroll */
+  overflow-y: scroll;
 }
 
 .App {

@@ -1,6 +1,5 @@
 import css from "./Social.module.css";
 import { BsFacebook, BsTwitter, BsInstagram, BsYoutube } from "react-icons/bs";
-import { SiBeatport } from "react-icons/si";
 import { Container } from "react-bootstrap";
 
 export default function Social() {
@@ -11,7 +10,6 @@ export default function Social() {
         <BsTwitter className={css["social-icon"]} />
         <BsInstagram className={css["social-icon"]} />
         <BsYoutube className={css["social-icon"]} />
-        <SiBeatport className={css["social-icon"]} />
       </div>
     </Container>
   );

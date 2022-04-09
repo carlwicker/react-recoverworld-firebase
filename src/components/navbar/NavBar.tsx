@@ -1,4 +1,4 @@
-import { Container, Navbar, NavDropdown, Nav } from "react-bootstrap";
+import { Container, Navbar, NavDropdown, Nav, NavLink } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
@@ -23,17 +23,18 @@ export default function NavBar() {
               About
             </Nav.Link>
 
-            <NavDropdown title="Shop" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/vinyl">
-                Vinyl
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/digital">
-                Digital Hub
-              </NavDropdown.Item>
-            </NavDropdown>
+            <NavLink as={Link} to="/digital">
+              Digital Hub
+            </NavLink>
+
+            <NavLink as={Link} to="/merchandise">
+              Mechandise
+            </NavLink>
+
             <Nav.Link as={Link} to="/demos">
               Demos
             </Nav.Link>
+
             <Nav.Link as={Link} to="/contact">
               Contact
             </Nav.Link>
