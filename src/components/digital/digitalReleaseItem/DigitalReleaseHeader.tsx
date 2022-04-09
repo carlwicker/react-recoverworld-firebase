@@ -13,7 +13,7 @@ export default function DigitalReleaseHeader({
   release,
   deleteRelease,
 }: IDigitalReleaseHeader) {
-  const isAdmin: boolean = true;
+  const isAdmin: boolean = false;
   return (
     <Row style={{ padding: "5px 5px 20px 5px" }}>
       <Col md="auto">

@@ -1,6 +1,6 @@
 import { Container, Row, Carousel } from "react-bootstrap";
-import Merchantise from "../merchantise/Merchandise";
+import Merchandise from "../merchandise/Merchandise";
 
 export default function Home() {
-  return <Container>{/* <Merchantise /> */}</Container>;
+  return <Container>{/* <Merchandise /> */}</Container>;
 }

@@ -12,7 +12,7 @@ import Social from "./components/social/Social";
 import AddRelease from "./components/digital/addRelease/AddRelease";
 import EditRelease from "./components/digital/editRelease/EditRelease";
 import Test from "./AmpsuiteImporter";
-import Merchandise from "./components/merchantise/Merchandise";
+import Merchandise from "./components/merchandise/Merchandise";
 
 function App() {
   return (

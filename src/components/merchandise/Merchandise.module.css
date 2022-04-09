@@ -1,0 +1,15 @@
+.item {
+  display: flex;
+  height: 200px;
+  width: fit-content;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.75;
+}
+
+.item:hover {
+  /* height: 250px; */
+  opacity: 1;
+  /* transition: 1s; */
+}

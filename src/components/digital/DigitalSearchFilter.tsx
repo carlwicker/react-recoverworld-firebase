@@ -41,7 +41,7 @@ export default function DigitalSearchFilter({
   useEffect(() => {
     if (searchTerm === "") {
       setFilteredReleases(releases);
-    } else {
+    } else if (searchTerm.length >= 2) {
       const result = releases.filter(
         (release) =>
           release.title.toLocaleLowerCase().includes(searchTerm) ||
