@@ -41,17 +41,15 @@ export default function AmpsuiteXMLReleaseParser() {
   useEffect(() => {
     // Check if Object or Array
     if (!Array.isArray(jsonData?.tracks?.track)) {
-      console.log([jsonData?.tracks?.track]);
+      setTracklisting([jsonData?.tracks?.track]);
     } else {
-      console.log([jsonData?.tracks?.track]);
+      setTracklisting(jsonData?.tracks?.track);
     }
   }, [jsonData]);
 
-  const [tracklistArr, setTracklistArr] = useState<ITrack[] | []>([]);
-
   useEffect(() => {
-    // console.log(tracklistArr);
-  }, [tracklistArr]);
+    console.log(tracklisting);
+  }, [tracklisting]);
 
   return (
     <Container>
@@ -63,6 +61,13 @@ export default function AmpsuiteXMLReleaseParser() {
         <div>Title: {jsonData?.title}</div>
         <div>Label: {jsonData?.label}</div>
         <div>Release Date: {jsonData?.release_date}</div>
+
+        <h3 style={{ marginTop: "20px" }}>Tracklisting:</h3>
+
+        {tracklisting.track?.map((track: any, index: number) => {
+          console.log(track);
+          return <div key={index}>{track[index]?.mix_name}</div>;
+        })}
       </Row>
       <Row>
         <Form
