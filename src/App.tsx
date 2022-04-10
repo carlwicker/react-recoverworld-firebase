@@ -13,6 +13,7 @@ import AddRelease from "./components/digital/addRelease/AddRelease";
 import EditRelease from "./components/digital/editRelease/EditRelease";
 import Test from "./AmpsuiteImporter";
 import Merchandise from "./components/merchandise/Merchandise";
+import AmpsuiteXMLReleaseParser from "./components/utility/AmpsuiteXMLReleaseParser";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
       </Routes>
       <Social />
 
+      <AmpsuiteXMLReleaseParser />
       {/* <Merchantise /> */}
       {/* <Test /> */}
     </div>

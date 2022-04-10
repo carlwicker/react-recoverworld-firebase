@@ -75,7 +75,7 @@ export default function Test() {
       releaseObj.artist = release.artists.artist["#cdata-section"].slice(1, -1);
       releaseObj.title = release.title["#cdata-section"].slice(1, -1);
       releaseObj.label = release.label["#cdata-section"].slice(1, -1);
-      releaseObj.artwork = release.covers.cover[0]["#cdata-section"].slice(
+      releaseObj.artwork = release.covers.cover[1]["#cdata-section"].slice(
         1,
         -1
       );
