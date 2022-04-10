@@ -3,11 +3,9 @@ import axios from "axios";
 import { XMLParser } from "fast-xml-parser";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { json } from "stream/consumers";
+import ITrack from "../../interfaces/ITrack";
 
 export default function AmpsuiteXMLReleaseParser() {
-  var xml = "<foo></foo>";
-
-  const [id, setId] = useState(1985);
   const [xmlData, setXMLData] = useState<any>();
   const [jsonData, setJsonData] = useState<any>([]);
   const [ampsuiteId, setAmpsuiteId] = useState<number>();
@@ -41,19 +39,19 @@ export default function AmpsuiteXMLReleaseParser() {
   }, [xmlData]);
 
   useEffect(() => {
-    console.log(Array(jsonData?.tracks?.track).length, jsonData);
-    if (Array(jsonData?.tracks?.track).length === 1) {
-      setTracklisting([jsonData?.tracks?.track]);
-    } else if (Array(jsonData?.tracks?.track).length < 1) {
-      setTracklisting([...tracklisting, jsonData?.tracks?.track]);
+    // Check if Object or Array
+    if (!Array.isArray(jsonData?.tracks?.track)) {
+      console.log([jsonData?.tracks?.track]);
     } else {
+      console.log([jsonData?.tracks?.track]);
     }
-  }, [ampsuiteId]);
+  }, [jsonData]);
+
+  const [tracklistArr, setTracklistArr] = useState<ITrack[] | []>([]);
 
   useEffect(() => {
-    console.log(tracklisting);
-    // console.log(jsonData);
-  }, [tracklisting, jsonData]);
+    // console.log(tracklistArr);
+  }, [tracklistArr]);
 
   return (
     <Container>
@@ -89,10 +87,11 @@ export default function AmpsuiteXMLReleaseParser() {
                 setAmpsuiteId(e.target.value);
               }}
             />
-
-            <Button variant="primary" type="submit">
-              Import Release
-            </Button>
+            <div>
+              <Button variant="primary" type="submit">
+                Import Release
+              </Button>
+            </div>
           </Col>
         </Form>
       </Row>
