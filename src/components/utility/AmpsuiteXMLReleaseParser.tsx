@@ -45,6 +45,7 @@ export default function AmpsuiteXMLReleaseParser() {
     } else {
       setTracklisting(jsonData?.tracks?.track);
     }
+    console.log(jsonData);
   }, [jsonData]);
 
   useEffect(() => {
@@ -57,6 +58,7 @@ export default function AmpsuiteXMLReleaseParser() {
         <h2>XML AmpSuite Release Parser</h2>
       </Row>
       <Row style={{ textAlign: "left", padding: "20px 0" }}>
+        <div>Cat Number: {jsonData?.cat_no}</div>
         <div>Artist: {jsonData?.artists?.artist}</div>
         <div>Title: {jsonData?.title}</div>
         <div>Label: {jsonData?.label}</div>
@@ -64,9 +66,20 @@ export default function AmpsuiteXMLReleaseParser() {
 
         <h3 style={{ marginTop: "20px" }}>Tracklisting:</h3>
 
-        {tracklisting.track?.map((track: any, index: number) => {
+        {tracklisting?.map((track: any, index: number) => {
           console.log(track);
-          return <div key={index}>{track[index]?.mix_name}</div>;
+          return (
+            <div key={index}>
+              {track !== undefined ? (
+                <div>
+                  {index + 1}: {track?.title} - {track?.artist} (
+                  {track?.mix_name})
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+          );
         })}
       </Row>
       <Row>
@@ -92,7 +105,7 @@ export default function AmpsuiteXMLReleaseParser() {
                 setAmpsuiteId(e.target.value);
               }}
             />
-            <div>
+            <div style={{ marginBottom: "50px" }}>
               <Button variant="primary" type="submit">
                 Import Release
               </Button>
