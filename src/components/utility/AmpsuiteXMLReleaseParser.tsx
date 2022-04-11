@@ -45,7 +45,7 @@ export default function AmpsuiteXMLReleaseParser() {
     } else {
       setTracklisting(jsonData?.tracks?.track);
     }
-    console.log(jsonData);
+    // console.log(jsonData);
   }, [jsonData]);
 
   useEffect(() => {
@@ -54,40 +54,58 @@ export default function AmpsuiteXMLReleaseParser() {
 
   return (
     <Container>
-      <Row style={{ textAlign: "left" }}>
-        <h2>XML AmpSuite Release Parser</h2>
-      </Row>
-      <Row style={{ textAlign: "left", padding: "20px 0" }}>
-        <div>Cat Number: {jsonData?.cat_no}</div>
-        <div>Artist: {jsonData?.artists?.artist}</div>
-        <div>Title: {jsonData?.title}</div>
-        <div>Label: {jsonData?.label}</div>
-        <div>Release Date: {jsonData?.release_date}</div>
+      <Form
+        onSubmit={(e: any) => {
+          e.preventDefault();
+        }}
+      >
+        <Row style={{ textAlign: "left" }}>
+          <h2>AmpSuite XML Release Parser</h2>
+        </Row>
+        <Row>
+          <div>
+            <Form.Control
+              style={{ margin: "20px 0" }}
+              type="number"
+              placeholder="Ampsuite Release ID"
+              maxLength={5}
+              onChange={(e: any) => {
+                setAmpsuiteId(e.target.value);
+              }}
+            />
+          </div>
+        </Row>
+        <Row style={{ textAlign: "left", padding: "20px 0" }}>
+          {tracklisting[0] !== undefined ? (
+            <>
+              <div>Cat Number: {jsonData?.cat_no}</div>
+              <div>Artist: {jsonData?.artists?.artist}</div>
+              <div>Title: {jsonData?.title}</div>
+              <div>Label: {jsonData?.label}</div>
+              <div>Release Date: {jsonData?.release_date}</div>
+              <h3 style={{ marginTop: "20px" }}>Tracklisting:</h3>{" "}
+            </>
+          ) : (
+            ""
+          )}
 
-        <h3 style={{ marginTop: "20px" }}>Tracklisting:</h3>
-
-        {tracklisting?.map((track: any, index: number) => {
-          console.log(track);
-          return (
-            <div key={index}>
-              {track !== undefined ? (
-                <div>
-                  {index + 1}: {track?.title} - {track?.artist} (
-                  {track?.mix_name})
-                </div>
-              ) : (
-                ""
-              )}
-            </div>
-          );
-        })}
-      </Row>
-      <Row>
-        <Form
-          onSubmit={(e: any) => {
-            e.preventDefault();
-          }}
-        >
+          {tracklisting?.map((track: any, index: number) => {
+            console.log(track);
+            return (
+              <div key={index}>
+                {track !== undefined ? (
+                  <div>
+                    {index + 1}: {track?.title} - {track?.artist} (
+                    {track?.mix_name})
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+            );
+          })}
+        </Row>
+        <Row>
           <Col
             md={6}
             style={{
@@ -97,22 +115,14 @@ export default function AmpsuiteXMLReleaseParser() {
               gap: "10px",
             }}
           >
-            <Form.Control
-              type="number"
-              placeholder="Ampsuite Release ID"
-              maxLength={5}
-              onChange={(e: any) => {
-                setAmpsuiteId(e.target.value);
-              }}
-            />
             <div style={{ marginBottom: "50px" }}>
               <Button variant="primary" type="submit">
                 Import Release
               </Button>
             </div>
           </Col>
-        </Form>
-      </Row>
+        </Row>
+      </Form>
     </Container>
   );
 }
