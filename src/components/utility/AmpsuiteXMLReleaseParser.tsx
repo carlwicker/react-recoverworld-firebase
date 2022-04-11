@@ -116,7 +116,11 @@ export default function AmpsuiteXMLReleaseParser() {
             }}
           >
             <div style={{ marginBottom: "50px" }}>
-              <Button variant="primary" type="submit">
+              <Button
+                variant={tracklisting[0] !== undefined ? "primary" : "danger"}
+                disabled={tracklisting[0] === undefined}
+                type="submit"
+              >
                 Import Release
               </Button>
             </div>
