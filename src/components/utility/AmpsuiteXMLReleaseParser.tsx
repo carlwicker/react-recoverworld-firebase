@@ -52,6 +52,10 @@ export default function AmpsuiteXMLReleaseParser() {
     let linkTempObj = {
       beatport: "",
       itunes: "",
+      spotify: "",
+      soundcloud: "",
+      youtube: "",
+      recoverworld: "",
     };
 
     if (Array.isArray(jsonData?.retailer_links?.retailer_link)) {
@@ -59,13 +63,13 @@ export default function AmpsuiteXMLReleaseParser() {
         if (link?.link_url?.includes("beatport")) {
           linkTempObj.beatport = link.link_url;
         } else if (link.link_url.includes("spotify")) {
-          setLinksObj({ ...linksObj, spotify: link?.link_url });
+          linkTempObj.spotify = link.link_url;
         } else if (link.link_url.includes("soundcloud")) {
-          setLinksObj({ ...linksObj, soundcloud: link?.link_url });
+          linkTempObj.soundcloud = link.link_url;
         } else if (link.link_url.includes("youtube")) {
-          setLinksObj({ ...linksObj, youtube: link?.link_url });
+          linkTempObj.youtube = link.link_url;
         } else if (link.link_url.includes("recoverworld")) {
-          setLinksObj({ ...linksObj, recoverworld: link?.link_url });
+          linkTempObj.recoverworld = link.link_url;
         } else if (link?.link_url?.includes("itunes")) {
           linkTempObj.itunes = link.link_url;
         }
@@ -76,13 +80,13 @@ export default function AmpsuiteXMLReleaseParser() {
       if (link?.includes("beatport")) {
         linkTempObj.beatport = link;
       } else if (link?.includes("spotify")) {
-        setLinksObj({ ...linksObj, spotify: link });
+        linkTempObj.spotify = link;
       } else if (link?.includes("soundcloud")) {
-        setLinksObj({ ...linksObj, soundcloud: link });
+        linkTempObj.soundcloud = link;
       } else if (link?.includes("youtube")) {
-        setLinksObj({ ...linksObj, youtube: link });
+        linkTempObj.youtube = link;
       } else if (link?.includes("recoverworld")) {
-        setLinksObj({ ...linksObj, recoverworld: link });
+        linkTempObj.recoverworld = link;
       } else if (link?.includes("itunes")) {
         linkTempObj.itunes = link;
       }
