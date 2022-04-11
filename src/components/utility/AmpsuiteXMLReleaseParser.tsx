@@ -34,7 +34,7 @@ export default function AmpsuiteXMLReleaseParser() {
       });
   }, [ampsuiteId]);
 
-  // Parse XML => Set JSON
+  // Parse XML => JSON
   useEffect(() => {
     async function getAmpsuiteRelease() {
       const parser: any = new XMLParser();
