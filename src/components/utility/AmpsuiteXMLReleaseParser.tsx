@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { XMLParser } from "fast-xml-parser";
-import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-import { json } from "stream/consumers";
-import ITrack from "../../interfaces/ITrack";
+import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 
 export default function AmpsuiteXMLReleaseParser() {
   const [xmlData, setXMLData] = useState<any>();
   const [jsonData, setJsonData] = useState<any>([]);
-  const [ampsuiteId, setAmpsuiteId] = useState<number>();
+  const [ampsuiteId, setAmpsuiteId] = useState<number | undefined>();
   const [tracklisting, setTracklisting] = useState<any>([]);
+  const [firebaseReleaseObj, setFirebaseReleaseObj] = useState({
+    artist: "",
+    title: "",
+    label: "",
+    artwork: "",
+    catNum: "",
+    tracklisting: [],
+    releaseDate: 0,
+    ampsuiteId: 0,
+  });
 
   // Get Ampsuite XML by AmpSuite Id
   useEffect(() => {
@@ -39,18 +47,83 @@ export default function AmpsuiteXMLReleaseParser() {
   }, [xmlData]);
 
   useEffect(() => {
-    // Check if Object or Array
+    // Put single Object in Array
     if (!Array.isArray(jsonData?.tracks?.track)) {
       setTracklisting([jsonData?.tracks?.track]);
     } else {
       setTracklisting(jsonData?.tracks?.track);
     }
-    // console.log(jsonData);
+
+    // Get Retail Links
+    let retailerArr: any = {
+      beatport: "",
+      spotify: "",
+      soundcloud: "",
+      youtube: "",
+      recoverworld: "",
+      itunes: "",
+    };
+
+    jsonData?.retailer_links?.retailer_link?.forEach((link: any) => {
+      // console.log(link);
+      if (link.link_url.includes("beatport")) {
+        retailerArr.beatport = link.link_url;
+      } else if (link.link_url.includes("spotify")) {
+        retailerArr.spotify = link.link_url;
+      } else if (link.link_url.includes("soundcloud")) {
+        retailerArr.soundcloud = link.link_url;
+      } else if (link.link_url.includes("youtube")) {
+        retailerArr.youtube = link.link_url;
+      } else if (link.link_url.includes("recoverworld")) {
+        retailerArr.recoverworld = link.link_url;
+      } else if (link.link_url.includes("itunes")) {
+        retailerArr.itunes = link.link_url;
+      }
+    });
+
+    // Convert Date to Firebase Date Format
+    let firebaseDateFormatted: any = undefined;
+
+    function getFormattedData() {
+      if (ampsuiteId !== undefined) {
+        let unformattedDate = jsonData?.release_date;
+        unformattedDate = unformattedDate?.split("-");
+        let firebaseDateFormatted = new Date(
+          unformattedDate[0],
+          unformattedDate[1] - 1,
+          unformattedDate[2]
+        );
+        return firebaseDateFormatted.getTime();
+      } else {
+        firebaseDateFormatted = 0;
+        return firebaseDateFormatted;
+      }
+    }
+
+    // Firebase Release Obj
+    setFirebaseReleaseObj({
+      artist: jsonData?.artists?.artist,
+      title: jsonData?.title,
+      label: jsonData?.label,
+      artwork: jsonData?.covers?.cover[1],
+      catNum: jsonData?.cat_no,
+      tracklisting: [],
+      releaseDate: getFormattedData(),
+      ampsuiteId: jsonData.id,
+    });
   }, [jsonData]);
 
   useEffect(() => {
-    console.log(tracklisting);
+    // console.log(tracklisting);
   }, [tracklisting]);
+
+  useEffect(() => {
+    console.log(jsonData);
+  }, [jsonData]);
+
+  useEffect(() => {
+    console.log(firebaseReleaseObj);
+  }, [firebaseReleaseObj]);
 
   return (
     <Container>
@@ -62,6 +135,11 @@ export default function AmpsuiteXMLReleaseParser() {
         <Row style={{ textAlign: "left" }}>
           <h2>AmpSuite XML Release Parser</h2>
         </Row>
+
+        <Alert variant="danger" style={{ textAlign: "left" }}>
+          CORS Must be enabled in your browers.
+        </Alert>
+
         <Row>
           <div>
             <Form.Control
@@ -90,7 +168,6 @@ export default function AmpsuiteXMLReleaseParser() {
           )}
 
           {tracklisting?.map((track: any, index: number) => {
-            console.log(track);
             return (
               <div key={index}>
                 {track !== undefined ? (

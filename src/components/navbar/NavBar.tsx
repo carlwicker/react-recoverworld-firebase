@@ -38,6 +38,12 @@ export default function NavBar() {
             <Nav.Link as={Link} to="/contact">
               Contact
             </Nav.Link>
+
+            <NavDropdown title="AMPSuite Tools" id="ampsuiteTools">
+              <NavDropdown.Item as={Link} to="/ampsuite/release/import">
+                Import AMPSuite Release
+              </NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>

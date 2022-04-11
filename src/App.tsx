@@ -11,7 +11,6 @@ import Digital from "./components/digital/Digital";
 import Social from "./components/social/Social";
 import AddRelease from "./components/digital/addRelease/AddRelease";
 import EditRelease from "./components/digital/editRelease/EditRelease";
-import Test from "./AmpsuiteImporter";
 import Merchandise from "./components/merchandise/Merchandise";
 import AmpsuiteXMLReleaseParser from "./components/utility/AmpsuiteXMLReleaseParser";
 
@@ -29,12 +28,12 @@ function App() {
         <Route path="merchandise" element={<Merchandise />} />
         <Route path="digital/addRelease" element={<AddRelease />} />
         <Route path="digital/:releaseId/edit" element={<EditRelease />} />
+        <Route
+          path="ampsuite/release/import"
+          element={<AmpsuiteXMLReleaseParser />}
+        />
       </Routes>
       <Social />
-
-      <AmpsuiteXMLReleaseParser />
-      {/* <Merchantise /> */}
-      {/* <Test /> */}
     </div>
   );
 }
