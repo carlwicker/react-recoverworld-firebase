@@ -18,6 +18,7 @@ export default function AmpsuiteXMLReleaseParser() {
     releaseDate: 0,
     ampsuiteId: 0,
   });
+  const [linksObj, setLinksObj] = useState<any>({});
 
   // Get Ampsuite XML by AmpSuite Id
   useEffect(() => {
@@ -47,43 +48,57 @@ export default function AmpsuiteXMLReleaseParser() {
   }, [xmlData]);
 
   useEffect(() => {
-    // Put single Object in Array
+    // Build Firebase Retailer Array
+    let linkTempObj = {
+      beatport: "",
+      itunes: "",
+    };
+
+    if (Array.isArray(jsonData?.retailer_links?.retailer_link)) {
+      jsonData?.retailer_links?.retailer_link?.forEach((link: any) => {
+        if (link?.link_url?.includes("beatport")) {
+          linkTempObj.beatport = link.link_url;
+        } else if (link.link_url.includes("spotify")) {
+          setLinksObj({ ...linksObj, spotify: link?.link_url });
+        } else if (link.link_url.includes("soundcloud")) {
+          setLinksObj({ ...linksObj, soundcloud: link?.link_url });
+        } else if (link.link_url.includes("youtube")) {
+          setLinksObj({ ...linksObj, youtube: link?.link_url });
+        } else if (link.link_url.includes("recoverworld")) {
+          setLinksObj({ ...linksObj, recoverworld: link?.link_url });
+        } else if (link?.link_url?.includes("itunes")) {
+          linkTempObj.itunes = link.link_url;
+        }
+      });
+      setLinksObj(linkTempObj);
+    } else if (!Array.isArray(jsonData?.retailer_links?.retailer_link)) {
+      let link = jsonData?.retailer_links?.retailer_link?.link_url;
+      if (link?.includes("beatport")) {
+        linkTempObj.beatport = link;
+      } else if (link?.includes("spotify")) {
+        setLinksObj({ ...linksObj, spotify: link });
+      } else if (link?.includes("soundcloud")) {
+        setLinksObj({ ...linksObj, soundcloud: link });
+      } else if (link?.includes("youtube")) {
+        setLinksObj({ ...linksObj, youtube: link });
+      } else if (link?.includes("recoverworld")) {
+        setLinksObj({ ...linksObj, recoverworld: link });
+      } else if (link?.includes("itunes")) {
+        linkTempObj.itunes = link;
+      }
+      setLinksObj(linkTempObj);
+    }
+  }, [jsonData.id]);
+
+  useEffect(() => {
+    // Put single tracklist Object in Array
     if (!Array.isArray(jsonData?.tracks?.track)) {
       setTracklisting([jsonData?.tracks?.track]);
     } else {
       setTracklisting(jsonData?.tracks?.track);
     }
 
-    // Get Retail Links
-    let retailerArr: any = {
-      beatport: "",
-      spotify: "",
-      soundcloud: "",
-      youtube: "",
-      recoverworld: "",
-      itunes: "",
-    };
-
-    jsonData?.retailer_links?.retailer_link?.forEach((link: any) => {
-      // console.log(link);
-      if (link.link_url.includes("beatport")) {
-        retailerArr.beatport = link.link_url;
-      } else if (link.link_url.includes("spotify")) {
-        retailerArr.spotify = link.link_url;
-      } else if (link.link_url.includes("soundcloud")) {
-        retailerArr.soundcloud = link.link_url;
-      } else if (link.link_url.includes("youtube")) {
-        retailerArr.youtube = link.link_url;
-      } else if (link.link_url.includes("recoverworld")) {
-        retailerArr.recoverworld = link.link_url;
-      } else if (link.link_url.includes("itunes")) {
-        retailerArr.itunes = link.link_url;
-      }
-    });
-
     // Convert Date to Firebase Date Format
-    let firebaseDateFormatted: any = undefined;
-
     function getFormattedData() {
       if (ampsuiteId !== undefined) {
         let unformattedDate = jsonData?.release_date;
@@ -93,10 +108,9 @@ export default function AmpsuiteXMLReleaseParser() {
           unformattedDate[1] - 1,
           unformattedDate[2]
         );
-        return firebaseDateFormatted.getTime();
+        return firebaseDateFormatted?.getTime();
       } else {
-        firebaseDateFormatted = 0;
-        return firebaseDateFormatted;
+        return 0;
       }
     }
 
@@ -114,15 +128,11 @@ export default function AmpsuiteXMLReleaseParser() {
   }, [jsonData]);
 
   useEffect(() => {
-    // console.log(tracklisting);
-  }, [tracklisting]);
+    console.log(linksObj);
+  }, [linksObj]);
 
   useEffect(() => {
-    console.log(jsonData);
-  }, [jsonData]);
-
-  useEffect(() => {
-    console.log(firebaseReleaseObj);
+    // console.log(firebaseReleaseObj);
   }, [firebaseReleaseObj]);
 
   return (
