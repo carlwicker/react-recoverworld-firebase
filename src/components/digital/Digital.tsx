@@ -1,6 +1,6 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import FeaturedReleases from "./FeaturedReleases";
 import DigitalSearchFilter from "./DigitalSearchFilter";
 import {
   collection,
@@ -97,6 +97,8 @@ export default function Digital() {
         updateReleaseList={updateReleaseList}
         labelFilteredResults={labelFilteredResults}
       />
+
+      <FeaturedReleases />
     </Container>
   );
 }

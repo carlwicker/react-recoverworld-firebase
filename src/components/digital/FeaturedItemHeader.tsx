@@ -1,31 +1,23 @@
 import { Card, Row, Col, Badge, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import IRelease from "../../../interfaces/IRelease";
-import ITrack from "../../../interfaces/ITrack";
-import DigitalTrack from "./DigitalTrack";
-
-import { db } from "../../../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import IRelease from "../../interfaces/IRelease";
+import ITrack from "../../interfaces/ITrack";
+import DigitalTrack from "./digitalReleaseItem/DigitalTrack";
+import { doc, deleteDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 interface IDigitalReleaseHeader {
   release: IRelease;
-  deleteRelease: Function;
+  getFeaturedReleases: Function;
 }
 
 export default function DigitalReleaseHeader({
   release,
-  deleteRelease,
+  getFeaturedReleases,
 }: IDigitalReleaseHeader) {
   const isAdmin: boolean = true;
 
-  async function addToFeaturedReleases(release: IRelease) {
-    console.log(release);
-
-    // Add a new document in collection "cities"
-
-    // Add a new document with a generated id.
-    const docRef = await addDoc(collection(db, "featured"), release);
-    console.log("Document written with ID: ", docRef.id);
+  async function deleteFeaturedItem(id: string) {
+    await deleteDoc(doc(db, "featured", id));
   }
 
   return (
@@ -47,7 +39,9 @@ export default function DigitalReleaseHeader({
         }}
       >
         <Card.Subtitle className="text-muted">
-          {/* <Badge bg="primary">New Release</Badge> */}
+          <Badge bg="danger" style={{ textTransform: "uppercase" }}>
+            New Release
+          </Badge>
           <div style={{ fontWeight: "200", fontSize: "12px" }} className="pt-2">
             {release.catNum} | {release.label}
           </div>
@@ -87,22 +81,14 @@ export default function DigitalReleaseHeader({
         {/* Admin Edit / Delete Buttons */}
         {isAdmin ? (
           <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
-            <Link to={"/digital/" + release.id + "/edit"}>
-              <Button variant="outline-warning">Edit</Button>
-            </Link>
             <Button
               variant="outline-danger"
               onClick={() => {
-                deleteRelease(release.id);
+                deleteFeaturedItem(release.id);
+                getFeaturedReleases();
               }}
             >
-              Delete
-            </Button>
-            <Button
-              variant="outline-primary"
-              onClick={() => addToFeaturedReleases(release)}
-            >
-              Add to Featured
+              Remove Featured Item
             </Button>
           </div>
         ) : (

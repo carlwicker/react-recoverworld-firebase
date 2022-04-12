@@ -13,6 +13,7 @@ import AddRelease from "./components/digital/addRelease/AddRelease";
 import EditRelease from "./components/digital/editRelease/EditRelease";
 import Merchandise from "./components/merchandise/Merchandise";
 import AmpsuiteXMLReleaseParser from "./components/utility/AmpsuiteXMLReleaseParser";
+import FeaturedReleases from "./components/digital/FeaturedReleases";
 
 function App() {
   return (
