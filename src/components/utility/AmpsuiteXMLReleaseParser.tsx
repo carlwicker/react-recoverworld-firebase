@@ -19,9 +19,6 @@ export default function AmpsuiteXMLReleaseParser() {
     ampsuiteId: 0,
   });
   const [linksObj, setLinksObj] = useState<any>({});
-  const [firebaseTracklisting, setFirebaseTracklisting] = useState<any | []>(
-    []
-  );
 
   // Get Ampsuite XML by AmpSuite Id
   useEffect(() => {
