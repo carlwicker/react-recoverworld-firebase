@@ -1,11 +1,10 @@
-import DigitalReleaseItem from "./digitalReleaseItem/DigitalReleaseItem";
 import { useEffect, useState } from "react";
 import { collection, query, getDocs, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
 import { Container } from "react-bootstrap";
 import FeaturedItem from "./FeaturedItem";
 
-export default function FeaturedReleases({ updateReleaseList }: any) {
+export default function FeaturedReleases() {
   const [featuredReleases, setFeaturedReleases] = useState<any[]>([]);
 
   async function getFeaturedReleases() {
