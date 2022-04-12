@@ -1,6 +1,6 @@
 import DigitalReleaseItem from "./digitalReleaseItem/DigitalReleaseItem";
 import { useEffect, useState } from "react";
-import { collection, query, getDocs } from "firebase/firestore";
+import { collection, query, getDocs, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
 import { Container } from "react-bootstrap";
 import FeaturedItem from "./FeaturedItem";
@@ -9,10 +9,12 @@ export default function FeaturedReleases({ updateReleaseList }: any) {
   const [featuredReleases, setFeaturedReleases] = useState<any[]>([]);
 
   async function getFeaturedReleases() {
-    const querySnapshot = await getDocs(collection(db, "featured"));
+    const featuredRef = await collection(db, "featured");
 
     let featureArr: any[] = [];
-    querySnapshot.forEach((doc) => {
+    const q: any = query(featuredRef, orderBy("releaseDate", "desc"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc: any) => {
       featureArr.push({ ...doc.data(), id: doc.id });
     });
     setFeaturedReleases(featureArr);
