@@ -19,13 +19,16 @@ export default function AmpsuiteXMLReleaseParser() {
     ampsuiteId: 0,
   });
   const [linksObj, setLinksObj] = useState<any>({});
+  const [firebaseTracklisting, setFirebaseTracklisting] = useState<any | []>(
+    []
+  );
 
   // Get Ampsuite XML by AmpSuite Id
   useEffect(() => {
     axios
       .get(
         `https://recoverworld.ampsuite.com/xml/releases?cid=10&id=${ampsuiteId}`,
-        {}
+        { headers: { "Content-Type": "application/xml" } }
       )
       .then(function (response) {
         setXMLData(response.data);
@@ -58,6 +61,7 @@ export default function AmpsuiteXMLReleaseParser() {
       recoverworld: "",
     };
 
+    // Handle array of links
     if (Array.isArray(jsonData?.retailer_links?.retailer_link)) {
       jsonData?.retailer_links?.retailer_link?.forEach((link: any) => {
         if (link?.link_url?.includes("beatport")) {
@@ -75,6 +79,7 @@ export default function AmpsuiteXMLReleaseParser() {
         }
       });
       setLinksObj(linkTempObj);
+      // Handle One link
     } else if (!Array.isArray(jsonData?.retailer_links?.retailer_link)) {
       let link = jsonData?.retailer_links?.retailer_link?.link_url;
       if (link?.includes("beatport")) {
@@ -99,6 +104,7 @@ export default function AmpsuiteXMLReleaseParser() {
     if (!Array.isArray(jsonData?.tracks?.track)) {
       setTracklisting([jsonData?.tracks?.track]);
     } else {
+      // Or leave as Array
       setTracklisting(jsonData?.tracks?.track);
     }
 
@@ -132,11 +138,32 @@ export default function AmpsuiteXMLReleaseParser() {
   }, [jsonData]);
 
   useEffect(() => {
-    console.log(linksObj);
-  }, [linksObj]);
+    // Build Firestore Tracklisting
+    let trackArr: any = [];
+    tracklisting?.forEach((track: any) => {
+      trackArr.push({
+        artist: track?.artist,
+        title: track?.title,
+        mix: track?.mix_name,
+        beatport: linksObj.beatport,
+        spotify: linksObj.spotify,
+        soundcloud: linksObj.soundcloud,
+        youtube: linksObj.youtube,
+        recoverworld: linksObj.recoverworld,
+        itunes: linksObj.itunes,
+      });
 
+      // Build Final Firebase Release inc. Links & Tracklisting
+      setFirebaseReleaseObj({
+        ...firebaseReleaseObj,
+        tracklisting: trackArr,
+      });
+    });
+  }, [tracklisting]);
+
+  // Firestore it!
   useEffect(() => {
-    // console.log(firebaseReleaseObj);
+    console.log(firebaseReleaseObj);
   }, [firebaseReleaseObj]);
 
   return (
