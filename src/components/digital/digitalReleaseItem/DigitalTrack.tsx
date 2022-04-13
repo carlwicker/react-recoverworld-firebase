@@ -14,7 +14,6 @@ export default function DigitalTrack({ track, index }: IDigitalTrack) {
       <div
         className="d-flex align-items-center"
         style={{
-          padding: "5px",
           width: "100%",
           gap: "10px",
         }}

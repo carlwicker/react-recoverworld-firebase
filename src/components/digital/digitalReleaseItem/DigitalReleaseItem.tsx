@@ -1,4 +1,3 @@
-import { Card } from "react-bootstrap";
 import IRelease from "../../../interfaces/IRelease";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
@@ -30,9 +29,7 @@ export default function DigitalReleaseItem({
         borderBottom: "1px dashed #555",
       }}
     >
-      <Card.Body>
-        <DigitalReleaseHeader release={release} deleteRelease={deleteRelease} />
-      </Card.Body>
+      <DigitalReleaseHeader release={release} deleteRelease={deleteRelease} />
     </div>
   );
 }

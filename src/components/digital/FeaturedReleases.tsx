@@ -35,7 +35,6 @@ export default function FeaturedReleases() {
           <div
             key={index}
             style={{
-              padding: "5px",
               display: "flex",
               flexDirection: "column",
               gap: "10px",

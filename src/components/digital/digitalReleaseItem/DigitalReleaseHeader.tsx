@@ -16,7 +16,7 @@ export default function DigitalReleaseHeader({
   release,
   deleteRelease,
 }: IDigitalReleaseHeader) {
-  const isAdmin: boolean = true;
+  const isAdmin: boolean = false;
 
   async function addToFeaturedReleases(release: IRelease) {
     console.log(release);
@@ -29,7 +29,7 @@ export default function DigitalReleaseHeader({
   }
 
   return (
-    <Row style={{ padding: "5px 5px 20px 5px" }}>
+    <Row style={{ padding: "50px 20px" }}>
       <Col md="auto">
         <Card.Img
           variant="top"

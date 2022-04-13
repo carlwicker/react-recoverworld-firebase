@@ -21,7 +21,7 @@ export default function DigitalReleaseHeader({
   }
 
   return (
-    <Row style={{ padding: "5px 5px 20px 5px" }}>
+    <Row style={{ padding: "50px 20px" }}>
       <Col md="auto">
         <Card.Img
           variant="top"
@@ -38,15 +38,21 @@ export default function DigitalReleaseHeader({
           justifyContent: "center",
         }}
       >
-        <Card.Subtitle className="text-muted">
-          <Badge bg="danger" style={{ textTransform: "uppercase" }}>
+        <>
+          <Badge
+            bg="danger"
+            style={{ textTransform: "uppercase", width: "fit-content" }}
+          >
             New Release
           </Badge>
-          <div style={{ fontWeight: "200", fontSize: "12px" }} className="pt-2">
+          <div
+            style={{ fontWeight: "200", fontSize: "12px" }}
+            className="pt-2 text-muted"
+          >
             {release.catNum} | {release.label}
           </div>
-        </Card.Subtitle>
-        <Card.Title
+        </>
+        <div
           style={{
             marginBottom: "0",
             paddingTop: "0",
@@ -55,8 +61,8 @@ export default function DigitalReleaseHeader({
           }}
         >
           {release.title}
-        </Card.Title>
-        <Card.Title
+        </div>
+        <div
           style={{
             marginBottom: "0",
             paddingTop: "0",
@@ -65,7 +71,7 @@ export default function DigitalReleaseHeader({
           }}
         >
           {release.artist}
-        </Card.Title>
+        </div>
 
         {/* Track Listing */}
         <div

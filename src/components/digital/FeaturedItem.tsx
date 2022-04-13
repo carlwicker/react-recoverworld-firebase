@@ -19,7 +19,6 @@ export default function DigitalReleaseItem({
 
   return (
     <div
-      className="mb-2"
       style={{
         display: "flex",
         gap: "5px",
@@ -27,12 +26,10 @@ export default function DigitalReleaseItem({
         borderBottom: "1px dashed #555",
       }}
     >
-      <Card.Body>
-        <FeaturedItemHeader
-          release={release}
-          getFeaturedReleases={getFeaturedReleases}
-        />
-      </Card.Body>
+      <FeaturedItemHeader
+        release={release}
+        getFeaturedReleases={getFeaturedReleases}
+      />
     </div>
   );
 }

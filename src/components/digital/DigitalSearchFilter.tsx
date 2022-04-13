@@ -74,43 +74,41 @@ export default function DigitalSearchFilter({
   }, [selectedLabel, filteredReleases, searchTerm]);
 
   return (
-    <Container>
-      <Form>
-        <Row>
-          <Col>
-            <Form.Group className="mb-3" controlId="releasesSearch">
-              <Form.Label>Search Releases</Form.Label>
-              <Form.Control
-                defaultValue={searchTerm}
-                type="text"
-                onChange={(e) => {
-                  setSearchTerm(e.target.value.toLocaleLowerCase());
-                }}
-                placeholder="Search..."
-              />
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group className="mb-3" controlId="releasesFilter">
-              <Form.Label>Label Filter</Form.Label>
-              <Form.Select
-                onChange={(e: any) => {
-                  setSelectedLabel(e.target.value);
-                  setLabelFilteredResults(filteredReleases);
-                }}
-              >
-                {labels.map((label: string, index: number) => {
-                  return (
-                    <option key={index} value={label}>
-                      {label}
-                    </option>
-                  );
-                })}
-              </Form.Select>
-            </Form.Group>
-          </Col>
-        </Row>
-      </Form>
-    </Container>
+    <Form>
+      <Row>
+        <Col>
+          <Form.Group className="mb-3" controlId="releasesSearch">
+            <Form.Label>Search Releases</Form.Label>
+            <Form.Control
+              defaultValue={searchTerm}
+              type="text"
+              onChange={(e) => {
+                setSearchTerm(e.target.value.toLocaleLowerCase());
+              }}
+              placeholder="Search..."
+            />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className="mb-3" controlId="releasesFilter">
+            <Form.Label>Label Filter</Form.Label>
+            <Form.Select
+              onChange={(e: any) => {
+                setSelectedLabel(e.target.value);
+                setLabelFilteredResults(filteredReleases);
+              }}
+            >
+              {labels.map((label: string, index: number) => {
+                return (
+                  <option key={index} value={label}>
+                    {label}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Group>
+        </Col>
+      </Row>
+    </Form>
   );
 }
