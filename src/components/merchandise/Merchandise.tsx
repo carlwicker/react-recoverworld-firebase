@@ -1,59 +1,47 @@
 import { useEffect, useState } from "react";
-import {
-  Container,
-  Button,
-  Carousel,
-  Row,
-  Col,
-  Badge,
-  Card,
-} from "react-bootstrap";
+import { Container, Button, Row, Col, Badge } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 import css from "./Merchandise.module.css";
 import { Link } from "react-router-dom";
+import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 export default function Merchandise() {
-  const [itemArr, setItemArr] = useState<any[]>([]);
+  const [merchandise, setMerchandise] = useState<any[]>([]);
+
+  async function getMerchandise() {
+    const querySnapshot = await getDocs(collection(db, "merchandise"));
+    let productArr: any[] = [];
+    querySnapshot.forEach((product) => {
+      let productObj = {
+        id: product.id,
+        ...product.data(),
+      };
+      productArr.push(productObj);
+    });
+    setMerchandise([...productArr]);
+  }
 
   useEffect(() => {
-    setItemArr([
-      {
-        title: "Discover Records T",
-        imgUrl: "./img/merchandise/DiscoverT.png",
-        salesUrl:
-          "https://recoverworld.teemill.com/product/classic-discover-records-t-shirt/",
-        price: 19.0,
-      },
-      {
-        title: "Discover Dark T",
-        imgUrl: "./img/merchandise/discoverDarkT.png",
-        salesUrl:
-          "https://recoverworld.teemill.com/product/classic-discover-dark-mens-t-shirt/",
-        price: 19.0,
-      },
-      {
-        title: "Discover Hoodie",
-        imgUrl: "./img/merchandise/DiscoverHoodie.png",
-        salesUrl:
-          "https://recoverworld.teemill.com/product/classic-discover-records-mens-hoodie/",
-        price: 40.0,
-      },
-      {
-        title: "Discover Dark Hoodie",
-        imgUrl: "./img/merchandise/DiscoverDarkHoodie.png",
-        salesUrl:
-          "https://recoverworld.teemill.com/product/classic-discover-dark-mens-hoodie/",
-        price: 40.0,
-      },
-    ]);
-    console.log(itemArr);
+    getMerchandise();
   }, []);
+
+  async function removeProductFromFirebase(id: string) {
+    await deleteDoc(doc(db, "merchandise", id));
+    getMerchandise();
+  }
+
+  let isAdmin = true;
+
+  useEffect(() => {
+    console.log(merchandise);
+  }, [merchandise]);
 
   return (
     <Container
       style={{
         display: "flex",
         flexDirection: "column",
-        cursor: "pointer",
       }}
     >
       <Row
@@ -62,43 +50,81 @@ export default function Merchandise() {
           alignItems: "center",
         }}
       >
-        <h1>Merchandise</h1>
+        <Col>
+          <h1>Merchandise</h1>
+        </Col>
+
+        {/* Admin Add Release Button */}
+        {isAdmin ? (
+          <Col style={{ display: "flex", justifyContent: "end" }}>
+            <Link to="/merchandise/add">
+              <Button variant="primary">Add Product</Button>
+            </Link>
+          </Col>
+        ) : (
+          ""
+        )}
       </Row>
 
-      {itemArr.map((item: any, index: number) => {
+      {merchandise.map((product: any, index: number) => {
         return (
-          <div
+          <Row
             key={index}
             className="mb-2"
+            target="_blank"
             style={{
               display: "flex",
               borderRadius: "15px 0px 15px 0px",
               borderBottom: "1px dashed #555",
             }}
           >
-            <Card.Body>
-              <a
-                key={index}
-                className={css.item}
-                href={item.salesUrl}
-                target="_blank"
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  <img src={item.imgUrl} style={{ height: "250px" }} />
-                  <div style={{ textAlign: "start", fontSize: "2em" }}>
-                    <h3>{item.title}</h3>
-                    <Badge>{item.price} GBP</Badge>
-                  </div>
-                </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                textTransform: "uppercase",
+              }}
+              key={index}
+              className={css.item}
+            >
+              <a href={product.salesUrl} target="_blank">
+                <Image src={product?.imageUrl} style={{ height: "250px" }} />
               </a>
-            </Card.Body>
-          </div>
+              <div style={{ textAlign: "start" }}>
+                <a href={product.salesUrl} target="_blank">
+                  <h3>{product?.productName}</h3>
+                </a>
+                <p style={{ textTransform: "capitalize" }}>
+                  {product?.amountOfColours} Colours / {product?.amountOfSizes}{" "}
+                  sizes
+                </p>
+                <a href={product.salesUrl} target="_blank">
+                  <Badge pill bg="primary">
+                    <div style={{ fontSize: "2em" }}>{product?.price} GBP</div>
+                  </Badge>
+                </a>
+                <div className="mt-3">
+                  {isAdmin ? (
+                    <div style={{ display: "flex", gap: "10px" }}>
+                      <Link to={product.id + "/edit"}>
+                        <Button variant="outline-warning">Edit</Button>
+                      </Link>
+                      <Button
+                        variant="outline-danger"
+                        onClick={() => {
+                          removeProductFromFirebase(product?.id);
+                        }}
+                      >
+                        Remove Product
+                      </Button>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+            </div>
+          </Row>
         );
       })}
     </Container>

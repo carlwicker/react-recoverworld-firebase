@@ -13,6 +13,8 @@ import AddRelease from "./components/digital/addRelease/AddRelease";
 import EditRelease from "./components/digital/editRelease/EditRelease";
 import Merchandise from "./components/merchandise/Merchandise";
 import AmpsuiteXMLReleaseParser from "./components/utility/AmpsuiteXMLReleaseParser";
+import AddMerchandise from "./components/merchandise/AddProduct";
+import EditProduct from "./components/merchandise/EditProduct";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           path="ampsuite/release/import"
           element={<AmpsuiteXMLReleaseParser />}
         />
+        <Route path="merchandise/add" element={<AddMerchandise />} />
+        <Route path="merchandise/:id/edit" element={<EditProduct />} />
       </Routes>
       <Social />
     </div>

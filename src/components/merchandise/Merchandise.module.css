@@ -1,6 +1,5 @@
 .item {
   display: flex;
-  height: 200px;
   width: fit-content;
   text-decoration: none;
   align-items: center;

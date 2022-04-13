@@ -3,14 +3,15 @@ import { collection, query, getDocs, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
 import { Container } from "react-bootstrap";
 import FeaturedItem from "./FeaturedItem";
+import IRelease from "../../interfaces/IRelease";
 
 export default function FeaturedReleases() {
-  const [featuredReleases, setFeaturedReleases] = useState<any[]>([]);
+  const [featuredReleases, setFeaturedReleases] = useState<IRelease[]>([]);
 
   async function getFeaturedReleases() {
     const featuredRef = await collection(db, "featured");
 
-    let featureArr: any[] = [];
+    let featureArr: IRelease[] = [];
     const q: any = query(featuredRef, orderBy("releaseDate", "desc"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc: any) => {
