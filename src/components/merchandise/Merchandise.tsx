@@ -31,7 +31,7 @@ export default function Merchandise() {
     getMerchandise();
   }
 
-  let isAdmin = true;
+  let isAdmin = false;
 
   useEffect(() => {
     console.log(merchandise);
