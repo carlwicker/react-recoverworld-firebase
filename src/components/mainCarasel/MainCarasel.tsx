@@ -1,11 +1,12 @@
-import { Image, Carousel } from "react-bootstrap";
+import { Image, Carousel, Button } from "react-bootstrap";
 
 export default function RadioBanner() {
   return (
     <Carousel
       fade={true}
+      indicators={false}
       style={{
-        height: "80vh",
+        height: "70vh",
         width: "100%",
       }}
     >
@@ -18,13 +19,13 @@ export default function RadioBanner() {
       >
         <img
           // src="../../img/bannerTest1.png"
-          style={{ height: "80vh", opacity: 0.95 }}
+          style={{ height: "70vh", opacity: 0.95 }}
         />
         <Carousel.Caption
           style={{
             textAlign: "left",
             alignItems: "center",
-            height: "80vh",
+            height: "70vh",
             display: "flex",
           }}
         >
@@ -34,13 +35,16 @@ export default function RadioBanner() {
               flexDirection: "column",
               gap: "0",
               maxWidth: "350px",
+              opacity: ".95",
             }}
           >
             <h1 style={{ lineHeight: "0.8em", overflowWrap: "break-word" }}>
               RECOVERWORLD RADIO
             </h1>
-            <h3 style={{ lineHeight: "0.8em" }}>Every Friday @ 22:00GMT</h3>
-            <h4 style={{ lineHeight: "0.8em" }}>With Chris Hampshire</h4>
+            <p style={{ lineHeight: "0.8em" }}>Live every Friday @ 22:00GMT</p>
+            <div style={{ width: "fitContent" }}>
+              <Button>Listen Now</Button>
+            </div>
           </div>
         </Carousel.Caption>
       </Carousel.Item>

@@ -5,15 +5,16 @@ export default function NavBar() {
   return (
     <Navbar expand="lg" variant="dark">
       <Container>
-        <Navbar.Brand
-          href="/"
-          style={{
-            textTransform: "uppercase",
-            fontWeight: "800",
-          }}
-        >
-          RecoverWorld
-        </Navbar.Brand>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <Navbar.Brand
+            style={{
+              textTransform: "uppercase",
+              fontWeight: "800",
+            }}
+          >
+            RecoverWorld
+          </Navbar.Brand>
+        </Link>
         <Navbar.Collapse
           id="basic-navbar-nav"
           style={{ textTransform: "uppercase" }}
