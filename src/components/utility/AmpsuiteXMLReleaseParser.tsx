@@ -22,6 +22,7 @@ export default function AmpsuiteXMLReleaseParser() {
 
   // Get Ampsuite XML by AmpSuite Id
   useEffect(() => {
+    let url = `https://${process.env.REACT_APP_AMPSUITE_SUBDOMAIN}.ampsuite.com/xml/releases?cid=${process.env.REACT_APP_AMPSUITE_CID}&id=${ampsuiteId}`;
     axios
       .get(
         `https://recoverworld.ampsuite.com/xml/releases?cid=10&id=${ampsuiteId}`,
