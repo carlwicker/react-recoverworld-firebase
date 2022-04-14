@@ -15,12 +15,10 @@ export default function RadioBanner() {
           display: "flex",
           justifyContent: "flex-end",
           alignItems: "center",
+          height: "70vh",
         }}
       >
-        <img
-          // src="../../img/bannerTest1.png"
-          style={{ height: "70vh", opacity: 0.95 }}
-        />
+        {/* <img src="../../img/floatingCube.png" style={{ opacity: 0.95 }} /> */}
         <Carousel.Caption
           style={{
             textAlign: "left",

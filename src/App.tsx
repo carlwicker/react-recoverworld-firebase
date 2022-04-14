@@ -15,29 +15,33 @@ import Merchandise from "./components/merchandise/Merchandise";
 import AmpsuiteXMLReleaseParser from "./components/utility/AmpsuiteXMLReleaseParser";
 import AddMerchandise from "./components/merchandise/AddProduct";
 import EditProduct from "./components/merchandise/EditProduct";
+import ParalaxBackground from "./components/paralaxBackground.tsx/ParalaxBackground";
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="demos" element={<Demos />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="vinyl" element={<Vinyl />} />
-        <Route path="digital" element={<Digital />} />
-        <Route path="merchandise" element={<Merchandise />} />
-        <Route path="digital/addRelease" element={<AddRelease />} />
-        <Route path="digital/:releaseId/edit" element={<EditRelease />} />
-        <Route
-          path="ampsuite/release/import"
-          element={<AmpsuiteXMLReleaseParser />}
-        />
-        <Route path="merchandise/add" element={<AddMerchandise />} />
-        <Route path="merchandise/:id/edit" element={<EditProduct />} />
-      </Routes>
-      <Social />
+    <div className="wrapper">
+      <ParalaxBackground />
+      <div className="App">
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="demos" element={<Demos />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="vinyl" element={<Vinyl />} />
+          <Route path="digital" element={<Digital />} />
+          <Route path="merchandise" element={<Merchandise />} />
+          <Route path="digital/addRelease" element={<AddRelease />} />
+          <Route path="digital/:releaseId/edit" element={<EditRelease />} />
+          <Route
+            path="ampsuite/release/import"
+            element={<AmpsuiteXMLReleaseParser />}
+          />
+          <Route path="merchandise/add" element={<AddMerchandise />} />
+          <Route path="merchandise/:id/edit" element={<EditProduct />} />
+        </Routes>
+        <Social />
+      </div>
     </div>
   );
 }

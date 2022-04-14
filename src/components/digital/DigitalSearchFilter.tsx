@@ -1,4 +1,4 @@
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import IRelease from "../../interfaces/IRelease";
 
@@ -76,22 +76,9 @@ export default function DigitalSearchFilter({
   return (
     <Form>
       <Row>
-        <Col>
-          <Form.Group className="mb-3" controlId="releasesSearch">
-            <Form.Label>Search Releases</Form.Label>
-            <Form.Control
-              defaultValue={searchTerm}
-              type="text"
-              onChange={(e) => {
-                setSearchTerm(e.target.value.toLocaleLowerCase());
-              }}
-              placeholder="Search..."
-            />
-          </Form.Group>
-        </Col>
-        <Col>
+        <Col className="md-3">
           <Form.Group className="mb-3" controlId="releasesFilter">
-            <Form.Label>Label Filter</Form.Label>
+            <Form.Label>Select a label...</Form.Label>
             <Form.Select
               onChange={(e: any) => {
                 setSelectedLabel(e.target.value);
@@ -108,6 +95,20 @@ export default function DigitalSearchFilter({
             </Form.Select>
           </Form.Group>
         </Col>
+        {/* <Col>
+          <Form.Group className="mb-3" controlId="releasesSearch">
+            <Form.Label>Search Releases</Form.Label>
+            <Form.Control
+              defaultValue={searchTerm}
+              type="text"
+              onChange={(e) => {
+                setSearchTerm(e.target.value.toLocaleLowerCase());
+              }}
+              placeholder="Search..."
+              disabled
+            />
+          </Form.Group>
+        </Col> */}
       </Row>
     </Form>
   );

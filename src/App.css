@@ -13,6 +13,10 @@
   margin: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body::-webkit-scrollbar {
   display: none; /* Chrome scroll */
 }
@@ -20,7 +24,7 @@ body::-webkit-scrollbar {
 body {
   font-size: 16px;
   font-family: "Barlow Semi Condensed";
-  background-image: url("../build/img/testBackground4.png");
+  /* background-image: url("../build/img/testBackground4.png"); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -28,6 +32,17 @@ body {
   -ms-overflow-style: none; /* for Internet Explorer, Edge scroll */
   scrollbar-width: none; /* for Firefox scroll */
   overflow-y: scroll;
+}
+
+.wrapper {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  perspective: 10px;
+}
+
+.wrapper::-webkit-scrollbar {
+  display: none; /* Chrome scroll */
 }
 
 .App {
