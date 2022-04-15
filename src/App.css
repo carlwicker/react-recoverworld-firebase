@@ -91,8 +91,11 @@ a {
 }
 
 select {
-  background-color: #111 !important;
-  color: black;
+  background-color: rgba(17, 17, 17, 0.5) !important;
+}
+
+.form-select {
+  color: white;
 }
 
 option {

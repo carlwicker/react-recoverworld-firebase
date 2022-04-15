@@ -4,6 +4,7 @@ import ITrack from "../../interfaces/ITrack";
 import DigitalTrack from "./digitalReleaseItem/DigitalTrack";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { Link } from "react-router-dom";
 
 interface IDigitalReleaseHeader {
   release: IRelease;
@@ -49,7 +50,8 @@ export default function DigitalReleaseHeader({
             style={{ fontWeight: "200", fontSize: "12px" }}
             className="pt-2 text-muted"
           >
-            {release.catNum} | {release.label}
+            <Link to={`./${release.catNum}`}>{release.catNum}</Link> |{" "}
+            {release.label}
           </div>
         </>
         <div

@@ -37,7 +37,7 @@ export default function FeaturedReleases() {
           paddingTop: "20px",
         }}
       >
-        <h2>New releases</h2>
+        {/* <h2>New releases</h2> */}
       </Row>
       <Row style={{ textAlign: "left" }}>
         {featuredReleases?.map((release: any, index: number) => {

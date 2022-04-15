@@ -49,7 +49,8 @@ export default function DigitalReleaseHeader({
         <Card.Subtitle className="text-muted">
           {/* <Badge bg="primary">New Release</Badge> */}
           <div style={{ fontWeight: "200", fontSize: "12px" }} className="pt-2">
-            {release.catNum} | {release.label}
+            <Link to={`./${release.catNum}`}>{release.catNum}</Link> |{" "}
+            {release.label}
           </div>
         </Card.Subtitle>
         <Card.Title

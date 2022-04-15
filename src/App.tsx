@@ -16,6 +16,7 @@ import AmpsuiteXMLReleaseParser from "./components/utility/AmpsuiteXMLReleasePar
 import AddMerchandise from "./components/merchandise/AddProduct";
 import EditProduct from "./components/merchandise/EditProduct";
 import RadioBanner from "./components/mainCarasel/MainCarasel";
+import Release from "./components/Release/Release";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
 
       <div className="App">
         <NavBar />
-        <RadioBanner />
+        {/* <RadioBanner /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
@@ -41,6 +42,7 @@ function App() {
           />
           <Route path="merchandise/add" element={<AddMerchandise />} />
           <Route path="merchandise/:id/edit" element={<EditProduct />} />
+          <Route path="digital/:catNum" element={<Release />} />
         </Routes>
         <Social />
       </div>

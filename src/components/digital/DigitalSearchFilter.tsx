@@ -87,7 +87,7 @@ export default function DigitalSearchFilter({
     <Form>
       <Row>
         <Col className="md-3" syle={{}}>
-          <div>
+          <div style={{ opacity: "1" }}>
             <Form.Group className="mb-3" controlId="releasesFilter">
               <Form.Select
                 onChange={(e: any) => {
