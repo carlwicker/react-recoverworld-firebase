@@ -29,7 +29,7 @@ export default function NavBar() {
             </NavLink>
 
             <NavLink as={Link} to="/merchandise">
-              Mechandise
+              Merchandise
             </NavLink>
 
             <Nav.Link as={Link} to="/demos">

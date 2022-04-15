@@ -64,8 +64,8 @@ ol,
 .form-check-label {
   font-family: "Roboto";
   font-weight: 100;
-  font-size: 1.2em;
-  word-spacing: 0.2em;
+  font-size: 1em;
+  /* word-spacing: 0.2em; */
 }
 
 .form-label,
