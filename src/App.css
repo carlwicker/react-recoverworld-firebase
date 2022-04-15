@@ -96,12 +96,12 @@ select {
 }
 
 option {
-  color: white;
-  background-color: #222;
+  color: #333;
+  background-color: #111;
   height: 50px;
 }
 
 option:hover {
-  color: white;
+  color: #333;
   background-color: #111;
 }
