@@ -89,3 +89,19 @@ h3 {
 a {
   text-decoration: none !important;
 }
+
+select {
+  background-color: #111 !important;
+  color: black;
+}
+
+option {
+  color: white;
+  background-color: #222;
+  height: 50px;
+}
+
+option:hover {
+  color: white;
+  background-color: #111;
+}

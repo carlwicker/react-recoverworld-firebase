@@ -23,7 +23,7 @@ export default function RadioBanner() {
           style={{
             textAlign: "left",
             alignItems: "center",
-            height: "70vh",
+            height: "fit-content",
             display: "flex",
           }}
         >
@@ -32,7 +32,7 @@ export default function RadioBanner() {
               display: "flex",
               flexDirection: "column",
               gap: "0",
-              width: "90%",
+              width: "100%",
               opacity: ".95",
               left: "0",
             }}
@@ -40,7 +40,7 @@ export default function RadioBanner() {
             <h1 style={{ lineHeight: "0.8em", overflowWrap: "break-word" }}>
               <b>RECOVERWORLD</b> RADIO
             </h1>
-            <p style={{ lineHeight: "0.8em" }}>Live every Friday @ 22:00GMT</p>
+            <p style={{ lineHeight: "1em" }}>Live every Friday @ 22:00GMT</p>
             <div style={{ width: "fitContent" }}>
               <Button>Listen Now</Button>
             </div>

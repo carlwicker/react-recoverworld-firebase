@@ -1,4 +1,12 @@
-import { Row, Col, Form } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Form,
+  Button,
+  ButtonGroup,
+  Dropdown,
+  DropdownButton,
+} from "react-bootstrap";
 import { useEffect, useState } from "react";
 import IRelease from "../../interfaces/IRelease";
 
@@ -22,7 +30,7 @@ export default function DigitalSearchFilter({
   setSelectedLabel,
 }: IDigitalSearchFilter) {
   const labels = [
-    "No Filter...",
+    "Select a label...",
     "Discover Records",
     "Discover Dark",
     "EVE Records",
@@ -78,23 +86,25 @@ export default function DigitalSearchFilter({
   return (
     <Form>
       <Row>
-        <Col className="md-3">
-          <Form.Group className="mb-3" controlId="releasesFilter">
-            <Form.Select
-              onChange={(e: any) => {
-                setSelectedLabel(e.target.value);
-                setLabelFilteredResults(filteredReleases);
-              }}
-            >
-              {labels.map((label: string, index: number) => {
-                return (
-                  <option key={index} value={label}>
-                    {label}
-                  </option>
-                );
-              })}
-            </Form.Select>
-          </Form.Group>
+        <Col className="md-3" syle={{}}>
+          <div>
+            <Form.Group className="mb-3" controlId="releasesFilter">
+              <Form.Select
+                onChange={(e: any) => {
+                  setSelectedLabel(e.target.value);
+                  setLabelFilteredResults(filteredReleases);
+                }}
+              >
+                {labels.map((label: string, index: number) => {
+                  return (
+                    <option key={index} value={label}>
+                      {label}
+                    </option>
+                  );
+                })}
+              </Form.Select>
+            </Form.Group>
+          </div>
         </Col>
         {/* <Col>
           <Form.Group className="mb-3" controlId="releasesSearch">
@@ -111,6 +121,27 @@ export default function DigitalSearchFilter({
           </Form.Group>
         </Col> */}
       </Row>
+      {/* <Row>
+        <div>
+          <DropdownButton
+            as={ButtonGroup}
+            title="Select a Label..."
+            id="bg-nested-dropdown"
+            onChange={(e: any) => {
+              setSelectedLabel(e.target.value);
+              setLabelFilteredResults(filteredReleases);
+            }}
+          >
+            {labels.map((label: string, index: number) => {
+              return (
+                <Dropdown.Item key={index} eventKey={index} value={label}>
+                  {label}
+                </Dropdown.Item>
+              );
+            })}
+          </DropdownButton>
+        </div>
+      </Row> */}
     </Form>
   );
 }
