@@ -1,4 +1,4 @@
-import { Image, Carousel, Button } from "react-bootstrap";
+import { Container, Carousel, Button } from "react-bootstrap";
 
 export default function RadioBanner() {
   return (
@@ -34,6 +34,7 @@ export default function RadioBanner() {
               gap: "0",
               maxWidth: "350px",
               opacity: ".95",
+              left: "0",
             }}
           >
             <h1 style={{ lineHeight: "0.8em", overflowWrap: "break-word" }}>

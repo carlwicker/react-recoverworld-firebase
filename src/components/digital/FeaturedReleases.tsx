@@ -33,7 +33,7 @@ export default function FeaturedReleases() {
       <Row
         style={{
           textAlign: "left",
-          borderBottom: "1px  #555 dashed",
+          // borderBottom: "1px  #555 dashed",
           paddingTop: "20px",
         }}
       >

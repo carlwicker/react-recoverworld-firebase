@@ -13,7 +13,7 @@ export default function About() {
               flexDirection: "column",
             }}
           >
-            <h1>About</h1>
+            <h2>About</h2>
 
             <p>
               We are an established and continually expanding collection of

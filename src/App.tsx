@@ -15,14 +15,16 @@ import Merchandise from "./components/merchandise/Merchandise";
 import AmpsuiteXMLReleaseParser from "./components/utility/AmpsuiteXMLReleaseParser";
 import AddMerchandise from "./components/merchandise/AddProduct";
 import EditProduct from "./components/merchandise/EditProduct";
-import ParalaxBackground from "./components/paralaxBackground.tsx/ParalaxBackground";
+import RadioBanner from "./components/mainCarasel/MainCarasel";
 
 function App() {
   return (
     <div className="wrapper">
-      <ParalaxBackground />
+      {/* <ParalaxBackground /> */}
+
       <div className="App">
         <NavBar />
+        <RadioBanner />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />

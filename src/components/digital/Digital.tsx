@@ -66,7 +66,7 @@ export default function Digital() {
           alignItems: "center",
         }}
       >
-        <h1>Digital Hub</h1>
+        <h2>Select a label...</h2>
 
         {/* Admin Add Release Button */}
         {isAdmin ? (

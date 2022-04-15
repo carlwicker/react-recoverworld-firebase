@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 export default function Demos() {
   return (
     <Container>
-      <h1>Demos</h1>
+      <h2>Demos</h2>
       <Row>
         <Col
           md={6}

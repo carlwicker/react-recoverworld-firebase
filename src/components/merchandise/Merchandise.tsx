@@ -51,7 +51,7 @@ export default function Merchandise() {
         }}
       >
         <Col>
-          <h1>Merchandise</h1>
+          <h2>Merchandise</h2>
         </Col>
 
         {/* Admin Add Release Button */}
@@ -82,7 +82,7 @@ export default function Merchandise() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                textTransform: "uppercase",
+                // textTransform: "uppercase",
               }}
               key={index}
               className={css.item}

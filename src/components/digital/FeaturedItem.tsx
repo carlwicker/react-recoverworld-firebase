@@ -13,10 +13,6 @@ export default function DigitalReleaseItem({
   release,
   getFeaturedReleases,
 }: IDigitalReleaseItem) {
-  async function deleteRelease(releaseId: string) {
-    await deleteDoc(doc(db, "featured", releaseId));
-  }
-
   return (
     <div
       style={{

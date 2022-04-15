@@ -27,8 +27,10 @@ export default function DigitalSearchFilter({
     "Discover Dark",
     "EVE Records",
     "Flux Delux",
+    "Flux Delux Digital",
     "Iconise",
     "Discover Digital",
+    "Recover",
   ];
 
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -78,7 +80,6 @@ export default function DigitalSearchFilter({
       <Row>
         <Col className="md-3">
           <Form.Group className="mb-3" controlId="releasesFilter">
-            <Form.Label>Select a label...</Form.Label>
             <Form.Select
               onChange={(e: any) => {
                 setSelectedLabel(e.target.value);

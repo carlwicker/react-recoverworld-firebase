@@ -13,7 +13,7 @@ export default function Contact() {
             flexDirection: "column",
           }}
         >
-          <h1>Contact</h1>
+          <h2>Contact</h2>
           <p>
             Send us an email using the form below, or contact us on{" "}
             <Link to="https://www.facebook.com/Recoverworld">Facebook</Link>.

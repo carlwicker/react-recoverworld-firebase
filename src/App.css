@@ -24,7 +24,7 @@ body::-webkit-scrollbar {
 body {
   font-size: 16px;
   font-family: "Barlow Semi Condensed";
-  /* background-image: url("../build/img/testBackground4.png"); */
+  background-image: url("../build/img/testBackground4.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -60,13 +60,24 @@ h1 {
 
 p,
 ol {
+  font-family: "Roboto";
   font-weight: 100;
-  font-size: 1em;
+  font-size: 1.2em;
+  word-spacing: 0.2em;
 }
 
-h2,
-h3 {
+h2 {
   font-weight: 800;
   text-transform: uppercase;
   font-family: "Barlow Semi Condensed";
+  text-align: left;
+}
+
+h3 {
+  text-transform: uppercase;
+  /* font-family: "Roboto"; */
+}
+
+a {
+  text-decoration: none !important;
 }
