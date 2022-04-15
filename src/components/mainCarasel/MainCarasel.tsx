@@ -32,13 +32,13 @@ export default function RadioBanner() {
               display: "flex",
               flexDirection: "column",
               gap: "0",
-              maxWidth: "350px",
+              width: "90%",
               opacity: ".95",
               left: "0",
             }}
           >
             <h1 style={{ lineHeight: "0.8em", overflowWrap: "break-word" }}>
-              RECOVERWORLD RADIO
+              <b>RECOVERWORLD</b> RADIO
             </h1>
             <p style={{ lineHeight: "0.8em" }}>Live every Friday @ 22:00GMT</p>
             <div style={{ width: "fitContent" }}>

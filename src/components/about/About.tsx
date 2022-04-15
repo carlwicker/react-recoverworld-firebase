@@ -22,17 +22,10 @@ export default function About() {
             </p>
 
             <p>
-              Recoverworld started out as "Eve Records" back in 1994 and as such
-              is one of the UK's oldest independent dance music label groups. We
-              offer a bespoke management and royalty accounting service for
-              record labels and artists. We also have our own labels including
-              Discover, Eve and Kill the Lights, releasing independent dance
-              music across a variety of genres including trance, techno and
-              house. Our past and present group of artists reads like a who's
-              who of credible dance music. It includes Pablo Gargano, John
-              Askew, Jose Amnesia, Sean Tyas, John O'Callaghan, Chris Hampshire
-              and many more. Just check our "Artist" section for a comprehensive
-              list.
+              Our past and present group of artists reads like a who's who of
+              credible dance music. It includes Pablo Gargano, John Askew, Jose
+              Amnesia, Sean Tyas, John O'Callaghan, Chris Hampshire and many
+              more.
             </p>
 
             <p>
