@@ -90,6 +90,7 @@ export default function DigitalSearchFilter({
           <div style={{ opacity: "1" }}>
             <Form.Group className="mb-3" controlId="releasesFilter">
               <Form.Select
+                style={{ color: "white" }}
                 onChange={(e: any) => {
                   setSelectedLabel(e.target.value);
                   setLabelFilteredResults(filteredReleases);

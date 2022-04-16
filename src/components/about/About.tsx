@@ -6,7 +6,7 @@ export default function About() {
       <Container>
         <Row>
           <Col
-            md={6}
+            md={7}
             style={{
               textAlign: "left",
               display: "flex",

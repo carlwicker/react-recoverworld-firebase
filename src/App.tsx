@@ -21,11 +21,9 @@ import Release from "./components/Release/Release";
 function App() {
   return (
     <div className="wrapper">
-      {/* <ParalaxBackground /> */}
-
       <div className="App">
         <NavBar />
-        {/* <RadioBanner /> */}
+        <RadioBanner />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />

@@ -74,32 +74,36 @@ export default function Merchandise() {
             target="_blank"
             style={{
               display: "flex",
-              borderRadius: "15px 0px 15px 0px",
-              borderBottom: "1px dashed #555",
             }}
           >
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
+                borderRadius: "15px 0px 15px 0px",
+                borderBottom: "1px dashed #555",
                 // textTransform: "uppercase",
               }}
               key={index}
-              className={css.item}
+              className={(css.item, "mx-3")}
             >
               <a href={product.salesUrl} target="_blank">
                 <Image src={product?.imageUrl} style={{ height: "250px" }} />
               </a>
-              <div style={{ textAlign: "start" }}>
+              <div
+                style={{
+                  textAlign: "start",
+                }}
+              >
                 <a href={product.salesUrl} target="_blank">
-                  <h3>{product?.productName}</h3>
+                  <title>{product?.productName}</title>
                 </a>
-                <p style={{ textTransform: "capitalize" }}>
+                <p style={{ textTransform: "capitalize", marginLeft: "-40px" }}>
                   {product?.amountOfColours} Colours / {product?.amountOfSizes}{" "}
                   sizes
                 </p>
                 <a href={product.salesUrl} target="_blank">
-                  <Badge pill bg="primary">
+                  <Badge pill bg="primary" style={{ marginLeft: "-40px" }}>
                     <div style={{ fontSize: "2em" }}>{product?.price} GBP</div>
                   </Badge>
                 </a>
