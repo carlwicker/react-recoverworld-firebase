@@ -15,7 +15,7 @@ export default function About({ setIsCaraselVisible }: IAbout) {
       <Container style={{ marginTop: "50vh" }}>
         <Row>
           <Col
-            md={7}
+            md={4}
             style={{
               textAlign: "left",
               display: "flex",

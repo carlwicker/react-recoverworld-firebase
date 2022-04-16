@@ -49,7 +49,7 @@ export default function Digital({ setIsCaraselVisible }: IDigital) {
 
   // Show Carasel
   useEffect(() => {
-    setIsCaraselVisible(true);
+    setIsCaraselVisible(false);
   }, []);
 
   // Initalise Release List
@@ -75,7 +75,7 @@ export default function Digital({ setIsCaraselVisible }: IDigital) {
           alignItems: "center",
         }}
       >
-        {/* <h2>Select a label...</h2> */}
+        <h2>{selectedLabel ? selectedLabel : "Select A Label"}</h2>
 
         {/* Admin Add Release Button */}
         {isAdmin ? (

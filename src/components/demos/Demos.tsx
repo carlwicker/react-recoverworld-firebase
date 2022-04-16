@@ -15,7 +15,7 @@ export default function Demos({ setIsCaraselVisible }: IDemos) {
       {/* <h2>Demos</h2> */}
       <Row>
         <Col
-          md={6}
+          md={4}
           style={{
             textAlign: "left",
             display: "flex",

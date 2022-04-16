@@ -4,6 +4,7 @@ import { db } from "../../firebase";
 import { Row } from "react-bootstrap";
 import FeaturedItem from "./FeaturedItem";
 import IRelease from "../../interfaces/IRelease";
+import css from "./FeaturedReleases.module.css";
 
 export default function FeaturedReleases() {
   const [featuredReleases, setFeaturedReleases] = useState<IRelease[]>([]);
@@ -30,16 +31,7 @@ export default function FeaturedReleases() {
 
   return (
     <>
-      <Row
-        style={{
-          textAlign: "left",
-          // borderBottom: "1px  #555 dashed",
-          paddingTop: "20px",
-        }}
-      >
-        {/* <h2>New releases</h2> */}
-      </Row>
-      <Row style={{ textAlign: "left" }}>
+      <Row style={{ textAlign: "left" }} className={css["featured-items-list"]}>
         {featuredReleases?.map((release: any, index: number) => {
           return (
             <div
@@ -47,7 +39,6 @@ export default function FeaturedReleases() {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "10px",
               }}
             >
               <FeaturedItem

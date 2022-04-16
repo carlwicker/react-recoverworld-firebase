@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -6,11 +7,15 @@ interface IContact {
 }
 
 export default function Contact({ setIsCaraselVisible }: IContact) {
+  useEffect(() => {
+    setIsCaraselVisible(false);
+  }, []);
+
   return (
     <Container style={{ marginTop: "50vh" }}>
       <Row>
         <Col
-          md={6}
+          md={4}
           style={{
             textAlign: "left",
             display: "flex",

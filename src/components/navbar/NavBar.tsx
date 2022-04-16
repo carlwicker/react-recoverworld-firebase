@@ -2,6 +2,7 @@ import { Container, Navbar, NavDropdown, Nav, NavLink } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
+  const isAdmin: boolean = false;
   return (
     <Navbar expand="lg" variant="dark">
       <Container>
@@ -40,11 +41,13 @@ export default function NavBar() {
               Contact
             </Nav.Link>
 
-            <NavDropdown title="AMPSuite Tools" id="ampsuiteTools">
-              <NavDropdown.Item as={Link} to="/ampsuite/release/import">
-                Import AMPSuite Release
-              </NavDropdown.Item>
-            </NavDropdown>
+            {isAdmin ? (
+              <NavDropdown title="AMPSuite Tools" id="ampsuiteTools">
+                <NavDropdown.Item as={Link} to="/ampsuite/release/import">
+                  Import AMPSuite Release
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : null}
           </Nav>
         </Navbar.Collapse>
       </Container>

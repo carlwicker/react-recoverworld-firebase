@@ -15,10 +15,9 @@ export default function DigitalReleaseItem({
 }: IDigitalReleaseItem) {
   return (
     <div
+      className="featured-"
       style={{
         display: "flex",
-        gap: "5px",
-        borderRadius: "15px 0px 15px 0px",
         borderBottom: "1px dashed #555",
       }}
     >

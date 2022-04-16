@@ -79,6 +79,7 @@ h2 {
   text-transform: uppercase;
   font-family: "Barlow Semi Condensed";
   text-align: left;
+  opacity: "0.25";
 }
 
 h3 {

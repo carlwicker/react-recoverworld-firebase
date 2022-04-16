@@ -30,6 +30,7 @@ export default function Release({ setIsCaraselVisible }: IRelease) {
 
   return (
     <Container style={{ textAlign: "left" }}>
+      <h2 style={{}}>{catNum}</h2>
       <Row style={{ padding: "50px 20px" }}>
         <Col md="auto">
           <Card.Img
@@ -48,12 +49,6 @@ export default function Release({ setIsCaraselVisible }: IRelease) {
           }}
         >
           <>
-            {/* <Badge
-              bg="danger"
-              style={{ textTransform: "uppercase", width: "fit-content" }}
-            >
-              New Release
-            </Badge> */}
             <div
               style={{ fontWeight: "200", fontSize: "12px" }}
               className="pt-2 text-muted"
