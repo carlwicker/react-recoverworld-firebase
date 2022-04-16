@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import FeaturedReleases from "../digital/FeaturedReleases";
-import RadioBanner from "../mainCarasel/MainCarasel";
+import RadioBanner from "../carousel/Carousel";
 
 interface IHome {
   setIsCaraselVisible: any;

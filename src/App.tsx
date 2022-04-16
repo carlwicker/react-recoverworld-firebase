@@ -15,7 +15,7 @@ import Merchandise from "./components/merchandise/Merchandise";
 import AmpsuiteXMLReleaseParser from "./components/utility/AmpsuiteXMLReleaseParser";
 import AddMerchandise from "./components/merchandise/AddProduct";
 import EditProduct from "./components/merchandise/EditProduct";
-import RadioBanner from "./components/mainCarasel/MainCarasel";
+import RadioBanner from "./components/carousel/Carousel";
 import Release from "./components/Release/Release";
 
 import { useState } from "react";

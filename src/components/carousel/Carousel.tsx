@@ -1,4 +1,6 @@
 import { Container, Carousel, Button } from "react-bootstrap";
+import { FaSoundcloud } from "react-icons/fa";
+import css from "./Carousel.module.css";
 
 export default function RadioBanner() {
   return (
@@ -15,7 +17,6 @@ export default function RadioBanner() {
           height: "80vh",
         }}
       >
-        {/* <img src="../../img/floatingCube.png" style={{ opacity: 0.95 }} /> */}
         <Container>
           <Carousel.Caption>
             <div
@@ -30,14 +31,27 @@ export default function RadioBanner() {
                 textAlign: "left",
                 wordBreak: "break-word",
                 paddingTop: "150px",
+                gap: "30px",
               }}
             >
               <h1 style={{ lineHeight: "0.8em", overflowWrap: "break-word" }}>
                 <b>RECOVERWORLD</b> RADIO
               </h1>
-              <p>Live every Friday @ 22:00GMT</p>
+
               <div style={{ width: "fitContent" }}>
-                <Button>Listen Now</Button>
+                <Button
+                  className={css["btn-soundcloud"]}
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+                    alignItems: "center",
+                  }}
+                >
+                  <FaSoundcloud style={{ fontSize: "2em" }} />
+                  <div style={{ opacity: "1 !important" }}>
+                    RecoverWorld Soundcloud
+                  </div>
+                </Button>
               </div>
             </div>
           </Carousel.Caption>
