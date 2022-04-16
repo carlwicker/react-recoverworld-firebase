@@ -48,7 +48,7 @@ export default function RadioBanner() {
                   }}
                 >
                   <FaSoundcloud style={{ fontSize: "2em" }} />
-                  <div style={{ opacity: "1 !important" }}>
+                  <div style={{ opacity: "1", textAlign: "left" }}>
                     RecoverWorld Soundcloud
                   </div>
                 </Button>

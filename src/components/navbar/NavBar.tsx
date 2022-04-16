@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function NavBar() {
   const isAdmin: boolean = false;
   return (
-    <Navbar expand="lg" variant="dark">
+    <Navbar expand="md" variant="dark">
       <Container>
         <Link to="/" style={{ textDecoration: "none" }}>
           <Navbar.Brand
@@ -16,11 +16,15 @@ export default function NavBar() {
             RecoverWorld
           </Navbar.Brand>
         </Link>
-        <Navbar.Collapse
-          id="basic-navbar-nav"
-          style={{ textTransform: "uppercase" }}
-        >
-          <Nav className="me-auto">
+
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" style={{ border: "none" }}>
+          <Nav
+            className="me-auto"
+            style={{
+              textTransform: "uppercase",
+            }}
+          >
             <Nav.Link as={Link} to="/about">
               About
             </Nav.Link>
