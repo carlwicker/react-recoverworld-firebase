@@ -15,7 +15,11 @@ import { db } from "../../firebase";
 import DigitalReleaseList from "./DigitalReleaseList";
 import IRelease from "../../interfaces/IRelease";
 
-export default function Digital() {
+interface IDigital {
+  setIsCaraselVisible: any;
+}
+
+export default function Digital({ setIsCaraselVisible }: IDigital) {
   const [releases, setReleases] = useState<IRelease[] | []>([]);
   const [filteredReleases, setFilteredReleases] = useState<IRelease[] | []>([]);
   const [labelFilteredResults, setLabelFilteredResults] = useState<
@@ -42,6 +46,11 @@ export default function Digital() {
     setReleases(releaseArr);
     releaseArr = [];
   }
+
+  // Show Carasel
+  useEffect(() => {
+    setIsCaraselVisible(true);
+  }, []);
 
   // Initalise Release List
   useEffect(() => {

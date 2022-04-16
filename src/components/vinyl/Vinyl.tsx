@@ -1,6 +1,10 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-export default function Vinyl() {
+interface IVinyl {
+  setIsCaraselVisible: any;
+}
+export default function Vinyl({ setIsCaraselVisible }: IVinyl) {
+  setIsCaraselVisible(true);
   return (
     <Container>
       <Row>

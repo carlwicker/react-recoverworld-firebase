@@ -1,6 +1,15 @@
+import { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-export default function About() {
+interface IAbout {
+  setIsCaraselVisible: any;
+}
+
+export default function About({ setIsCaraselVisible }: IAbout) {
+  useEffect(() => {
+    setIsCaraselVisible(false);
+  }, []);
+
   return (
     <div>
       <Container>

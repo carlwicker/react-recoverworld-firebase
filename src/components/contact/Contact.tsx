@@ -1,7 +1,11 @@
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function Contact() {
+interface IContact {
+  setIsCaraselVisible: any;
+}
+
+export default function Contact({ setIsCaraselVisible }: IContact) {
   return (
     <Container>
       <Row>

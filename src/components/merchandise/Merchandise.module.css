@@ -1,10 +1,10 @@
 .item {
-  display: flex;
+  /* display: flex;
   width: fit-content;
   text-decoration: none;
   align-items: center;
   justify-content: center;
-  opacity: 0.75;
+  opacity: 0.75; */
 }
 
 .item:hover {

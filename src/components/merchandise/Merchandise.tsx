@@ -1,13 +1,23 @@
 import { useEffect, useState } from "react";
-import { Container, Button, Row, Col, Badge } from "react-bootstrap";
+import { Container, Button, Row, Col, Badge, Carousel } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import css from "./Merchandise.module.css";
 import { Link } from "react-router-dom";
 import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
-export default function Merchandise() {
+interface IMerchandise {
+  setIsCaraselVisible: any;
+}
+
+export default function Merchandise({ setIsCaraselVisible }: IMerchandise) {
   const [merchandise, setMerchandise] = useState<any[]>([]);
+
+  const [indexCarousel, setIndexCarosel] = useState(0);
+
+  const handleSelect = (selectedIndex: any, e: any) => {
+    setIndexCarosel(selectedIndex);
+  };
 
   async function getMerchandise() {
     const querySnapshot = await getDocs(collection(db, "merchandise"));
@@ -23,6 +33,7 @@ export default function Merchandise() {
   }
 
   useEffect(() => {
+    setIsCaraselVisible(false);
     getMerchandise();
   }, []);
 
@@ -44,7 +55,7 @@ export default function Merchandise() {
         flexDirection: "column",
       }}
     >
-      <Row
+      {/* <Row
         style={{
           display: "flex",
           alignItems: "center",
@@ -53,8 +64,6 @@ export default function Merchandise() {
         <Col>
           <h2>Merchandise</h2>
         </Col>
-
-        {/* Admin Add Release Button */}
         {isAdmin ? (
           <Col style={{ display: "flex", justifyContent: "end" }}>
             <Link to="/merchandise/add">
@@ -64,73 +73,87 @@ export default function Merchandise() {
         ) : (
           ""
         )}
-      </Row>
+      </Row> */}
 
-      {merchandise.map((product: any, index: number) => {
-        return (
-          <Row
-            key={index}
-            className="mb-2"
-            target="_blank"
-            style={{
-              display: "flex",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                borderRadius: "15px 0px 15px 0px",
-                borderBottom: "1px dashed #555",
-                // textTransform: "uppercase",
-              }}
-              key={index}
-              className={(css.item, "mx-3")}
-            >
-              <a href={product.salesUrl} target="_blank">
-                <Image src={product?.imageUrl} style={{ height: "250px" }} />
-              </a>
-              <div
-                style={{
-                  textAlign: "start",
-                }}
-              >
-                <a href={product.salesUrl} target="_blank">
-                  <title>{product?.productName}</title>
-                </a>
-                <p style={{ textTransform: "capitalize", marginLeft: "-40px" }}>
-                  {product?.amountOfColours} Colours / {product?.amountOfSizes}{" "}
-                  sizes
-                </p>
-                <a href={product.salesUrl} target="_blank">
-                  <Badge pill bg="primary" style={{ marginLeft: "-40px" }}>
-                    <div style={{ fontSize: "2em" }}>{product?.price} GBP</div>
-                  </Badge>
-                </a>
-                <div className="mt-3">
-                  {isAdmin ? (
-                    <div style={{ display: "flex", gap: "10px" }}>
-                      <Link to={product.id + "/edit"}>
-                        <Button variant="outline-warning">Edit</Button>
-                      </Link>
-                      <Button
-                        variant="outline-danger"
-                        onClick={() => {
-                          removeProductFromFirebase(product?.id);
-                        }}
-                      >
-                        Remove Product
-                      </Button>
+      <Carousel activeIndex={indexCarousel} onSelect={handleSelect}>
+        {merchandise.map((product: any, idx: number) => {
+          return (
+            <div>
+              {indexCarousel === idx ? (
+                <Carousel.Item
+                  key={indexCarousel}
+                  className="mb-2"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "400px",
+                  }}
+                >
+                  <Carousel.Caption>
+                    <div key={indexCarousel}>
+                      <a href={product.salesUrl} target="_blank">
+                        <Image
+                          src={product?.imageUrl}
+                          style={{ height: "250px" }}
+                        />
+                      </a>
+                      <div>
+                        <a href={product.salesUrl} target="_blank">
+                          <title>{product?.productName}</title>
+                        </a>
+                        <p
+                          style={{
+                            textTransform: "capitalize",
+                            textAlign: "center",
+                          }}
+                        >
+                          {product?.amountOfColours} Colours /{" "}
+                          {product?.amountOfSizes} sizes
+                        </p>
+                        <a href={product.salesUrl} target="_blank">
+                          <Badge
+                            pill
+                            bg="primary"
+                            style={{
+                              textTransform: "capitalize",
+                              textAlign: "center",
+                            }}
+                          >
+                            <div style={{ fontSize: "2em" }}>
+                              {product?.price} GBP
+                            </div>
+                          </Badge>
+                        </a>
+                        <div className="mt-3">
+                          {isAdmin ? (
+                            <div style={{ display: "flex", gap: "10px" }}>
+                              <Link to={product.id + "/edit"}>
+                                <Button variant="outline-warning">Edit</Button>
+                              </Link>
+                              <Button
+                                variant="outline-danger"
+                                onClick={() => {
+                                  removeProductFromFirebase(product?.id);
+                                }}
+                              >
+                                Remove Product
+                              </Button>
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </div>
                     </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </div>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              ) : (
+                ""
+              )}
             </div>
-          </Row>
-        );
-      })}
+          );
+        })}
+      </Carousel>
     </Container>
   );
 }

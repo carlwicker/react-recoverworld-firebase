@@ -6,7 +6,12 @@ import { useEffect, useState } from "react";
 import ITrack from "../../interfaces/ITrack";
 import DigitalTrack from "../digital/digitalReleaseItem/DigitalTrack";
 
-export default function Release() {
+interface IRelease {
+  setIsCaraselVisible: any;
+}
+
+export default function Release({ setIsCaraselVisible }: IRelease) {
+  setIsCaraselVisible(false);
   const { catNum } = useParams();
   const [release, setRelease] = useState<any | {}>({});
 

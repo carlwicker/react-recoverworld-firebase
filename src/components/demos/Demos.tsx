@@ -1,6 +1,15 @@
+import { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-export default function Demos() {
+interface IDemos {
+  setIsCaraselVisible: any;
+}
+
+export default function Demos({ setIsCaraselVisible }: IDemos) {
+  useEffect(() => {
+    setIsCaraselVisible(false);
+  }, []);
+
   return (
     <Container>
       <h2>Demos</h2>
