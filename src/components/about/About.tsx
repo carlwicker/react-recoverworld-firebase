@@ -12,7 +12,7 @@ export default function About({ setIsCaraselVisible }: IAbout) {
 
   return (
     <div>
-      <Container>
+      <Container style={{ marginTop: "50vh" }}>
         <Row>
           <Col
             md={7}
@@ -22,7 +22,7 @@ export default function About({ setIsCaraselVisible }: IAbout) {
               flexDirection: "column",
             }}
           >
-            <h2>About</h2>
+            {/* <h2>About</h2> */}
 
             <p>
               We are an established and continually expanding collection of

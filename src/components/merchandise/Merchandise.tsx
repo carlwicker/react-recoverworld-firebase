@@ -66,9 +66,7 @@ export default function Merchandise({ setIsCaraselVisible }: IMerchandise) {
         </Col>
         {isAdmin ? (
           <Col style={{ display: "flex", justifyContent: "end" }}>
-            <Link to="/merchandise/add">
-              <Button variant="primary">Add Product</Button>
-            </Link>
+
           </Col>
         ) : (
           ""
@@ -126,7 +124,19 @@ export default function Merchandise({ setIsCaraselVisible }: IMerchandise) {
                         </a>
                         <div className="mt-3">
                           {isAdmin ? (
-                            <div style={{ display: "flex", gap: "10px" }}>
+                            <div
+                              style={{
+                                display: "flex",
+                                gap: "10px",
+                                width: "100%",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <Link to="/merchandise/add">
+                                <Button variant="outline-primary">
+                                  Add Product
+                                </Button>
+                              </Link>
                               <Link to={product.id + "/edit"}>
                                 <Button variant="outline-warning">Edit</Button>
                               </Link>
@@ -136,20 +146,16 @@ export default function Merchandise({ setIsCaraselVisible }: IMerchandise) {
                                   removeProductFromFirebase(product?.id);
                                 }}
                               >
-                                Remove Product
+                                Remove This Product
                               </Button>
                             </div>
-                          ) : (
-                            ""
-                          )}
+                          ) : null}
                         </div>
                       </div>
                     </div>
                   </Carousel.Caption>
                 </Carousel.Item>
-              ) : (
-                ""
-              )}
+              ) : null}
             </div>
           );
         })}

@@ -11,8 +11,8 @@ export default function Demos({ setIsCaraselVisible }: IDemos) {
   }, []);
 
   return (
-    <Container>
-      <h2>Demos</h2>
+    <Container style={{ marginTop: "50vh" }}>
+      {/* <h2>Demos</h2> */}
       <Row>
         <Col
           md={6}
@@ -67,18 +67,16 @@ export default function Demos({ setIsCaraselVisible }: IDemos) {
             </li>
           </ol>
 
-          <h2>Submission Details</h2>
-          <p>
-            Initially, we now ask for all tracks to be submitted as SoundCloud
-            links, MySpace, YouTube, or any other streaming format. We can then
-            click and listen and if we like what we hear we will be in touch for
-            a full length 320 MP3. Whilst we often give a small amount of
-            feedback on track rejections, we regret that we cannot reply to
-            everyone or get involved in lengthy dialogue, as we simply do not
-            have the time. Due to the large volume of demo submissions, we may
-            not be able to respond or listen to your work immediately - please
-            allow at least two weeks before 'chasing up' as this will only delay
-            the process.
+          <p style={{ marginTop: "10vh" }}>
+            Initially, we now ask for all tracks to be submitted as SoundCloud,
+            YouTube, or any other streaming format. We can then click and listen
+            and if we like what we hear we will be in touch for a full length
+            320 MP3. Whilst we often give a small amount of feedback on track
+            rejections, we regret that we cannot reply to everyone or get
+            involved in lengthy dialogue, as we simply do not have the time. Due
+            to the large volume of demo submissions, we may not be able to
+            respond or listen to your work immediately - please allow at least
+            two weeks before 'chasing up' as this will only delay the process.
           </p>
           <p>
             Good luck – we look forward to hearing from you and hopefully

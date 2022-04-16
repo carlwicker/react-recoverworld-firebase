@@ -7,7 +7,7 @@ interface IContact {
 
 export default function Contact({ setIsCaraselVisible }: IContact) {
   return (
-    <Container>
+    <Container style={{ marginTop: "50vh" }}>
       <Row>
         <Col
           md={6}
@@ -17,7 +17,7 @@ export default function Contact({ setIsCaraselVisible }: IContact) {
             flexDirection: "column",
           }}
         >
-          <h2>Contact</h2>
+          {/* <h2>Contact</h2> */}
           <p>
             Send us an email using the form below, or contact us on{" "}
             <Link to="https://www.facebook.com/Recoverworld">Facebook</Link>.
