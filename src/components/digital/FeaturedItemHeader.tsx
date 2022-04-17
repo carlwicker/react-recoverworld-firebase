@@ -11,7 +11,7 @@ interface IDigitalReleaseHeader {
   getFeaturedReleases: Function;
 }
 
-export default function DigitalReleaseHeader({
+export default function FeaturedReleaseHeader({
   release,
   getFeaturedReleases,
 }: IDigitalReleaseHeader) {
@@ -25,7 +25,6 @@ export default function DigitalReleaseHeader({
     <div
       style={{
         display: "flex",
-        borderBottom: "1px dashed #555",
       }}
     >
       <Row style={{ padding: "50px 20px" }}>
