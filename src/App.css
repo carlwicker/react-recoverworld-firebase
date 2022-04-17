@@ -135,11 +135,14 @@ option:hover {
 .show {
   background-color: #333;
   width: 100%;
-  margin: 0;
   left: 0;
   position: absolute;
   z-index: 2;
   top: 60px;
   border-radius: 10px;
+  transition: none;
+}
+
+.collapse {
   transition: none;
 }
