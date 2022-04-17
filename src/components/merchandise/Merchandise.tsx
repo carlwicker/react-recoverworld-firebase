@@ -51,24 +51,6 @@ export default function Merchandise({ setIsCaraselVisible }: IMerchandise) {
         flexDirection: "column",
       }}
     >
-      {/* <Row
-        style={{
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <Col>
-          <h2>Merchandise</h2>
-        </Col>
-        {isAdmin ? (
-          <Col style={{ display: "flex", justifyContent: "end" }}>
-
-          </Col>
-        ) : (
-          ""
-        )}
-      </Row> */}
-
       <Carousel activeIndex={indexCarousel} onSelect={handleSelect}>
         {merchandise.map((product: any, idx: number) => {
           return (
