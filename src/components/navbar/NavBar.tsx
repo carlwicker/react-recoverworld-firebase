@@ -1,10 +1,11 @@
 import { Container, Navbar, NavDropdown, Nav, NavLink } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import css from "./NavBar.module.css";
 
 export default function NavBar() {
   const isAdmin: boolean = false;
   return (
-    <Navbar expand="md" variant="dark">
+    <Navbar expand="md" variant="dark" collapseOnSelect>
       <Container>
         <Link to="/" style={{ textDecoration: "none" }}>
           <Navbar.Brand
@@ -17,37 +18,54 @@ export default function NavBar() {
           </Navbar.Brand>
         </Link>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav" style={{ border: "none" }}>
-          <Nav
-            className="me-auto"
-            style={{
-              textTransform: "uppercase",
-            }}
-          >
-            <Nav.Link as={Link} to="/about">
+        <Navbar.Toggle
+          // aria-controls="basic-navbar-nav"
+          style={{
+            border: "none",
+            outline: "none",
+          }}
+          className={css["nav-hamburger"]}
+          onClick={() => {
+            console.log("dfsdfds");
+          }}
+        />
+
+        <Navbar.Collapse
+          id="basic-navbar-nav"
+          style={{
+            border: "none",
+            outline: "none",
+            textTransform: "uppercase",
+          }}
+        >
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/about" eventKey="1">
               About
             </Nav.Link>
 
-            <NavLink as={Link} to="/digital">
+            <NavLink as={Link} to="/digital" eventKey="2">
               Digital Hub
             </NavLink>
 
-            <NavLink as={Link} to="/merchandise">
+            <NavLink as={Link} to="/merchandise" eventKey="3">
               Merchandise
             </NavLink>
 
-            <Nav.Link as={Link} to="/demos">
+            <Nav.Link as={Link} to="/demos" eventKey="4">
               Demos
             </Nav.Link>
 
-            <Nav.Link as={Link} to="/contact">
+            <Nav.Link as={Link} to="/contact" eventKey="5">
               Contact
             </Nav.Link>
 
             {isAdmin ? (
               <NavDropdown title="AMPSuite Tools" id="ampsuiteTools">
-                <NavDropdown.Item as={Link} to="/ampsuite/release/import">
+                <NavDropdown.Item
+                  as={Link}
+                  to="/ampsuite/release/import"
+                  eventKey="6"
+                >
                   Import AMPSuite Release
                 </NavDropdown.Item>
               </NavDropdown>

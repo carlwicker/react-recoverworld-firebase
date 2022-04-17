@@ -12,10 +12,9 @@ export default function Demos({ setIsCaraselVisible }: IDemos) {
 
   return (
     <Container style={{ marginTop: "50vh" }}>
-      {/* <h2>Demos</h2> */}
       <Row>
         <Col
-          md={4}
+          md={8}
           style={{
             textAlign: "left",
             display: "flex",

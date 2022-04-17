@@ -44,10 +44,6 @@ export default function Merchandise({ setIsCaraselVisible }: IMerchandise) {
 
   let isAdmin = false;
 
-  useEffect(() => {
-    console.log(merchandise);
-  }, [merchandise]);
-
   return (
     <Container
       style={{
@@ -76,7 +72,7 @@ export default function Merchandise({ setIsCaraselVisible }: IMerchandise) {
       <Carousel activeIndex={indexCarousel} onSelect={handleSelect}>
         {merchandise.map((product: any, idx: number) => {
           return (
-            <div>
+            <div key={idx}>
               {indexCarousel === idx ? (
                 <Carousel.Item
                   key={indexCarousel}

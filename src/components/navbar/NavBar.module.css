@@ -1,0 +1,64 @@
+.navbar-toggler:focus .navbar-toggler:active .navbar-toggler:hover {
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar-toggler,
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler:hover {
+  outline: none;
+  box-shadow: none;
+}
+
+.collapsed {
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar-toggler-icon:focus,
+.navbar-toggler-icon:hover,
+.navbar-toggler-icon:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar-dark .navbar-toggler {
+  color: rgba(255, 255, 255, 0) !important;
+  border-color: rgba(255, 255, 255, 0) !important;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler-icon:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.nav-hamburger {
+  opacity: 0.75;
+}
+
+.nav-hamburger:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.nav-hamburger:hover {
+  opacity: 1;
+}
+
+a {
+  color: #777;
+}
+
+a:visited {
+  color: #777;
+}
+
+a:hover {
+  color: #999;
+}
+
+.nav-link:hover {
+  color: white;
+}

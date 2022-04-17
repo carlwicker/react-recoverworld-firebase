@@ -64,7 +64,7 @@ ol,
 .form-check-label {
   font-family: "Roboto";
   font-weight: 100;
-  font-size: 1em;
+  font-size: 1.2em;
   /* word-spacing: 0.2em; */
 }
 
@@ -124,4 +124,21 @@ option:hover {
 ::-ms-input-placeholder {
   /* Microsoft Edge */
   color: red;
+}
+
+/* .show {
+  position: absolute;
+  width: 100%;
+  margin-top: 400px;
+} */
+
+.show {
+  background-color: #333;
+  width: 100%;
+  margin: 0;
+  left: 0;
+  position: absolute;
+  z-index: 1;
+  top: 60px;
+  border-radius: 10px;
 }

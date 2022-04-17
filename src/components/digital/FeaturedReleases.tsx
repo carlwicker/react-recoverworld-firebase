@@ -25,10 +25,6 @@ export default function FeaturedReleases() {
     getFeaturedReleases();
   }, []);
 
-  useEffect(() => {
-    console.log(featuredReleases);
-  }, [featuredReleases]);
-
   return (
     <>
       <Row style={{ textAlign: "left" }} className={css["featured-items-list"]}>

@@ -16,13 +16,15 @@ import AmpsuiteXMLReleaseParser from "./components/utility/AmpsuiteXMLReleasePar
 import AddMerchandise from "./components/merchandise/AddProduct";
 import EditProduct from "./components/merchandise/EditProduct";
 import RadioBanner from "./components/carousel/Carousel";
-import Release from "./components/Release/Release";
+import Release from "./components/release/Release";
 
 import { ThemeProvider, Container } from "react-bootstrap";
 import { useState } from "react";
 
 function App() {
   const [isCaraselVisible, setIsCaraselVisible] = useState<Boolean>(false);
+  const [mobileNavMenuVisible, setMobileNavMenuVisible] =
+    useState<Boolean>(false);
 
   return (
     <ThemeProvider
