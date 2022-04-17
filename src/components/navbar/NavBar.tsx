@@ -5,7 +5,7 @@ import css from "./NavBar.module.css";
 export default function NavBar() {
   const isAdmin: boolean = false;
   return (
-    <Navbar expand="md" variant="dark" collapseOnSelect>
+    <Navbar expand="md" variant="dark" collapseOnSelect no-transition>
       <Container>
         <Link to="/" style={{ textDecoration: "none" }}>
           <Navbar.Brand
@@ -25,9 +25,6 @@ export default function NavBar() {
             outline: "none",
           }}
           className={css["nav-hamburger"]}
-          onClick={() => {
-            console.log("dfsdfds");
-          }}
         />
 
         <Navbar.Collapse
