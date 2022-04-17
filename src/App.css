@@ -141,4 +141,5 @@ option:hover {
   z-index: 2;
   top: 60px;
   border-radius: 10px;
+  transition: none;
 }
