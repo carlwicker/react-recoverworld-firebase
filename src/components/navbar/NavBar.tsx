@@ -5,7 +5,12 @@ import css from "./NavBar.module.css";
 export default function NavBar() {
   const isAdmin: boolean = false;
   return (
-    <Navbar expand="md" variant="dark" collapseOnSelect no-transition>
+    <Navbar
+      expand="md"
+      variant="dark"
+      collapseOnSelect
+      className={css["no-transition"]}
+    >
       <Container>
         <Link to="/" style={{ textDecoration: "none" }}>
           <Navbar.Brand

@@ -143,11 +143,3 @@ option:hover {
   border-radius: 10px;
   transition: none;
 }
-
-.no-transition {
-  -webkit-transition: height 0;
-  -moz-transition: height 0;
-  -ms-transition: height 0;
-  -o-transition: height 0;
-  transition: height 0;
-}
