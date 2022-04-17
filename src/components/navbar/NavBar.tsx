@@ -5,7 +5,12 @@ import css from "./NavBar.module.css";
 export default function NavBar() {
   const isAdmin: boolean = false;
   return (
-    <Navbar expand="md" variant="dark" collapseOnSelect>
+    <Navbar
+      expand="md"
+      variant="dark"
+      collapseOnSelect
+      className={css["no-transition"]}
+    >
       <Container>
         <Link to="/" style={{ textDecoration: "none" }}>
           <Navbar.Brand
@@ -36,7 +41,7 @@ export default function NavBar() {
           }}
           className={css["no-transition"]}
         >
-          <Nav className="me-auto">
+          <Nav className={css["no-transition"]}>
             <Nav.Link as={Link} to="/about" eventKey="1">
               About
             </Nav.Link>
