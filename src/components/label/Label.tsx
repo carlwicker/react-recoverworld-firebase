@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Col, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -65,10 +65,6 @@ export default function Label({ setIsCaraselVisible }: ILabel) {
   }, [search]);
 
   useEffect(() => {
-    console.log(releases);
-  }, [releases]);
-
-  useEffect(() => {
     console.log(filteredResults);
   }, [filteredResults]);
 
@@ -76,22 +72,37 @@ export default function Label({ setIsCaraselVisible }: ILabel) {
     <Container style={{ textAlign: "left" }}>
       <h2>{label}</h2>
 
-      <Form>
-        <Form.Group className="mb-3" controlId="releaseSearch">
-          <Form.Control
-            type="text"
-            placeholder="Search..."
-            onChange={(e: any) => {
-              setSearch(e.target.value.toLowerCase());
-            }}
-          />
+      <Form
+        onSubmit={(e: any) => {
+          e.preventDefault();
+          console.log(e);
+          setSearch(e.target[0].value.toLowerCase());
+        }}
+      >
+        <Form.Group controlId="releaseSearch">
+          <div style={{ display: "flex", gap: "10px" }}>
+            <div style={{ width: "100%" }}>
+              <Form.Control
+                type="text"
+                placeholder="Search..."
+                onChange={(e) => {
+                  if (e.target.value === "") {
+                    setSearch("");
+                  }
+                }}
+              />
+            </div>
+            <div>
+              <Button type="submit">Search</Button>
+            </div>
+          </div>
           <Form.Text className="text-muted">
             Search Release Artist, Release Name.
           </Form.Text>
         </Form.Group>
       </Form>
 
-      {search.length <= 2 ? (
+      {search === "" ? (
         <>
           {releases?.map((release: any, index: number) => {
             return (
