@@ -47,7 +47,7 @@ export default function Digital({ setIsCaraselVisible }: IDigital) {
     releaseArr = [];
   }
 
-  // Show Carasel
+  // Show Carousel
   useEffect(() => {
     setIsCaraselVisible(false);
   }, []);

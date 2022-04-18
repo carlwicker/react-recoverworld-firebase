@@ -12,18 +12,16 @@ export default function About({ setIsCaraselVisible }: IAbout) {
 
   return (
     <div>
-      <Container style={{ marginTop: "50vh" }}>
+      <Container
+        style={{
+          marginTop: "50vh",
+          textAlign: "left",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <Row>
-          <Col
-            md={8}
-            style={{
-              textAlign: "left",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            {/* <h2>About</h2> */}
-
+          <Col md={8}>
             <p>
               We are an established and continually expanding collection of
               record labels, a publishing company, online record store,

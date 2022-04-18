@@ -61,11 +61,6 @@ export default function DigitalSearchFilter({
     }
   }, [searchTerm, selectedLabel]);
 
-  // useEffect(() => {
-  //   console.log(filteredReleases);
-  //   console.log(labelFilteredResults);
-  // }, [filteredReleases, labelFilteredResults]);
-
   // Label Filter
   useEffect(() => {
     function labelFilter() {

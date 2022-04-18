@@ -1,4 +1,4 @@
-import { Container, Col, Row, Badge, Card } from "react-bootstrap";
+import { Container, Col, Row, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { db } from "../../firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
@@ -12,6 +12,7 @@ interface IRelease {
 
 export default function Release({ setIsCaraselVisible }: IRelease) {
   setIsCaraselVisible(false);
+  const isAdmin: boolean = true;
   const { catNum } = useParams();
   const [release, setRelease] = useState<any | {}>({});
 
@@ -30,7 +31,7 @@ export default function Release({ setIsCaraselVisible }: IRelease) {
 
   return (
     <Container style={{ textAlign: "left" }}>
-      <h2 style={{}}>{catNum}</h2>
+      <h2>{catNum}</h2>
       <Row style={{ padding: "50px 20px" }}>
         <Col md="auto">
           <Card.Img
@@ -58,8 +59,6 @@ export default function Release({ setIsCaraselVisible }: IRelease) {
           </>
           <div
             style={{
-              marginBottom: "0",
-              paddingTop: "0",
               textTransform: "uppercase",
               fontWeight: "800",
             }}
@@ -68,8 +67,6 @@ export default function Release({ setIsCaraselVisible }: IRelease) {
           </div>
           <div
             style={{
-              marginBottom: "0",
-              paddingTop: "0",
               textTransform: "capitalize",
               fontWeight: "200",
             }}
@@ -87,23 +84,6 @@ export default function Release({ setIsCaraselVisible }: IRelease) {
               return <DigitalTrack track={track} key={index} index={index} />;
             })}
           </div>
-
-          {/* Admin Edit / Delete Buttons */}
-          {/* {isAdmin ? (
-            <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
-              <Button
-                variant="outline-danger"
-                onClick={() => {
-                  deleteFeaturedItem(release.id);
-                  getFeaturedReleases();
-                }}
-              >
-                Remove Featured Item
-              </Button>
-            </div>
-          ) : (
-            ""
-          )} */}
         </Col>
       </Row>
     </Container>

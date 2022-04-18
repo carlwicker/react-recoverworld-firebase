@@ -20,6 +20,7 @@ import Release from "./components/release/Release";
 
 import { ThemeProvider, Container } from "react-bootstrap";
 import { useState } from "react";
+import Label from "./components/label/Label";
 
 function App() {
   const [isCaraselVisible, setIsCaraselVisible] = useState<Boolean>(false);
@@ -77,7 +78,12 @@ function App() {
               path="digital/:catNum"
               element={<Release setIsCaraselVisible={setIsCaraselVisible} />}
             />
+            <Route
+              path="digital/label/:label"
+              element={<Label setIsCaraselVisible={setIsCaraselVisible} />}
+            />
           </Routes>
+
           <Social />
         </div>
       </Container>
