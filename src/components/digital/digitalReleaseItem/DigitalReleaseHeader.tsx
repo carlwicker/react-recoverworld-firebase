@@ -16,14 +16,10 @@ export default function DigitalReleaseHeader({
   release,
   deleteRelease,
 }: IDigitalReleaseHeader) {
-  const isAdmin: boolean = false;
+  const isAdmin: boolean = true;
 
   async function addToFeaturedReleases(release: IRelease) {
     console.log(release);
-
-    // Add a new document in collection "cities"
-
-    // Add a new document with a generated id.
     const docRef = await addDoc(collection(db, "featured"), release);
     console.log("Document written with ID: ", docRef.id);
   }

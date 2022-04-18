@@ -5,7 +5,7 @@
 }
 
 .social:hover {
-  color: #1db954;
+  color: #1db954 !important;
   transition: 0.5s;
 }
 
@@ -13,6 +13,6 @@
 .social:focus,
 .social:active,
 a {
-  color: white;
+  color: white !important;
   transition: 0.5s;
 }

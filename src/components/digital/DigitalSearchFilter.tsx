@@ -85,7 +85,6 @@ export default function DigitalSearchFilter({
           <div style={{ opacity: "1" }}>
             <Form.Group className="mb-3" controlId="releasesFilter">
               <Form.Select
-                style={{ color: "white" }}
                 onChange={(e: any) => {
                   setSelectedLabel(e.target.value);
                   setLabelFilteredResults(filteredReleases);
@@ -102,42 +101,7 @@ export default function DigitalSearchFilter({
             </Form.Group>
           </div>
         </Col>
-        {/* <Col>
-          <Form.Group className="mb-3" controlId="releasesSearch">
-            <Form.Label>Search Releases</Form.Label>
-            <Form.Control
-              defaultValue={searchTerm}
-              type="text"
-              onChange={(e) => {
-                setSearchTerm(e.target.value.toLocaleLowerCase());
-              }}
-              placeholder="Search..."
-              disabled
-            />
-          </Form.Group>
-        </Col> */}
       </Row>
-      {/* <Row>
-        <div>
-          <DropdownButton
-            as={ButtonGroup}
-            title="Select a Label..."
-            id="bg-nested-dropdown"
-            onChange={(e: any) => {
-              setSelectedLabel(e.target.value);
-              setLabelFilteredResults(filteredReleases);
-            }}
-          >
-            {labels.map((label: string, index: number) => {
-              return (
-                <Dropdown.Item key={index} eventKey={index} value={label}>
-                  {label}
-                </Dropdown.Item>
-              );
-            })}
-          </DropdownButton>
-        </div>
-      </Row> */}
     </Form>
   );
 }

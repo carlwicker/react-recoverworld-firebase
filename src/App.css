@@ -91,7 +91,7 @@ a {
   text-decoration: none !important;
 }
 
-select {
+/* select {
   background-color: rgba(17, 17, 17, 0.5) !important;
 }
 
@@ -108,7 +108,7 @@ option {
 option:hover {
   color: #333;
   background-color: #111;
-}
+} */
 
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */

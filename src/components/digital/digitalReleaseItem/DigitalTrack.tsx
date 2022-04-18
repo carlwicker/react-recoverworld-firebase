@@ -1,5 +1,5 @@
 import { BsSpotify, BsYoutube } from "react-icons/bs";
-import { SiBeatport, SiSoundcloud } from "react-icons/si";
+import { SiBeatport, SiSoundcloud, SiItunes } from "react-icons/si";
 import css from "./social.module.css";
 import ITrack from "../../../interfaces/ITrack";
 
@@ -38,21 +38,31 @@ export default function DigitalTrack({ track, index }: IDigitalTrack) {
           )}
           {track.spotify !== "" ? (
             <a href={track.spotify} target="blank">
-              <BsSpotify style={{ fontSize: "20px" }} />
+              <BsSpotify style={{ fontSize: "20px" }} className={css.social} />
             </a>
           ) : (
             ""
           )}
           {track.soundcloud !== "" ? (
             <a href={track.soundcloud} target="blank">
-              <SiSoundcloud style={{ fontSize: "20px" }} />
+              <SiSoundcloud
+                style={{ fontSize: "20px" }}
+                className={css.social}
+              />
             </a>
           ) : (
             ""
           )}
           {track.beatport !== "" ? (
             <a href={track.beatport} target="blank">
-              <SiBeatport style={{ fontSize: "20px" }} />
+              <SiBeatport style={{ fontSize: "20px" }} className={css.social} />
+            </a>
+          ) : (
+            ""
+          )}
+          {track.itunes !== "" ? (
+            <a href={track.itunes} target="blank">
+              <SiItunes style={{ fontSize: "20px" }} className={css.social} />
             </a>
           ) : (
             ""
