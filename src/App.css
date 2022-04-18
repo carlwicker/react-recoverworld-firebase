@@ -134,6 +134,7 @@ option:hover {
 
 .show {
   background-color: #333;
+  border-color: #111;
   width: 100%;
   left: 0;
   position: absolute;
@@ -143,6 +144,8 @@ option:hover {
   transition: none;
 }
 
-.collapse {
-  transition: none;
+.collapsing {
+  -webkit-transition: none;
+  transition: none !important;
+  display: none;
 }

@@ -30,7 +30,6 @@ export default function RadioBanner() {
                 opacity: ".95",
                 textAlign: "left",
                 wordBreak: "break-word",
-                paddingTop: "150px",
                 gap: "30px",
               }}
             >
