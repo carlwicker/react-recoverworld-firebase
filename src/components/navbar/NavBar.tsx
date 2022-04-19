@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import css from "./NavBar.module.css";
 
 export default function NavBar() {
-  const isAdmin: boolean = false;
+  const isAdmin: boolean = true;
   return (
     <Navbar
       expand="md"
@@ -63,15 +63,9 @@ export default function NavBar() {
             </Nav.Link>
 
             {isAdmin ? (
-              <NavDropdown title="AMPSuite Tools" id="ampsuiteTools">
-                <NavDropdown.Item
-                  as={Link}
-                  to="/ampsuite/release/import"
-                  eventKey="6"
-                >
-                  Import AMPSuite Release
-                </NavDropdown.Item>
-              </NavDropdown>
+              <Nav.Link as={Link} to="/admin" eventKey="6">
+                Admin
+              </Nav.Link>
             ) : null}
           </Nav>
         </Navbar.Collapse>
