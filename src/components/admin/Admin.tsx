@@ -20,7 +20,6 @@ import {
 import { db } from "../../firebase";
 import { useEffect, useState } from "react";
 import EditLabelModal from "./EditLabelModal";
-import AmpsuiteXMLReleaseParser from "../utility/AmpsuiteXMLReleaseParser";
 import { Link } from "react-router-dom";
 
 interface IAdmin {
@@ -54,10 +53,6 @@ export default function Admin({ setIsCaraselVisible }: IAdmin) {
     setIsCaraselVisible(false);
     getLabels();
   }, []);
-
-  useEffect(() => {
-    console.log(labels);
-  }, [labels]);
 
   async function addLabel(labelName: string) {
     const docRef = await addDoc(collection(db, "labels"), { labelName });

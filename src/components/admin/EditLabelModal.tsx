@@ -26,14 +26,6 @@ export default function EditLabelModal({
     setLabel(selectedLabel.name);
   }, []);
 
-  useEffect(() => {
-    console.log(selectedLabel);
-  }, [selectedLabel]);
-
-  useEffect(() => {
-    console.log(label);
-  }, [label]);
-
   return (
     <Modal
       size="lg"
