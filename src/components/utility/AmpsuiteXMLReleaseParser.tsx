@@ -3,7 +3,13 @@ import axios from "axios";
 import { XMLParser } from "fast-xml-parser";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 
-export default function AmpsuiteXMLReleaseParser() {
+interface IImport {
+  setIsCaraselVisible: any;
+}
+
+export default function AmpsuiteXMLReleaseParser({
+  setIsCaraselVisible,
+}: IImport) {
   const [xmlData, setXMLData] = useState<any>();
   const [jsonData, setJsonData] = useState<any>([]);
   const [ampsuiteId, setAmpsuiteId] = useState<number | undefined>();
@@ -19,6 +25,10 @@ export default function AmpsuiteXMLReleaseParser() {
     ampsuiteId: 0,
   });
   const [linksObj, setLinksObj] = useState<any>({});
+
+  useEffect(() => {
+    setIsCaraselVisible(false);
+  }, []);
 
   // Get Ampsuite XML by AmpSuite Id
   useEffect(() => {
@@ -165,21 +175,17 @@ export default function AmpsuiteXMLReleaseParser() {
   }, [firebaseReleaseObj]);
 
   return (
-    <Container>
-      <Form
-        onSubmit={(e: any) => {
-          e.preventDefault();
-        }}
-      >
-        <Row style={{ textAlign: "left" }}>
-          <h2>AmpSuite XML Release Parser</h2>
-        </Row>
-
-        <Alert variant="danger" style={{ textAlign: "left" }}>
-          CORS Must be enabled in your browers.
-        </Alert>
-
+    <>
+      <Container style={{ textAlign: "left" }}>
         <Row>
+          <h2>AmpSuite XML Release Parser</h2>
+
+          <Container>
+            <Alert style={{ top: "0", margin: "0" }} variant="danger">
+              CORS Must be <b>ENABLED</b> in your browers.
+            </Alert>
+          </Container>
+
           <div>
             <Form.Control
               style={{ margin: "20px 0" }}
@@ -192,7 +198,8 @@ export default function AmpsuiteXMLReleaseParser() {
             />
           </div>
         </Row>
-        <Row style={{ textAlign: "left", padding: "20px 0" }}>
+
+        <Row style={{ padding: "20px 0" }}>
           {tracklisting[0] !== undefined ? (
             <>
               <div>Cat Number: {jsonData?.cat_no}</div>
@@ -222,27 +229,17 @@ export default function AmpsuiteXMLReleaseParser() {
           })}
         </Row>
         <Row>
-          <Col
-            md={6}
-            style={{
-              textAlign: "left",
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-            }}
-          >
-            <div style={{ marginBottom: "50px" }}>
-              <Button
-                variant={tracklisting[0] !== undefined ? "primary" : "danger"}
-                disabled={tracklisting[0] === undefined}
-                type="submit"
-              >
-                Import Release
-              </Button>
-            </div>
-          </Col>
+          <div style={{ marginBottom: "50px" }}>
+            <Button
+              variant={tracklisting[0] !== undefined ? "primary" : "danger"}
+              disabled={tracklisting[0] === undefined}
+              type="submit"
+            >
+              Import Release
+            </Button>
+          </div>
         </Row>
-      </Form>
-    </Container>
+      </Container>
+    </>
   );
 }

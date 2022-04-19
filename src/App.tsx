@@ -21,6 +21,7 @@ import Release from "./components/release/Release";
 import { ThemeProvider, Container } from "react-bootstrap";
 import { useState } from "react";
 import Label from "./components/label/Label";
+import Admin from "./components/admin/Admin";
 
 function App() {
   const [isCaraselVisible, setIsCaraselVisible] = useState<Boolean>(false);
@@ -70,7 +71,11 @@ function App() {
             <Route path="digital/:releaseId/edit" element={<EditRelease />} />
             <Route
               path="ampsuite/release/import"
-              element={<AmpsuiteXMLReleaseParser />}
+              element={
+                <AmpsuiteXMLReleaseParser
+                  setIsCaraselVisible={setIsCaraselVisible}
+                />
+              }
             />
             <Route path="merchandise/add" element={<AddMerchandise />} />
             <Route path="merchandise/:id/edit" element={<EditProduct />} />
@@ -81,6 +86,18 @@ function App() {
             <Route
               path="digital/label/:label"
               element={<Label setIsCaraselVisible={setIsCaraselVisible} />}
+            />
+            <Route
+              path="/admin"
+              element={<Admin setIsCaraselVisible={setIsCaraselVisible} />}
+            />
+            <Route
+              path="/admin/import"
+              element={
+                <AmpsuiteXMLReleaseParser
+                  setIsCaraselVisible={setIsCaraselVisible}
+                />
+              }
             />
           </Routes>
 
