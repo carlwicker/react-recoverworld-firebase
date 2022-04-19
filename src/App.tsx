@@ -69,14 +69,6 @@ function App() {
             />
             <Route path="digital/addRelease" element={<AddRelease />} />
             <Route path="digital/:releaseId/edit" element={<EditRelease />} />
-            <Route
-              path="ampsuite/release/import"
-              element={
-                <AmpsuiteXMLReleaseParser
-                  setIsCaraselVisible={setIsCaraselVisible}
-                />
-              }
-            />
             <Route path="merchandise/add" element={<AddMerchandise />} />
             <Route path="merchandise/:id/edit" element={<EditProduct />} />
             <Route
