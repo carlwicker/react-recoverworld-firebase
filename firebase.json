@@ -7,16 +7,16 @@
       "**/node_modules/**",
       "**/src/json/.*"
     ],
-    "rewrites": [{
-      "source": "**",
-      "destination": "/index.html"
-    }],
     "headers": [{
       "source": "index.html",
       "headers": [{
         "key": "Access-Control-Allow-Origin",
         "value": "*"
       }]
+    }],
+    "rewrites": [{
+      "source": "**",
+      "destination": "/index.html"
     }]
   }
 }
