@@ -30,7 +30,7 @@ export default function AmpsuiteXMLReleaseParser({
     setIsCaraselVisible(false);
   }, []);
 
-  // Get Ampsuite XML by AmpSuite Id
+  // Get Ampsuite Release XML by AmpSuite Id
   useEffect(() => {
     let url = `https://${process.env.REACT_APP_AMPSUITE_SUBDOMAIN}.ampsuite.com/xml/releases?cid=${process.env.REACT_APP_AMPSUITE_CID}&id=${ampsuiteId}`;
     axios

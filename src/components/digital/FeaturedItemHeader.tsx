@@ -15,7 +15,7 @@ export default function FeaturedReleaseHeader({
   release,
   getFeaturedReleases,
 }: IDigitalReleaseHeader) {
-  const isAdmin: boolean = false;
+  const isAdmin: boolean = true;
 
   async function deleteFeaturedItem(id: string) {
     await deleteDoc(doc(db, "featured", id));
