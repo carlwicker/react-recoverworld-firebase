@@ -8,7 +8,7 @@
       "**/src/json/.*"
     ],
     "headers": [{
-      "source": "index.html",
+      "source": "/index.html",
       "headers": [{
         "key": "Access-Control-Allow-Origin",
         "value": "*"
