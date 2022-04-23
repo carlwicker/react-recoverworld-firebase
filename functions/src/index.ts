@@ -26,7 +26,6 @@ app.get("/importRelease/:id", (req: any, res: any, next: any) => {
           jObj = parser?.parse(xml);
           xmlDataToJson = jObj.releases.release;
         }
-        res.send(xmlDataToJson);
       })
       .catch((err) => next(err));
   }
