@@ -82,14 +82,6 @@ export default function Admin({ setIsCaraselVisible }: IAdmin) {
           <h2>Admin</h2>
         </Row>
 
-        <Alert style={{ top: "0" }} variant="danger">
-          CORS Must be <b>DISABLED</b> in your browers.
-        </Alert>
-
-        <Row>
-          <h2>Labels</h2>
-        </Row>
-
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>
@@ -163,9 +155,12 @@ export default function Admin({ setIsCaraselVisible }: IAdmin) {
 
       <Row>
         <h2>Import Release</h2>
-        <Link to="/admin/import">
-          <Button>Import Release from AmpSuite</Button>
-        </Link>
+
+        <div>
+          <Button>
+            <Link to="/admin/import">Import Release from AmpSuite</Link>
+          </Button>
+        </div>
       </Row>
     </Container>
   );
