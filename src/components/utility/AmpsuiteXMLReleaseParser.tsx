@@ -43,8 +43,8 @@ export default function AmpsuiteXMLReleaseParser({
   }, [ampsuiteId]);
 
   useEffect(() => {
-    console.log(ampsuiteId, jsonData);
-  }, [jsonData, ampsuiteId]);
+    console.log(jsonData);
+  }, [jsonData]);
 
   useEffect(() => {
     // Build Firebase Retailer Array

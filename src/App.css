@@ -45,10 +45,6 @@ body {
   display: none; /* Chrome scroll */
 }
 
-.App {
-  text-align: center;
-}
-
 h1 {
   font-family: "Barlow Semi Condensed";
   font-weight: 600 !important;
@@ -148,4 +144,8 @@ option:hover {
   -webkit-transition: none;
   transition: none !important;
   display: none;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.75);
 }

@@ -154,7 +154,7 @@ export default function Admin({ setIsCaraselVisible }: IAdmin) {
       </div>
 
       <Row>
-        <h2>Import Release</h2>
+        <h2>Import AmpSuite Release</h2>
 
         <div>
           <Button>
