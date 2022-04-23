@@ -4,13 +4,13 @@ import { XMLParser } from "fast-xml-parser";
 
 const express = require("express");
 const app = express();
-let xmlDataToJson: any;
 
 const cors = require("cors")({ origin: true });
 app.use(cors);
 
 app.get("/importRelease/:id", (req: any, res: any, next: any) => {
   const ampsuiteId: number = req.params.id;
+  let xmlDataToJson: any;
 
   function getXML() {
     let jObj: any;

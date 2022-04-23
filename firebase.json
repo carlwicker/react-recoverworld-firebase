@@ -17,6 +17,12 @@
     "rewrites": [{
       "source": "**",
       "destination": "/index.html"
+    }, {
+      "source": "**",
+      "function": "app"
     }]
+  },
+  "functions": {
+    "predeploy": "npm --prefix functions run build"
   }
 }

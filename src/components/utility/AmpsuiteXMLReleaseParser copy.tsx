@@ -10,6 +10,7 @@ interface IImport {
 export default function AmpsuiteXMLReleaseParser({
   setIsCaraselVisible,
 }: IImport) {
+  const [xmlData, setXMLData] = useState<any>();
   const [jsonData, setJsonData] = useState<any>([]);
   const [ampsuiteId, setAmpsuiteId] = useState<number | undefined>();
   const [tracklisting, setTracklisting] = useState<any>([]);
@@ -29,15 +30,32 @@ export default function AmpsuiteXMLReleaseParser({
     setIsCaraselVisible(false);
   }, []);
 
-  // Get Ampsuite Release from Google Cloud Functions
+  // Get Ampsuite Release XML by AmpSuite Id
   useEffect(() => {
     axios
       .get(
-        `https://us-central1-recoverworld-d5ab4.cloudfunctions.net/app/importRelease/${ampsuiteId}`
+        `https://recoverworld.ampsuite.com/xml/releases?cid=10&id=${ampsuiteId}`,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
       )
-      .then((res) => setJsonData(res.data))
+      .then((res) => setXMLData(res.data))
       .catch((err) => console.log(err));
-  }, [jsonData]);
+  }, [ampsuiteId]);
+
+  // Parse XML => JSON
+  useEffect(() => {
+    async function getAmpsuiteRelease() {
+      const parser: any = new XMLParser();
+      if (xmlData && jsonData !== []) {
+        let jObj: any = parser?.parse(xmlData);
+        setJsonData(jObj.releases.release);
+      }
+    }
+    getAmpsuiteRelease();
+  }, [xmlData]);
 
   useEffect(() => {
     // Build Firebase Retailer Array
