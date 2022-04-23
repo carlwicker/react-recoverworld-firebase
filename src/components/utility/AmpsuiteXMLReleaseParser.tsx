@@ -10,7 +10,7 @@ export default function AmpsuiteXMLReleaseParser({
   setIsCaraselVisible,
 }: IImport) {
   const [jsonData, setJsonData] = useState<any>([]);
-  const [ampsuiteId, setAmpsuiteId] = useState<number | undefined>();
+  const [ampsuiteId, setAmpsuiteId] = useState<string | undefined>();
   const [tracklisting, setTracklisting] = useState<any>([]);
   const [firebaseReleaseObj, setFirebaseReleaseObj] = useState({
     artist: "",
@@ -29,14 +29,22 @@ export default function AmpsuiteXMLReleaseParser({
   }, []);
 
   // Get Ampsuite Release from Google Cloud Functions
+
   useEffect(() => {
-    axios
-      .get(
-        `https://us-central1-recoverworld-d5ab4.cloudfunctions.net/app/importRelease/${ampsuiteId}`
-      )
-      .then((res) => setJsonData(res.data))
-      .catch((err) => console.log(err));
-  }, [jsonData]);
+    async function getData() {
+      await axios
+        .get(
+          `https://us-central1-recoverworld-d5ab4.cloudfunctions.net/app/importRelease/${ampsuiteId}`
+        )
+        .then((res) => setJsonData(res?.data))
+        .catch((err) => console.log(err));
+    }
+    ampsuiteId && getData();
+  }, [ampsuiteId]);
+
+  useEffect(() => {
+    console.log(ampsuiteId, jsonData);
+  }, [jsonData, ampsuiteId]);
 
   useEffect(() => {
     // Build Firebase Retailer Array
@@ -85,7 +93,7 @@ export default function AmpsuiteXMLReleaseParser({
       }
       setLinksObj(linkTempObj);
     }
-  }, [jsonData]);
+  }, [ampsuiteId]);
 
   useEffect(() => {
     // Put single tracklist Object in Array
@@ -123,7 +131,7 @@ export default function AmpsuiteXMLReleaseParser({
       releaseDate: getFormattedData(),
       ampsuiteId: jsonData.id,
     });
-  }, [jsonData.id]);
+  }, [jsonData]);
 
   useEffect(() => {
     // Build Firestore Tracklisting
@@ -149,9 +157,8 @@ export default function AmpsuiteXMLReleaseParser({
     });
   }, [tracklisting]);
 
-  // Firestore it!
   useEffect(() => {
-    console.log(firebaseReleaseObj);
+    // console.log(firebaseReleaseObj);
   }, [firebaseReleaseObj]);
 
   return (
@@ -159,12 +166,6 @@ export default function AmpsuiteXMLReleaseParser({
       <Container style={{ textAlign: "left" }}>
         <Row>
           <h2>AmpSuite XML Release Parser</h2>
-
-          <Container>
-            <Alert style={{ top: "0", margin: "0" }} variant="danger">
-              CORS Must be <b>ENABLED</b> in your browers.
-            </Alert>
-          </Container>
 
           <div>
             <Form.Control
