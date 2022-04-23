@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { XMLParser } from "fast-xml-parser";
 import { Container, Row, Form, Button, Alert } from "react-bootstrap";
 
 interface IImport {
@@ -86,7 +85,7 @@ export default function AmpsuiteXMLReleaseParser({
       }
       setLinksObj(linkTempObj);
     }
-  }, [jsonData.id]);
+  }, [jsonData]);
 
   useEffect(() => {
     // Put single tracklist Object in Array
@@ -124,7 +123,7 @@ export default function AmpsuiteXMLReleaseParser({
       releaseDate: getFormattedData(),
       ampsuiteId: jsonData.id,
     });
-  }, [jsonData]);
+  }, [jsonData.id]);
 
   useEffect(() => {
     // Build Firestore Tracklisting
