@@ -42,7 +42,7 @@ export default function Merchandise({ setIsCaraselVisible }: IMerchandise) {
     getMerchandise();
   }
 
-  let isAdmin = false;
+  let isAdmin = true;
 
   return (
     <Container

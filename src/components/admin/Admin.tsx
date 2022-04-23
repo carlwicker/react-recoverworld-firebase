@@ -156,11 +156,11 @@ export default function Admin({ setIsCaraselVisible }: IAdmin) {
       <Row>
         <h2>Import AmpSuite Release</h2>
 
-        <div>
-          <Button>
-            <Link to="/admin/import">Import Release from AmpSuite</Link>
-          </Button>
-        </div>
+        <>
+          <Link to="/admin/import">
+            <Button>Import Release from AmpSuite</Button>
+          </Link>
+        </>
       </Row>
     </Container>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Row, Form, Button, Alert } from "react-bootstrap";
+import { Container, Row, Form, Button } from "react-bootstrap";
 
 interface IImport {
   setIsCaraselVisible: any;

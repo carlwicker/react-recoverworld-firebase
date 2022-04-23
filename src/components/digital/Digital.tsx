@@ -25,8 +25,23 @@ export default function Digital({ setIsCaraselVisible }: IDigital) {
   const [labelFilteredResults, setLabelFilteredResults] = useState<
     IRelease[] | []
   >([]);
-  const isAdmin: boolean = false;
+  const isAdmin: boolean = true;
   const [selectedLabel, setSelectedLabel] = useState<string>("");
+  const [labels, setLabels] = useState<any>([]);
+
+  // Get Labels from Firestore
+  async function getLabelsFromFirestore() {
+    let labelsArr: any = ["Select A Label..."];
+    const querySnapshot = await getDocs(collection(db, "labels"));
+    querySnapshot.forEach((doc) => {
+      labelsArr.push(doc.data().labelName);
+    });
+    setLabels(labelsArr);
+  }
+
+  useEffect(() => {
+    getLabelsFromFirestore();
+  }, []);
 
   // Get All Releases from Firestore
   async function getReleases() {
@@ -42,7 +57,6 @@ export default function Digital({ setIsCaraselVisible }: IDigital) {
     querySnapshot.forEach((release) => {
       releaseArr.push({ ...release.data(), id: release.id });
     });
-
     setReleases(releaseArr);
     releaseArr = [];
   }
@@ -75,17 +89,17 @@ export default function Digital({ setIsCaraselVisible }: IDigital) {
           alignItems: "center",
         }}
       >
-        <h2>{selectedLabel ? selectedLabel : "Select A Label"}</h2>
+        <Col>
+          <h2>{selectedLabel ? selectedLabel : "Select A Label"}</h2>
+        </Col>
 
         {/* Admin Add Release Button */}
-        {isAdmin ? (
+        {isAdmin && (
           <Col style={{ display: "flex", justifyContent: "end" }}>
             <Link to="/digital/addRelease">
-              <Button variant="primary">Add Release</Button>
+              <Button variant="primary">Manually Add Release</Button>
             </Link>
           </Col>
-        ) : (
-          ""
         )}
       </Row>
 
@@ -94,10 +108,10 @@ export default function Digital({ setIsCaraselVisible }: IDigital) {
         releases={releases}
         setFilteredReleases={setFilteredReleases}
         filteredReleases={filteredReleases}
-        labelFilteredResults={labelFilteredResults}
         setLabelFilteredResults={setLabelFilteredResults}
         selectedLabel={selectedLabel}
         setSelectedLabel={setSelectedLabel}
+        labels={labels}
       />
 
       {/* Release list */}

@@ -14,33 +14,21 @@ interface IDigitalSearchFilter {
   releases: IRelease[];
   setFilteredReleases: any;
   filteredReleases: IRelease[];
-  labelFilteredResults: any;
   setLabelFilteredResults: any;
   setSelectedLabel: any;
   selectedLabel: string;
+  labels: any;
 }
 
 export default function DigitalSearchFilter({
   releases,
   setFilteredReleases,
   filteredReleases,
-  labelFilteredResults,
   setLabelFilteredResults,
   selectedLabel,
   setSelectedLabel,
+  labels,
 }: IDigitalSearchFilter) {
-  const labels = [
-    "Select a label...",
-    "Discover Records",
-    "Discover Dark",
-    "EVE Records",
-    "Flux Delux",
-    "Flux Delux Digital",
-    "Iconise",
-    "Discover Digital",
-    "Recover",
-  ];
-
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {

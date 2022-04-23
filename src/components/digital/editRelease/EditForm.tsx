@@ -1,5 +1,8 @@
 import { Form, InputGroup, FormControl } from "react-bootstrap";
 import IRelease from "../../../interfaces/IRelease";
+import { useState, useEffect } from "react";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "../../../firebase";
 
 interface IEditForm {
   releaseObj: IRelease;
@@ -7,13 +10,21 @@ interface IEditForm {
 }
 
 export default function EditForm({ releaseObj, setReleaseObj }: IEditForm) {
-  const labels = [
-    "Discover Records",
-    "Discover Dark",
-    "Eve Records",
-    "Flux Delux",
-    "Iconise Records",
-  ];
+  const [labels, setLabels] = useState<any>([]);
+
+  // Get Labels from Firestore
+  async function getLabelsFromFirestore() {
+    let labelsArr: any = ["Select A Label..."];
+    const querySnapshot = await getDocs(collection(db, "labels"));
+    querySnapshot.forEach((doc) => {
+      labelsArr.push(doc.data().labelName);
+    });
+    setLabels(labelsArr);
+  }
+
+  useEffect(() => {
+    getLabelsFromFirestore();
+  }, []);
 
   return (
     <>
