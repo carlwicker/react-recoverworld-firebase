@@ -62,8 +62,6 @@ export default function DigitalReleaseItem({
               }}
               className="pt-2 text-muted"
             >
-              {/* Need URL check here */}
-
               {window.location.pathname === "/digital" && (
                 <Link to={`./${release.catNum}`}>{release.catNum}</Link>
               )}
@@ -108,7 +106,7 @@ export default function DigitalReleaseItem({
           </div>
 
           {/* Admin Edit / Delete Buttons */}
-          {isAdmin ? (
+          {isAdmin && (
             <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
               <Button
                 variant="outline-danger"
@@ -120,8 +118,6 @@ export default function DigitalReleaseItem({
                 Remove Featured Item
               </Button>
             </div>
-          ) : (
-            ""
           )}
         </Col>
       </Row>
