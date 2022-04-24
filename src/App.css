@@ -87,47 +87,6 @@ a {
   text-decoration: none !important;
 }
 
-/* select {
-  background-color: rgba(17, 17, 17, 0.5) !important;
-}
-
-.form-select {
-  color: white;
-}
-
-option {
-  color: #333;
-  background-color: #111;
-  height: 50px;
-}
-
-option:hover {
-  color: #333;
-  background-color: #111;
-} */
-
-::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: red;
-  opacity: 1; /* Firefox */
-}
-
-:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: red;
-}
-
-::-ms-input-placeholder {
-  /* Microsoft Edge */
-  color: red;
-}
-
-/* .show {
-  position: absolute;
-  width: 100%;
-  margin-top: 400px;
-} */
-
 .show {
   background-color: #333;
   border-color: #111;

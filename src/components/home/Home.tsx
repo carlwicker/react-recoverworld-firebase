@@ -7,7 +7,7 @@ interface IHome {
 }
 
 export default function Home({ setIsCaraselVisible }: IHome) {
-  useEffect(() => setIsCaraselVisible(true));
+  useEffect(() => setIsCaraselVisible(true), []);
 
   return (
     <Container>
