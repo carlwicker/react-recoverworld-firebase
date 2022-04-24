@@ -1,9 +1,12 @@
-import { Container, Navbar, NavDropdown, Nav, NavLink } from "react-bootstrap";
+import { Container, Navbar, Nav, NavLink } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import css from "./NavBar.module.css";
 
-export default function NavBar() {
-  const isAdmin: boolean = true;
+interface INavBar {
+  isAdmin: boolean;
+}
+
+export default function NavBar({ isAdmin }: INavBar) {
   return (
     <Navbar
       expand="md"

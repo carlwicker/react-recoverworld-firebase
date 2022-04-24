@@ -6,7 +6,6 @@ import Home from "./components/home/Home";
 import Demos from "./components/demos/Demos";
 import Contact from "./components/contact/Contact";
 import { Routes, Route } from "react-router-dom";
-import Vinyl from "./components/vinyl/Vinyl";
 import Digital from "./components/digital/Digital";
 import Social from "./components/social/Social";
 import AddRelease from "./components/digital/addRelease/AddRelease";
@@ -22,11 +21,12 @@ import { ThemeProvider, Container } from "react-bootstrap";
 import { useState } from "react";
 import Label from "./components/label/Label";
 import Admin from "./components/admin/Admin";
+import Login from "./components/admin/Login";
 
 function App() {
   const [isCaraselVisible, setIsCaraselVisible] = useState<Boolean>(false);
-  const [mobileNavMenuVisible, setMobileNavMenuVisible] =
-    useState<Boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [user, setUser] = useState<any>();
 
   return (
     <ThemeProvider
@@ -34,12 +34,17 @@ function App() {
     >
       <Container>
         <div className="App">
-          <NavBar />
+          <NavBar isAdmin={isAdmin} />
           {isCaraselVisible ? <RadioBanner /> : null}
           <Routes>
             <Route
               path="/"
-              element={<Home setIsCaraselVisible={setIsCaraselVisible} />}
+              element={
+                <Home
+                  setIsCaraselVisible={setIsCaraselVisible}
+                  isAdmin={isAdmin}
+                />
+              }
             />
             <Route
               path="about"
@@ -54,17 +59,21 @@ function App() {
               element={<Contact setIsCaraselVisible={setIsCaraselVisible} />}
             />
             <Route
-              path="vinyl"
-              element={<Vinyl setIsCaraselVisible={setIsCaraselVisible} />}
-            />
-            <Route
               path="digital"
-              element={<Digital setIsCaraselVisible={setIsCaraselVisible} />}
+              element={
+                <Digital
+                  setIsCaraselVisible={setIsCaraselVisible}
+                  isAdmin={isAdmin}
+                />
+              }
             />
             <Route
               path="merchandise"
               element={
-                <Merchandise setIsCaraselVisible={setIsCaraselVisible} />
+                <Merchandise
+                  setIsCaraselVisible={setIsCaraselVisible}
+                  isAdmin={isAdmin}
+                />
               }
             />
             <Route path="digital/addRelease" element={<AddRelease />} />
@@ -77,7 +86,12 @@ function App() {
             />
             <Route
               path="digital/label/:label"
-              element={<Label setIsCaraselVisible={setIsCaraselVisible} />}
+              element={
+                <Label
+                  setIsCaraselVisible={setIsCaraselVisible}
+                  isAdmin={isAdmin}
+                />
+              }
             />
             <Route
               path="/admin"
@@ -88,6 +102,17 @@ function App() {
               element={
                 <AmpsuiteXMLReleaseParser
                   setIsCaraselVisible={setIsCaraselVisible}
+                />
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <Login
+                  user={user}
+                  setUser={setUser}
+                  isAdmin={isAdmin}
+                  setIsAdmin={setIsAdmin}
                 />
               }
             />

@@ -6,7 +6,11 @@ import FeaturedItem from "./FeaturedItem";
 import IRelease from "../../interfaces/IRelease";
 import css from "./FeaturedReleases.module.css";
 
-export default function FeaturedReleases() {
+interface IFeaturedReleases {
+  isAdmin: boolean;
+}
+
+export default function FeaturedReleases({ isAdmin }: IFeaturedReleases) {
   const [featuredReleases, setFeaturedReleases] = useState<IRelease[]>([]);
 
   async function getFeaturedReleases() {
@@ -40,6 +44,7 @@ export default function FeaturedReleases() {
               <FeaturedItem
                 release={release}
                 getFeaturedReleases={getFeaturedReleases}
+                isAdmin={isAdmin}
               />
             </div>
           );

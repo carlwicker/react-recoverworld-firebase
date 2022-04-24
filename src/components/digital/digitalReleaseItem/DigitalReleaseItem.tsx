@@ -9,14 +9,14 @@ import DigitalTrack from "./DigitalTrack";
 interface IDigitalReleaseItem {
   release: IRelease;
   updateReleaseList: Function;
+  isAdmin: boolean;
 }
 
 export default function DigitalReleaseItem({
   release,
   updateReleaseList,
+  isAdmin,
 }: IDigitalReleaseItem) {
-  const isAdmin = true;
-
   async function deleteRelease(releaseId: string) {
     await deleteDoc(doc(db, "releases", releaseId));
     updateReleaseList();
@@ -110,7 +110,7 @@ export default function DigitalReleaseItem({
           </div>
 
           {/* Admin Edit / Delete Buttons */}
-          {isAdmin ? (
+          {isAdmin && (
             <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
               <Link to={"/digital/" + release.id + "/edit"}>
                 <Button variant="outline-warning">Edit</Button>
@@ -130,8 +130,6 @@ export default function DigitalReleaseItem({
                 Add to Featured
               </Button>
             </div>
-          ) : (
-            ""
           )}
         </Col>
       </Row>

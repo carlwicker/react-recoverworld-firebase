@@ -8,9 +8,10 @@ import DigitalReleaseItem from "./../digital/digitalReleaseItem/DigitalReleaseIt
 
 interface ILabel {
   setIsCaraselVisible: any;
+  isAdmin: boolean;
 }
 
-export default function Label({ setIsCaraselVisible }: ILabel) {
+export default function Label({ setIsCaraselVisible, isAdmin }: ILabel) {
   const { label } = useParams();
   const [releases, setReleases] = useState<IRelease[] | []>([]);
   const [search, setSearch] = useState<string>("");
@@ -116,6 +117,7 @@ export default function Label({ setIsCaraselVisible }: ILabel) {
                 <DigitalReleaseItem
                   release={release}
                   updateReleaseList={updateReleaseList}
+                  isAdmin={isAdmin}
                 />
               </div>
             );
@@ -135,6 +137,7 @@ export default function Label({ setIsCaraselVisible }: ILabel) {
                 <DigitalReleaseItem
                   release={release}
                   updateReleaseList={updateReleaseList}
+                  isAdmin={isAdmin}
                 />
               </div>
             );

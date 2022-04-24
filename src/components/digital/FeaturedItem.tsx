@@ -9,14 +9,14 @@ import ITrack from "../../interfaces/ITrack";
 interface IDigitalReleaseItem {
   release: IRelease;
   getFeaturedReleases: Function;
+  isAdmin: boolean;
 }
 
 export default function DigitalReleaseItem({
   release,
   getFeaturedReleases,
+  isAdmin,
 }: IDigitalReleaseItem) {
-  const isAdmin: boolean = true;
-
   async function deleteFeaturedItem(id: string) {
     await deleteDoc(doc(db, "featured", id));
   }
@@ -121,7 +121,6 @@ export default function DigitalReleaseItem({
           )}
         </Col>
       </Row>
-      );
     </div>
   );
 }

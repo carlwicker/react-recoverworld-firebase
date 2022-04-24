@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { Container, Button, Row, Col, Badge, Carousel } from "react-bootstrap";
+import { Container, Button, Badge, Carousel } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
-import css from "./Merchandise.module.css";
 import { Link } from "react-router-dom";
 import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 interface IMerchandise {
   setIsCaraselVisible: any;
+  isAdmin: boolean;
 }
 
-export default function Merchandise({ setIsCaraselVisible }: IMerchandise) {
+export default function Merchandise({
+  setIsCaraselVisible,
+  isAdmin,
+}: IMerchandise) {
   const [merchandise, setMerchandise] = useState<any[]>([]);
 
   const [indexCarousel, setIndexCarosel] = useState(0);
@@ -41,8 +44,6 @@ export default function Merchandise({ setIsCaraselVisible }: IMerchandise) {
     await deleteDoc(doc(db, "merchandise", id));
     getMerchandise();
   }
-
-  let isAdmin = true;
 
   return (
     <Container

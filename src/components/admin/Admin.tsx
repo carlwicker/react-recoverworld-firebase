@@ -78,8 +78,19 @@ export default function Admin({ setIsCaraselVisible }: IAdmin) {
           setEditLabelModalShow={setEditLabelModalShow}
           selectedLabel={selectedLabel}
         />
+
         <Row>
-          <h2>Admin</h2>
+          <h2>Import AmpSuite Release</h2>
+
+          <>
+            <Link to="/admin/import">
+              <Button>Import Release from AmpSuite</Button>
+            </Link>
+          </>
+        </Row>
+
+        <Row style={{ paddingTop: "30px" }}>
+          <h2>Labels</h2>
         </Row>
 
         <Table striped bordered hover variant="dark">
@@ -152,16 +163,6 @@ export default function Admin({ setIsCaraselVisible }: IAdmin) {
           </Row>
         </Form>
       </div>
-
-      <Row>
-        <h2>Import AmpSuite Release</h2>
-
-        <>
-          <Link to="/admin/import">
-            <Button>Import Release from AmpSuite</Button>
-          </Link>
-        </>
-      </Row>
     </Container>
   );
 }

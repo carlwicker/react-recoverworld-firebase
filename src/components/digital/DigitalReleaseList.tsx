@@ -1,15 +1,16 @@
-import { useEffect } from "react";
 import DigitalReleaseItem from "./digitalReleaseItem/DigitalReleaseItem";
 
 interface IDigitalReleaseList {
   releases: any;
   updateReleaseList: Function;
   labelFilteredResults: any;
+  isAdmin: boolean;
 }
 
 export default function DigitalReleaseList({
   updateReleaseList,
   labelFilteredResults,
+  isAdmin,
 }: IDigitalReleaseList) {
   return (
     <>
@@ -25,6 +26,7 @@ export default function DigitalReleaseList({
             <DigitalReleaseItem
               release={release}
               updateReleaseList={updateReleaseList}
+              isAdmin={isAdmin}
             />
           </div>
         );

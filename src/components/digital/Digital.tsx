@@ -17,15 +17,15 @@ import IRelease from "../../interfaces/IRelease";
 
 interface IDigital {
   setIsCaraselVisible: any;
+  isAdmin: boolean;
 }
 
-export default function Digital({ setIsCaraselVisible }: IDigital) {
+export default function Digital({ setIsCaraselVisible, isAdmin }: IDigital) {
   const [releases, setReleases] = useState<IRelease[] | []>([]);
   const [filteredReleases, setFilteredReleases] = useState<IRelease[] | []>([]);
   const [labelFilteredResults, setLabelFilteredResults] = useState<
     IRelease[] | []
   >([]);
-  const isAdmin: boolean = true;
   const [selectedLabel, setSelectedLabel] = useState<string>("");
   const [labels, setLabels] = useState<any>([]);
 
@@ -119,9 +119,10 @@ export default function Digital({ setIsCaraselVisible }: IDigital) {
         releases={releases}
         updateReleaseList={updateReleaseList}
         labelFilteredResults={labelFilteredResults}
+        isAdmin={isAdmin}
       />
 
-      <FeaturedReleases />
+      <FeaturedReleases isAdmin={isAdmin} />
     </Container>
   );
 }
