@@ -1,7 +1,5 @@
 .release-item {
-  padding: 50px 0px;
-  display: flex;
-  gap: 5px;
+  padding: 50px 0;
   border-bottom: 1px dashed #555;
 }
 
@@ -46,5 +44,5 @@
 
 .release-cat:hover,
 .release-label:hover {
-  color: #00bc8c !important;
+  color: #375a7f !important;
 }
