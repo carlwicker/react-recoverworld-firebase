@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Button, Container, Form, Col, Row } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -53,11 +53,8 @@ export default function Label({ isAdmin }: ILabel) {
         }
       });
     }
+    filterReleases();
     setFilteredResults(filteredArr);
-
-    if (search.length >= 2) {
-      filterReleases();
-    }
   }, [search]);
 
   useEffect(() => {
@@ -71,7 +68,7 @@ export default function Label({ isAdmin }: ILabel) {
       <Form
         onSubmit={(e: any) => {
           e.preventDefault();
-          console.log(e);
+          console.log(e.target[0].value.toLowerCase());
           setSearch(e.target[0].value.toLowerCase());
         }}
       >
@@ -81,7 +78,7 @@ export default function Label({ isAdmin }: ILabel) {
               <Form.Control
                 type="text"
                 placeholder="Search..."
-                onChange={(e) => {
+                onChange={(e: any) => {
                   if (e.target.value === "") {
                     setSearch("");
                   }
@@ -98,25 +95,49 @@ export default function Label({ isAdmin }: ILabel) {
         </Form.Group>
       </Form>
 
-      <>
-        {releases?.map((release: any, index: number) => {
-          return (
-            <div
-              key={index}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <DigitalReleaseItem
-                release={release}
-                updateReleaseList={updateReleaseList}
-                isAdmin={isAdmin}
-              />
-            </div>
-          );
-        })}
-      </>
+      {search !== "" && (
+        <>
+          {filteredResults?.map((release: any, index: number) => {
+            return (
+              <div
+                key={index}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <DigitalReleaseItem
+                  release={release}
+                  updateReleaseList={updateReleaseList}
+                  isAdmin={isAdmin}
+                />
+              </div>
+            );
+          })}
+        </>
+      )}
+
+      {search === "" && (
+        <>
+          {releases?.map((release: any, index: number) => {
+            return (
+              <div
+                key={index}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <DigitalReleaseItem
+                  release={release}
+                  updateReleaseList={updateReleaseList}
+                  isAdmin={isAdmin}
+                />
+              </div>
+            );
+          })}
+        </>
+      )}
     </>
   );
 }
