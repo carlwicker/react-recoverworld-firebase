@@ -7,19 +7,14 @@ import IRelease from "../../interfaces/IRelease";
 import DigitalReleaseItem from "./../digital/digitalReleaseItem/DigitalReleaseItem";
 
 interface ILabel {
-  setIsCaraselVisible: any;
   isAdmin: boolean;
 }
 
-export default function Label({ setIsCaraselVisible, isAdmin }: ILabel) {
+export default function Label({ isAdmin }: ILabel) {
   const { label } = useParams();
   const [releases, setReleases] = useState<IRelease[] | []>([]);
   const [search, setSearch] = useState<string>("");
   const [filteredResults, setFilteredResults] = useState<IRelease[] | []>([]);
-
-  useEffect(() => {
-    setIsCaraselVisible(false);
-  }, []);
 
   function updateReleaseList() {
     return null;
@@ -70,7 +65,7 @@ export default function Label({ setIsCaraselVisible, isAdmin }: ILabel) {
   }, [filteredResults]);
 
   return (
-    <Container style={{ textAlign: "left" }}>
+    <>
       <h2>{label}</h2>
 
       <Form
@@ -103,47 +98,25 @@ export default function Label({ setIsCaraselVisible, isAdmin }: ILabel) {
         </Form.Group>
       </Form>
 
-      {search === "" ? (
-        <>
-          {releases?.map((release: any, index: number) => {
-            return (
-              <div
-                key={index}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <DigitalReleaseItem
-                  release={release}
-                  updateReleaseList={updateReleaseList}
-                  isAdmin={isAdmin}
-                />
-              </div>
-            );
-          })}
-        </>
-      ) : (
-        <>
-          {filteredResults?.map((release: any, index: number) => {
-            return (
-              <div
-                key={index}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <DigitalReleaseItem
-                  release={release}
-                  updateReleaseList={updateReleaseList}
-                  isAdmin={isAdmin}
-                />
-              </div>
-            );
-          })}
-        </>
-      )}
-    </Container>
+      <>
+        {releases?.map((release: any, index: number) => {
+          return (
+            <div
+              key={index}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <DigitalReleaseItem
+                release={release}
+                updateReleaseList={updateReleaseList}
+                isAdmin={isAdmin}
+              />
+            </div>
+          );
+        })}
+      </>
+    </>
   );
 }

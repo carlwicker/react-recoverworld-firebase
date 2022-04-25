@@ -1,19 +1,10 @@
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button,
-  Table,
-  Alert,
-} from "react-bootstrap";
+import { Row, Col, Form, Button, Table } from "react-bootstrap";
 import {
   addDoc,
   collection,
   getDocs,
   onSnapshot,
   query,
-  where,
   deleteDoc,
   doc,
 } from "firebase/firestore";
@@ -22,16 +13,14 @@ import { useEffect, useState } from "react";
 import EditLabelModal from "./EditLabelModal";
 import { Link } from "react-router-dom";
 
-interface IAdmin {
-  setIsCaraselVisible: any;
-}
+interface IAdmin {}
 
 interface ILabel {
   id: string;
   name: string;
 }
 
-export default function Admin({ setIsCaraselVisible }: IAdmin) {
+export default function Admin({}: IAdmin) {
   const [labels, setLabels] = useState<ILabel[] | []>([]);
   const [modalEditLabelShow, setEditLabelModalShow] = useState<boolean>(false);
   const [selectedLabel, setSelectedLabel] = useState<any>({ name: "", id: "" });
@@ -50,7 +39,6 @@ export default function Admin({ setIsCaraselVisible }: IAdmin) {
   }
 
   useEffect(() => {
-    setIsCaraselVisible(false);
     getLabels();
   }, []);
 
@@ -64,105 +52,96 @@ export default function Admin({ setIsCaraselVisible }: IAdmin) {
   }
 
   return (
-    <Container
-      style={{
-        textAlign: "left",
-        display: "flex",
-        flexDirection: "column",
-        gap: "50px",
-      }}
-    >
-      <div>
-        <EditLabelModal
-          modalEditLabelShow={modalEditLabelShow}
-          setEditLabelModalShow={setEditLabelModalShow}
-          selectedLabel={selectedLabel}
-        />
+    <>
+      <EditLabelModal
+        modalEditLabelShow={modalEditLabelShow}
+        setEditLabelModalShow={setEditLabelModalShow}
+        selectedLabel={selectedLabel}
+      />
 
-        <Row>
-          <h2>Import AmpSuite Release</h2>
+      <Row>
+        <h2>Import AmpSuite Release</h2>
 
-          <>
-            <Link to="/admin/import">
-              <Button>Import Release from AmpSuite</Button>
-            </Link>
-          </>
-        </Row>
+        <>
+          <Link to="/admin/import">
+            <Button>Import Release from AmpSuite</Button>
+          </Link>
+        </>
+      </Row>
 
-        <Row style={{ paddingTop: "30px" }}>
-          <h2>Labels</h2>
-        </Row>
+      <Row style={{ paddingTop: "30px" }}>
+        <h2>Labels</h2>
+      </Row>
 
-        <Table striped bordered hover variant="dark">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Label Name</th>
-              <th>Controls</th>
-            </tr>
-          </thead>
-          <tbody>
-            {labels?.map((label: ILabel, index: number) => {
-              return (
-                <tr key={index}>
-                  <td className="align-middle">{index + 1}</td>
-                  <td className="align-middle" style={{ width: "100%" }}>
-                    {label.name}
-                  </td>
-                  <td
-                    className="align-middle"
-                    style={{
-                      display: "flex",
-                      gap: "10px",
+      <Table striped bordered hover variant="dark">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Label Name</th>
+            <th>Controls</th>
+          </tr>
+        </thead>
+        <tbody>
+          {labels?.map((label: ILabel, index: number) => {
+            return (
+              <tr key={index}>
+                <td className="align-middle">{index + 1}</td>
+                <td className="align-middle" style={{ width: "100%" }}>
+                  {label.name}
+                </td>
+                <td
+                  className="align-middle"
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+                  }}
+                >
+                  <Button
+                    variant="outline-warning"
+                    onClick={() => {
+                      setSelectedLabel({ name: label.name, id: label.id });
+                      setEditLabelModalShow(true);
                     }}
                   >
-                    <Button
-                      variant="outline-warning"
-                      onClick={() => {
-                        setSelectedLabel({ name: label.name, id: label.id });
-                        setEditLabelModalShow(true);
-                      }}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      variant="outline-danger"
-                      onClick={() => {
-                        deleteLabel(label.id);
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
+                    Edit
+                  </Button>
+                  <Button
+                    variant="outline-danger"
+                    onClick={() => {
+                      deleteLabel(label.id);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
 
-        <Form
-          onSubmit={(e: any) => {
-            e.preventDefault();
-            addLabel(e.target[0].value);
-            e.target[0].value = "";
-          }}
-        >
-          <Form.Label>Add Label</Form.Label>
-          <Row>
-            <Col>
-              <Form.Group controlId="addRecordLabel">
-                <Form.Control type="text" placeholder="Label Name" />
-                <Form.Text className="text-muted">
-                  The label name needs to be EXACTLY the same as in Ampsuite.
-                </Form.Text>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Button type="submit">Add Label</Button>
-            </Col>
-          </Row>
-        </Form>
-      </div>
-    </Container>
+      <Form
+        onSubmit={(e: any) => {
+          e.preventDefault();
+          addLabel(e.target[0].value);
+          e.target[0].value = "";
+        }}
+      >
+        <Form.Label>Add Label</Form.Label>
+        <Row>
+          <Col>
+            <Form.Group controlId="addRecordLabel">
+              <Form.Control type="text" placeholder="Label Name" />
+              <Form.Text className="text-muted">
+                The label name needs to be EXACTLY the same as in Ampsuite.
+              </Form.Text>
+            </Form.Group>
+          </Col>
+          <Col>
+            <Button type="submit">Add Label</Button>
+          </Col>
+        </Row>
+      </Form>
+    </>
   );
 }

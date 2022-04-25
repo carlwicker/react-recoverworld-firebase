@@ -103,34 +103,32 @@ export default function EditRelease() {
       />
 
       {/* Main Page */}
-      <Container>
-        <Row style={{ textAlign: "left" }}>
-          <h1>Edit Release</h1>
-          <Form
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            {/* Track Details Form */}
-            <EditForm releaseObj={releaseObj} setReleaseObj={setReleaseObj} />
+      <Row style={{ textAlign: "left" }}>
+        <h2>Edit Release</h2>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
+          {/* Track Details Form */}
+          <EditForm releaseObj={releaseObj} setReleaseObj={setReleaseObj} />
 
-            {/* Tracklisting Table */}
-            <TrackList
-              tracks={tracks}
-              setTrackIndex={setTrackIndex}
-              setEditShowTrackModal={setEditShowTrackModal}
-              trackIndex={trackIndex}
-              deleteTrackFromTrackListing={deleteTrackFromTrackListing}
-            />
+          {/* Tracklisting Table */}
+          <TrackList
+            tracks={tracks}
+            setTrackIndex={setTrackIndex}
+            setEditShowTrackModal={setEditShowTrackModal}
+            trackIndex={trackIndex}
+            deleteTrackFromTrackListing={deleteTrackFromTrackListing}
+          />
 
-            {/* Buttons */}
-            <EditFomButtons
-              setAddShowTrackModal={setAddShowTrackModal}
-              updateFireStoreReleases={updateFireStoreReleases}
-            />
-          </Form>
-        </Row>
-      </Container>
+          {/* Buttons */}
+          <EditFomButtons
+            setAddShowTrackModal={setAddShowTrackModal}
+            updateFireStoreReleases={updateFireStoreReleases}
+          />
+        </Form>
+      </Row>
     </>
   );
 }

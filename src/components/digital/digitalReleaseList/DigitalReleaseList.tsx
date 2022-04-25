@@ -1,3 +1,4 @@
+import { Container } from "react-bootstrap";
 import DigitalReleaseItem from "../digitalReleaseItem/DigitalReleaseItem";
 
 interface IDigitalReleaseList {
@@ -15,13 +16,12 @@ export default function DigitalReleaseList({
     <>
       {labelFilteredResults?.map((release: any, index: number) => {
         return (
-          <div key={index}>
-            <DigitalReleaseItem
-              release={release}
-              updateReleaseList={updateReleaseList}
-              isAdmin={isAdmin}
-            />
-          </div>
+          <DigitalReleaseItem
+            key={index}
+            release={release}
+            updateReleaseList={updateReleaseList}
+            isAdmin={isAdmin}
+          />
         );
       })}
     </>

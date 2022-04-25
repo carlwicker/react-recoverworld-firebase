@@ -1,6 +1,6 @@
+import css from "./DigitalTrack.module.css";
 import { BsSpotify, BsYoutube } from "react-icons/bs";
 import { SiBeatport, SiSoundcloud, SiItunes } from "react-icons/si";
-import css from "./DigitalTrack.module.css";
 import ITrack from "../../../interfaces/ITrack";
 
 interface IDigitalTrack {

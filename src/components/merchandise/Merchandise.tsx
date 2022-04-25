@@ -6,14 +6,10 @@ import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 interface IMerchandise {
-  setIsCaraselVisible: any;
   isAdmin: boolean;
 }
 
-export default function Merchandise({
-  setIsCaraselVisible,
-  isAdmin,
-}: IMerchandise) {
+export default function Merchandise({ isAdmin }: IMerchandise) {
   const [merchandise, setMerchandise] = useState<any[]>([]);
 
   const [indexCarousel, setIndexCarosel] = useState(0);
@@ -36,7 +32,6 @@ export default function Merchandise({
   }
 
   useEffect(() => {
-    setIsCaraselVisible(false);
     getMerchandise();
   }, []);
 
@@ -46,99 +41,92 @@ export default function Merchandise({
   }
 
   return (
-    <Container
-      style={{
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <Carousel activeIndex={indexCarousel} onSelect={handleSelect}>
-        {merchandise.map((product: any, idx: number) => {
-          return (
-            <div key={idx}>
-              {indexCarousel === idx ? (
-                <Carousel.Item
-                  key={indexCarousel}
-                  className="mb-2"
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "400px",
-                  }}
-                >
-                  <Carousel.Caption>
-                    <div key={indexCarousel}>
+    <Carousel activeIndex={indexCarousel} onSelect={handleSelect}>
+      {merchandise.map((product: any, idx: number) => {
+        return (
+          <div key={idx}>
+            {indexCarousel === idx ? (
+              <Carousel.Item
+                key={indexCarousel}
+                className="mb-2"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "400px",
+                }}
+              >
+                <Carousel.Caption>
+                  <div key={indexCarousel}>
+                    <a href={product.salesUrl} target="_blank">
+                      <Image
+                        src={product?.imageUrl}
+                        style={{ height: "250px" }}
+                      />
+                    </a>
+                    <div>
                       <a href={product.salesUrl} target="_blank">
-                        <Image
-                          src={product?.imageUrl}
-                          style={{ height: "250px" }}
-                        />
+                        <title>{product?.productName}</title>
                       </a>
-                      <div>
-                        <a href={product.salesUrl} target="_blank">
-                          <title>{product?.productName}</title>
-                        </a>
-                        <p
+                      <p
+                        style={{
+                          textTransform: "capitalize",
+                          textAlign: "center",
+                        }}
+                      >
+                        {product?.amountOfColours} Colours /{" "}
+                        {product?.amountOfSizes} sizes
+                      </p>
+                      <a href={product.salesUrl} target="_blank">
+                        <Badge
+                          pill
+                          bg="primary"
                           style={{
                             textTransform: "capitalize",
                             textAlign: "center",
                           }}
                         >
-                          {product?.amountOfColours} Colours /{" "}
-                          {product?.amountOfSizes} sizes
-                        </p>
-                        <a href={product.salesUrl} target="_blank">
-                          <Badge
-                            pill
-                            bg="primary"
+                          <div style={{ fontSize: "2em" }}>
+                            {product?.price} GBP
+                          </div>
+                        </Badge>
+                      </a>
+                      <div className="mt-3">
+                        {isAdmin ? (
+                          <div
                             style={{
-                              textTransform: "capitalize",
-                              textAlign: "center",
+                              display: "flex",
+                              gap: "10px",
+                              width: "100%",
+                              justifyContent: "center",
                             }}
                           >
-                            <div style={{ fontSize: "2em" }}>
-                              {product?.price} GBP
-                            </div>
-                          </Badge>
-                        </a>
-                        <div className="mt-3">
-                          {isAdmin ? (
-                            <div
-                              style={{
-                                display: "flex",
-                                gap: "10px",
-                                width: "100%",
-                                justifyContent: "center",
+                            <Link to="/merchandise/add">
+                              <Button variant="outline-primary">
+                                Add Product
+                              </Button>
+                            </Link>
+                            <Link to={product.id + "/edit"}>
+                              <Button variant="outline-warning">Edit</Button>
+                            </Link>
+                            <Button
+                              variant="outline-danger"
+                              onClick={() => {
+                                removeProductFromFirebase(product?.id);
                               }}
                             >
-                              <Link to="/merchandise/add">
-                                <Button variant="outline-primary">
-                                  Add Product
-                                </Button>
-                              </Link>
-                              <Link to={product.id + "/edit"}>
-                                <Button variant="outline-warning">Edit</Button>
-                              </Link>
-                              <Button
-                                variant="outline-danger"
-                                onClick={() => {
-                                  removeProductFromFirebase(product?.id);
-                                }}
-                              >
-                                Remove This Product
-                              </Button>
-                            </div>
-                          ) : null}
-                        </div>
+                              Remove This Product
+                            </Button>
+                          </div>
+                        ) : null}
                       </div>
                     </div>
-                  </Carousel.Caption>
-                </Carousel.Item>
-              ) : null}
-            </div>
-          );
-        })}
-      </Carousel>
-    </Container>
+                  </div>
+                </Carousel.Caption>
+              </Carousel.Item>
+            ) : null}
+          </div>
+        );
+      })}
+    </Carousel>
   );
 }

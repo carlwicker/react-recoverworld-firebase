@@ -1,18 +1,16 @@
-import { Container } from "react-bootstrap";
-import FeaturedReleases from "../digital/FeaturedReleases";
+import FeaturedReleases from "../digital/featuredReleases/FeaturedReleases";
+import HomeCarousel from "../homeCarousel/HomeCarousel";
 import { useEffect } from "react";
 
 interface IHome {
-  setIsCaraselVisible: any;
   isAdmin: boolean;
 }
 
-export default function Home({ setIsCaraselVisible, isAdmin }: IHome) {
-  useEffect(() => setIsCaraselVisible(true), []);
-
+export default function Home({ isAdmin }: IHome) {
   return (
-    <Container>
+    <>
+      <HomeCarousel />
       <FeaturedReleases isAdmin={isAdmin} />
-    </Container>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import FeaturedReleases from "./FeaturedReleases";
+import FeaturedReleases from "./featuredReleases/FeaturedReleases";
 import DigitalSearchFilter from "./digitalLabelDropDown/DigitalLabelDropDown";
 import {
   collection,
@@ -16,11 +16,10 @@ import DigitalReleaseList from "./digitalReleaseList/DigitalReleaseList";
 import IRelease from "../../interfaces/IRelease";
 
 interface IDigital {
-  setIsCaraselVisible: any;
   isAdmin: boolean;
 }
 
-export default function Digital({ setIsCaraselVisible, isAdmin }: IDigital) {
+export default function Digital({ isAdmin }: IDigital) {
   const [releases, setReleases] = useState<IRelease[] | []>([]);
   const [labelFilteredResults, setLabelFilteredResults] = useState<
     IRelease[] | []
@@ -47,7 +46,6 @@ export default function Digital({ setIsCaraselVisible, isAdmin }: IDigital) {
     const q = await query(
       collection(db, "releases"),
       where("label", "==", selectedLabel),
-      limit(500),
       orderBy("releaseDate", "desc")
     );
 
@@ -59,11 +57,6 @@ export default function Digital({ setIsCaraselVisible, isAdmin }: IDigital) {
     setReleases(releaseArr);
     releaseArr = [];
   }
-
-  // Show Carousel
-  useEffect(() => {
-    setIsCaraselVisible(false);
-  }, []);
 
   // Initalise Release List
   useEffect(() => {
@@ -80,7 +73,7 @@ export default function Digital({ setIsCaraselVisible, isAdmin }: IDigital) {
   }
 
   return (
-    <Container>
+    <>
       {/* Header And Admin Controls */}
       <Row
         style={{
@@ -116,6 +109,6 @@ export default function Digital({ setIsCaraselVisible, isAdmin }: IDigital) {
       />
 
       <FeaturedReleases isAdmin={isAdmin} />
-    </Container>
+    </>
   );
 }

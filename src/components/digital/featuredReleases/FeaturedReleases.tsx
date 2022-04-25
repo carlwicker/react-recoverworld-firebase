@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { collection, query, getDocs, orderBy } from "firebase/firestore";
-import { db } from "../../firebase";
-import { Row } from "react-bootstrap";
+import { db } from "../../../firebase";
 import FeaturedItem from "./FeaturedItem";
-import IRelease from "../../interfaces/IRelease";
-import css from "./FeaturedReleases.module.css";
+import IRelease from "../../../interfaces/IRelease";
 
 interface IFeaturedReleases {
   isAdmin: boolean;
@@ -31,25 +29,16 @@ export default function FeaturedReleases({ isAdmin }: IFeaturedReleases) {
 
   return (
     <>
-      <Row style={{ textAlign: "left" }} className={css["featured-items-list"]}>
-        {featuredReleases?.map((release: any, index: number) => {
-          return (
-            <div
-              key={index}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <FeaturedItem
-                release={release}
-                getFeaturedReleases={getFeaturedReleases}
-                isAdmin={isAdmin}
-              />
-            </div>
-          );
-        })}
-      </Row>
+      {featuredReleases?.map((release: any, index: number) => {
+        return (
+          <FeaturedItem
+            key={index}
+            release={release}
+            getFeaturedReleases={getFeaturedReleases}
+            isAdmin={isAdmin}
+          />
+        );
+      })}
     </>
   );
 }

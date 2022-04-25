@@ -2,13 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Row, Form, Button, Col } from "react-bootstrap";
 
-interface IImport {
-  setIsCaraselVisible: any;
-}
+interface IImport {}
 
-export default function AmpsuiteXMLReleaseParser({
-  setIsCaraselVisible,
-}: IImport) {
+export default function AmpsuiteXMLReleaseParser({}: IImport) {
   const [jsonData, setJsonData] = useState<any>([]);
   const [ampsuiteId, setAmpsuiteId] = useState<string | undefined>();
   const [tracklisting, setTracklisting] = useState<any>([]);
@@ -23,10 +19,6 @@ export default function AmpsuiteXMLReleaseParser({
     ampsuiteId: 0,
   });
   const [linksObj, setLinksObj] = useState<any>({});
-
-  useEffect(() => {
-    setIsCaraselVisible(false);
-  }, []);
 
   // Get Ampsuite Release from Google Cloud Functions
   async function getData() {

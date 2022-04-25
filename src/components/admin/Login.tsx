@@ -1,17 +1,15 @@
-import { Container, Form, Button } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { Form, Button } from "react-bootstrap";
+import { useState } from "react";
 import { Auth } from "../../firebase";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 interface ILogin {
-  user: any;
   setUser: any;
-  isAdmin: any;
   setIsAdmin: any;
 }
 
-export default function Login({ user, setUser, isAdmin, setIsAdmin }: ILogin) {
+export default function Login({ setUser, setIsAdmin }: ILogin) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   let navigate = useNavigate();
@@ -25,20 +23,14 @@ export default function Login({ user, setUser, isAdmin, setIsAdmin }: ILogin) {
       .then(() => {
         setIsAdmin(true);
         navigate("../");
-        console.log(isAdmin);
       })
       .catch((err) => {
         console.log(err.message);
-        console.log(isAdmin);
       });
   }
 
-  useEffect(() => {
-    console.log(isAdmin, user);
-  }, [user, isAdmin]);
-
   return (
-    <Container>
+    <>
       <h2>Login</h2>
 
       <Form
@@ -47,7 +39,7 @@ export default function Login({ user, setUser, isAdmin, setIsAdmin }: ILogin) {
           login();
         }}
       >
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="loginEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
@@ -58,7 +50,7 @@ export default function Login({ user, setUser, isAdmin, setIsAdmin }: ILogin) {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="loginPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -73,6 +65,6 @@ export default function Login({ user, setUser, isAdmin, setIsAdmin }: ILogin) {
           Submit
         </Button>
       </Form>
-    </Container>
+    </>
   );
 }

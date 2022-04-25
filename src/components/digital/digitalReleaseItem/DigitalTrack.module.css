@@ -8,7 +8,7 @@
 .digital-track-icons {
   display: flex;
   gap: 10px;
-  justify-content: end;
+  justify-content: flex-end;
   align-self: center;
 }
 

@@ -14,9 +14,7 @@ import Merchandise from "./components/merchandise/Merchandise";
 import AmpsuiteXMLReleaseParser from "./components/utility/AmpsuiteXMLReleaseParser";
 import AddMerchandise from "./components/merchandise/AddProduct";
 import EditProduct from "./components/merchandise/EditProduct";
-import RadioBanner from "./components/carousel/Carousel";
-import Release from "./components/release/Release";
-
+import Release from "./components/digital/digitalRelease/DigitalRelease";
 import { ThemeProvider, Container } from "react-bootstrap";
 import { useState } from "react";
 import Label from "./components/label/Label";
@@ -24,7 +22,6 @@ import Admin from "./components/admin/Admin";
 import Login from "./components/admin/Login";
 
 function App() {
-  const [isCaraselVisible, setIsCaraselVisible] = useState<Boolean>(false);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [user, setUser] = useState<any>();
 
@@ -35,86 +32,33 @@ function App() {
       <Container>
         <div className="App">
           <NavBar isAdmin={isAdmin} />
-          {isCaraselVisible ? <RadioBanner /> : null}
           <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  setIsCaraselVisible={setIsCaraselVisible}
-                  isAdmin={isAdmin}
-                />
-              }
-            />
-            <Route
-              path="about"
-              element={<About setIsCaraselVisible={setIsCaraselVisible} />}
-            />
-            <Route
-              path="demos"
-              element={<Demos setIsCaraselVisible={setIsCaraselVisible} />}
-            />
-            <Route
-              path="contact"
-              element={<Contact setIsCaraselVisible={setIsCaraselVisible} />}
-            />
-            <Route
-              path="digital"
-              element={
-                <Digital
-                  setIsCaraselVisible={setIsCaraselVisible}
-                  isAdmin={isAdmin}
-                />
-              }
-            />
+            <Route path="/" element={<Home isAdmin={isAdmin} />} />
+            <Route path="about" element={<About />} />
+            <Route path="demos" element={<Demos />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="digital" element={<Digital isAdmin={isAdmin} />} />
             <Route
               path="merchandise"
-              element={
-                <Merchandise
-                  setIsCaraselVisible={setIsCaraselVisible}
-                  isAdmin={isAdmin}
-                />
-              }
+              element={<Merchandise isAdmin={isAdmin} />}
             />
             <Route path="digital/addRelease" element={<AddRelease />} />
             <Route path="digital/:releaseId/edit" element={<EditRelease />} />
             <Route path="merchandise/add" element={<AddMerchandise />} />
             <Route path="merchandise/:id/edit" element={<EditProduct />} />
-            <Route
-              path="digital/:catNum"
-              element={<Release setIsCaraselVisible={setIsCaraselVisible} />}
-            />
+            <Route path="digital/:catNum" element={<Release />} />
             <Route
               path="digital/label/:label"
-              element={
-                <Label
-                  setIsCaraselVisible={setIsCaraselVisible}
-                  isAdmin={isAdmin}
-                />
-              }
+              element={<Label isAdmin={isAdmin} />}
             />
-            <Route
-              path="/admin"
-              element={<Admin setIsCaraselVisible={setIsCaraselVisible} />}
-            />
+            <Route path="/admin" element={<Admin />} />
             <Route
               path="/admin/import"
-              element={
-                <AmpsuiteXMLReleaseParser
-                  setIsCaraselVisible={setIsCaraselVisible}
-                />
-              }
+              element={<AmpsuiteXMLReleaseParser />}
             />
             <Route
               path="/login"
-              element={
-                <Login
-                  user={user}
-                  setUser={setUser}
-                  isAdmin={isAdmin}
-                  setIsAdmin={setIsAdmin}
-                />
-              }
+              element={<Login setUser={setUser} setIsAdmin={setIsAdmin} />}
             />
           </Routes>
 
