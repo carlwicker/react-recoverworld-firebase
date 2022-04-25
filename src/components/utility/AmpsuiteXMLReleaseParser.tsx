@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Row, Form, Button } from "react-bootstrap";
+import { Container, Row, Form, Button, Col } from "react-bootstrap";
 
 interface IImport {
   setIsCaraselVisible: any;
@@ -29,18 +29,14 @@ export default function AmpsuiteXMLReleaseParser({
   }, []);
 
   // Get Ampsuite Release from Google Cloud Functions
-
-  useEffect(() => {
-    async function getData() {
-      await axios
-        .get(
-          `https://us-central1-recoverworld-d5ab4.cloudfunctions.net/app/importRelease/${ampsuiteId}`
-        )
-        .then((res) => setJsonData(res?.data))
-        .catch((err) => console.log(err));
-    }
-    ampsuiteId && getData();
-  }, [ampsuiteId]);
+  async function getData() {
+    await axios
+      .get(
+        `https://us-central1-recoverworld-d5ab4.cloudfunctions.net/app/importRelease/${ampsuiteId}`
+      )
+      .then((res) => setJsonData(res?.data))
+      .catch((err) => console.log(err));
+  }
 
   useEffect(() => {
     console.log(jsonData);
@@ -164,21 +160,31 @@ export default function AmpsuiteXMLReleaseParser({
   return (
     <>
       <Container style={{ textAlign: "left" }}>
-        <Row>
-          <h2>AmpSuite XML Release Parser</h2>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            console.log(ampsuiteId);
+            getData();
+          }}
+        >
+          <Row>
+            <h2>AmpSuite XML Release Parser</h2>
 
-          <div>
-            <Form.Control
-              style={{ margin: "20px 0" }}
-              type="number"
-              placeholder="Ampsuite Release ID"
-              maxLength={5}
-              onChange={(e: any) => {
-                setAmpsuiteId(e.target.value);
-              }}
-            />
-          </div>
-        </Row>
+            <Col>
+              <Form.Control
+                type="number"
+                placeholder="Ampsuite Release ID"
+                maxLength={5}
+                onChange={(e: any) => {
+                  setAmpsuiteId(e.target.value);
+                }}
+              />
+            </Col>
+            <Col>
+              <Button type="submit">Fetch Release</Button>
+            </Col>
+          </Row>
+        </Form>
 
         <Row style={{ padding: "20px 0" }}>
           {tracklisting[0] !== undefined ? (
