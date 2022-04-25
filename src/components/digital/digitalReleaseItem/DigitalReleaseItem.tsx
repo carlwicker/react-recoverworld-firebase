@@ -59,8 +59,6 @@ export default function DigitalReleaseItem({
               style={{
                 fontWeight: "200",
                 fontSize: "12px",
-                display: "flex",
-                gap: "10px",
               }}
               className="pt-2"
             >
@@ -74,7 +72,10 @@ export default function DigitalReleaseItem({
                 </Link>
               )}
 
-              {release.label}
+              {" | "}
+              <Link to={`../digital/label/${release.label}`}>
+                {release.label}
+              </Link>
             </div>
           </Card.Subtitle>
           <Card.Title

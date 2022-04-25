@@ -1,7 +1,7 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import FeaturedReleases from "./FeaturedReleases";
-import DigitalSearchFilter from "./DigitalSearchFilter";
+import DigitalSearchFilter from "./digitalLabelDropDown/DigitalLabelDropDown";
 import {
   collection,
   getDocs,
@@ -22,7 +22,6 @@ interface IDigital {
 
 export default function Digital({ setIsCaraselVisible, isAdmin }: IDigital) {
   const [releases, setReleases] = useState<IRelease[] | []>([]);
-  const [filteredReleases, setFilteredReleases] = useState<IRelease[] | []>([]);
   const [labelFilteredResults, setLabelFilteredResults] = useState<
     IRelease[] | []
   >([]);
@@ -43,7 +42,7 @@ export default function Digital({ setIsCaraselVisible, isAdmin }: IDigital) {
     getLabelsFromFirestore();
   }, []);
 
-  // Get All Releases from Firestore
+  // Get all releases from Firestore by selected record label.
   async function getReleases() {
     const q = await query(
       collection(db, "releases"),
@@ -81,7 +80,7 @@ export default function Digital({ setIsCaraselVisible, isAdmin }: IDigital) {
   }
 
   return (
-    <Container style={{ textAlign: "left" }}>
+    <Container>
       {/* Header And Admin Controls */}
       <Row
         style={{
@@ -103,13 +102,8 @@ export default function Digital({ setIsCaraselVisible, isAdmin }: IDigital) {
         )}
       </Row>
 
-      {/* Search And Filter */}
+      {/* SelectLabel */}
       <DigitalSearchFilter
-        releases={releases}
-        setFilteredReleases={setFilteredReleases}
-        filteredReleases={filteredReleases}
-        setLabelFilteredResults={setLabelFilteredResults}
-        selectedLabel={selectedLabel}
         setSelectedLabel={setSelectedLabel}
         labels={labels}
       />
