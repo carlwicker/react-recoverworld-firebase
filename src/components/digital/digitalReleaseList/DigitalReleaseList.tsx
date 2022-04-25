@@ -1,7 +1,6 @@
-import DigitalReleaseItem from "./digitalReleaseItem/DigitalReleaseItem";
+import DigitalReleaseItem from "../digitalReleaseItem/DigitalReleaseItem";
 
 interface IDigitalReleaseList {
-  releases: any;
   updateReleaseList: Function;
   labelFilteredResults: any;
   isAdmin: boolean;
@@ -16,13 +15,7 @@ export default function DigitalReleaseList({
     <>
       {labelFilteredResults?.map((release: any, index: number) => {
         return (
-          <div
-            key={index}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
+          <div key={index}>
             <DigitalReleaseItem
               release={release}
               updateReleaseList={updateReleaseList}

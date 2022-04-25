@@ -1,0 +1,45 @@
+.release-item {
+  padding: 50px 20px;
+  display: flex;
+  gap: 5px;
+  border-bottom: 1px dashed #555;
+}
+
+.release-image {
+  width: 160px;
+  margin-bottom: 10px;
+}
+
+.release-details {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: center;
+}
+
+.release-cat-group {
+  font-weight: 200;
+  font-size: 12px;
+  margin-bottom: 0;
+  padding-top: 0;
+}
+
+.release-title {
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.release-artist {
+  text-transform: capitalize;
+  font-weight: 800;
+}
+
+.release-tracklisting {
+  padding-top: 20px;
+}
+
+.admin-control-group {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}

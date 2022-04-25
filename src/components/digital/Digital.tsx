@@ -12,7 +12,7 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
-import DigitalReleaseList from "./DigitalReleaseList";
+import DigitalReleaseList from "./digitalReleaseList/DigitalReleaseList";
 import IRelease from "../../interfaces/IRelease";
 
 interface IDigital {
@@ -42,7 +42,7 @@ export default function Digital({ setIsCaraselVisible, isAdmin }: IDigital) {
     getLabelsFromFirestore();
   }, []);
 
-  // Get all releases from Firestore by selected record label.
+  // Get all releases from Firestore for selected record label.
   async function getReleases() {
     const q = await query(
       collection(db, "releases"),
@@ -110,7 +110,6 @@ export default function Digital({ setIsCaraselVisible, isAdmin }: IDigital) {
 
       {/* Release list */}
       <DigitalReleaseList
-        releases={releases}
         updateReleaseList={updateReleaseList}
         labelFilteredResults={labelFilteredResults}
         isAdmin={isAdmin}

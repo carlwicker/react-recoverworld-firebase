@@ -1,0 +1,38 @@
+.digital-track {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.digital-track-icons {
+  display: flex;
+  gap: 10px;
+  justify-content: end;
+  align-self: center;
+}
+
+.digital-track-number {
+  color: #555;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.icon {
+  color: white;
+  animation: fadeIn 0.5s;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: #1db954 !important;
+  transition: 0.5s;
+}
+
+.icon:visited,
+.icon:focus,
+.icon:active,
+a {
+  color: white !important;
+  transition: 0.5s;
+}

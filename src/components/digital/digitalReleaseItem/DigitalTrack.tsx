@@ -1,6 +1,6 @@
 import { BsSpotify, BsYoutube } from "react-icons/bs";
 import { SiBeatport, SiSoundcloud, SiItunes } from "react-icons/si";
-import css from "./social.module.css";
+import css from "./DigitalTrack.module.css";
 import ITrack from "../../../interfaces/ITrack";
 
 interface IDigitalTrack {
@@ -11,61 +11,38 @@ interface IDigitalTrack {
 export default function DigitalTrack({ track, index }: IDigitalTrack) {
   return (
     <>
-      <div
-        className="d-flex align-items-center"
-        style={{
-          width: "100%",
-          gap: "10px",
-        }}
-      >
-        <span style={{ color: "#555", fontSize: "20px", fontWeight: "800" }}>
-          {index + 1 + "  "}
-        </span>
-        <div
-          style={{
-            display: "flex",
-            gap: "10px",
-            justifyContent: "end",
-            alignSelf: "center",
-          }}
-        >
-          {track.youtube !== "" ? (
+      <div className={css["digital-track"]}>
+        <div className={css["digital-track-number"]}>{index + 1 + "  "}</div>
+
+        <div className={css["digital-track-icons"]} style={{}}>
+          {track.youtube !== "" && (
             <a href={track.youtube} target="blank">
-              <BsYoutube style={{ fontSize: "20px" }} className={css.social} />
+              <BsYoutube style={{ fontSize: "20px" }} className={css.icon} />
             </a>
-          ) : (
-            ""
           )}
-          {track.spotify !== "" ? (
+
+          {track.spotify !== "" && (
             <a href={track.spotify} target="blank">
-              <BsSpotify style={{ fontSize: "20px" }} className={css.social} />
+              <BsSpotify style={{ fontSize: "20px" }} className={css.icon} />
             </a>
-          ) : (
-            ""
           )}
-          {track.soundcloud !== "" ? (
+
+          {track.soundcloud !== "" && (
             <a href={track.soundcloud} target="blank">
-              <SiSoundcloud
-                style={{ fontSize: "20px" }}
-                className={css.social}
-              />
+              <SiSoundcloud style={{ fontSize: "20px" }} className={css.icon} />
             </a>
-          ) : (
-            ""
           )}
-          {track.beatport !== "" ? (
+
+          {track.beatport !== "" && (
             <a href={track.beatport} target="blank">
-              <SiBeatport style={{ fontSize: "20px" }} className={css.social} />
+              <SiBeatport style={{ fontSize: "20px" }} className={css.icon} />
             </a>
-          ) : (
-            ""
           )}
-          {track.itunes !== "" ? (
+
+          {track.itunes !== "" && (
             <a href={track.itunes} target="blank">
-              <SiItunes style={{ fontSize: "20px" }} className={css.social} />
+              <SiItunes style={{ fontSize: "20px" }} className={css.icon} />
             </a>
-          ) : (
-            ""
           )}
         </div>
 
