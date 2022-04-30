@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Row, Form, Button, Col } from "react-bootstrap";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 
-interface IImport {}
-
-export default function AmpsuiteXMLReleaseParser({}: IImport) {
+export default function AmpsuiteXMLReleaseParser() {
   const [jsonData, setJsonData] = useState<any>([]);
   const [ampsuiteId, setAmpsuiteId] = useState<string | undefined>();
   const [tracklisting, setTracklisting] = useState<any>([]);
@@ -14,11 +15,12 @@ export default function AmpsuiteXMLReleaseParser({}: IImport) {
     label: "",
     artwork: "",
     catNum: "",
-    tracklisting: [],
+    trackListing: [],
     releaseDate: 0,
     ampsuiteId: 0,
   });
   const [linksObj, setLinksObj] = useState<any>({});
+  const navigate = useNavigate();
 
   // Get Ampsuite Release from Google Cloud Functions
   async function getData() {
@@ -30,9 +32,16 @@ export default function AmpsuiteXMLReleaseParser({}: IImport) {
       .catch((err) => console.log(err));
   }
 
-  useEffect(() => {
-    console.log(jsonData);
-  }, [jsonData]);
+  // useEffect(() => {
+  //   console.log(jsonData);
+  //   console.log(linksObj);
+  // }, [linksObj]);
+
+  // Write converted Release to Firebase
+  async function sendToFirebase() {
+    const docRef = await addDoc(collection(db, "releases"), firebaseReleaseObj);
+    console.log("Document written with ID: ", docRef.id);
+  }
 
   useEffect(() => {
     // Build Firebase Retailer Array
@@ -48,7 +57,7 @@ export default function AmpsuiteXMLReleaseParser({}: IImport) {
     // Handle array of links
     if (Array.isArray(jsonData?.retailer_links?.retailer_link)) {
       jsonData?.retailer_links?.retailer_link?.forEach((link: any) => {
-        if (link?.link_url?.includes("beatport")) {
+        if (link.link_url?.includes("beatport")) {
           linkTempObj.beatport = link.link_url;
         } else if (link.link_url.includes("spotify")) {
           linkTempObj.spotify = link.link_url;
@@ -63,6 +72,7 @@ export default function AmpsuiteXMLReleaseParser({}: IImport) {
         }
       });
       setLinksObj(linkTempObj);
+
       // Handle One link
     } else if (!Array.isArray(jsonData?.retailer_links?.retailer_link)) {
       let link = jsonData?.retailer_links?.retailer_link?.link_url;
@@ -81,7 +91,7 @@ export default function AmpsuiteXMLReleaseParser({}: IImport) {
       }
       setLinksObj(linkTempObj);
     }
-  }, [ampsuiteId]);
+  }, [jsonData]);
 
   useEffect(() => {
     // Put single tracklist Object in Array
@@ -115,7 +125,7 @@ export default function AmpsuiteXMLReleaseParser({}: IImport) {
       label: jsonData?.label,
       artwork: jsonData?.covers?.cover[1],
       catNum: jsonData?.cat_no,
-      tracklisting: [],
+      trackListing: [],
       releaseDate: getFormattedData(),
       ampsuiteId: jsonData.id,
     });
@@ -123,30 +133,32 @@ export default function AmpsuiteXMLReleaseParser({}: IImport) {
 
   useEffect(() => {
     // Build Firestore Tracklisting
+
     let trackArr: any = [];
     tracklisting?.forEach((track: any) => {
       trackArr.push({
         artist: track?.artist,
         title: track?.title,
         mix: track?.mix_name,
-        beatport: linksObj.beatport,
-        spotify: linksObj.spotify,
-        soundcloud: linksObj.soundcloud,
-        youtube: linksObj.youtube,
-        recoverworld: linksObj.recoverworld,
-        itunes: linksObj.itunes,
+        beatport: linksObj?.beatport,
+        spotify: linksObj?.spotify,
+        soundcloud: linksObj?.soundcloud,
+        youtube: linksObj?.youtube,
+        recoverworld: linksObj?.recoverworld,
+        itunes: linksObj?.itunes,
       });
 
       // Build Final Firebase Release inc. Links & Tracklisting
       setFirebaseReleaseObj({
         ...firebaseReleaseObj,
-        tracklisting: trackArr,
+        trackListing: trackArr,
       });
     });
   }, [tracklisting]);
 
   useEffect(() => {
     // console.log(firebaseReleaseObj);
+    // console.log(tracklisting);
   }, [firebaseReleaseObj]);
 
   return (
@@ -207,17 +219,24 @@ export default function AmpsuiteXMLReleaseParser({}: IImport) {
             );
           })}
         </Row>
-        <Row>
-          <div style={{ marginBottom: "50px" }}>
-            <Button
-              variant={tracklisting[0] !== undefined ? "primary" : "danger"}
-              disabled={tracklisting[0] === undefined}
-              type="submit"
-            >
-              Import Release
-            </Button>
-          </div>
-        </Row>
+        <Form
+          onSubmit={(e) => {
+            sendToFirebase();
+            navigate("../");
+          }}
+        >
+          <Row>
+            <div style={{ marginBottom: "50px" }}>
+              <Button
+                variant={tracklisting[0] !== undefined ? "primary" : "danger"}
+                disabled={tracklisting[0] === undefined}
+                type="submit"
+              >
+                Import Release
+              </Button>
+            </div>
+          </Row>
+        </Form>
       </Container>
     </>
   );

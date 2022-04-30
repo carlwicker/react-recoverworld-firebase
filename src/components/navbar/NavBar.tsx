@@ -1,4 +1,4 @@
-import { Container, Navbar, Nav, NavLink } from "react-bootstrap";
+import { NavDropdown, Navbar, Nav, NavLink } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import css from "./NavBar.module.css";
 
@@ -9,7 +9,7 @@ interface INavBar {
 export default function NavBar({ isAdmin }: INavBar) {
   return (
     <Navbar
-      expand="md"
+      expand="lg"
       variant="dark"
       collapseOnSelect
       className={css["no-transition"]}
@@ -47,6 +47,15 @@ export default function NavBar({ isAdmin }: INavBar) {
           <Nav.Link as={Link} to="/about" eventKey="1">
             About
           </Nav.Link>
+
+          {/* <NavDropdown title="Digital" id="navbarScrollingDropdown">
+            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+            <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action5">
+              Something else here
+            </NavDropdown.Item>
+          </NavDropdown> */}
 
           <NavLink as={Link} to="/digital" eventKey="2">
             Digital Hub

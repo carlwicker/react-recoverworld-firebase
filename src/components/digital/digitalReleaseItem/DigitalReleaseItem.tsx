@@ -66,7 +66,7 @@ export default function DigitalReleaseItem({
 
         {/* Track Listing */}
         <div className={css["release-tracklisting"]}>
-          {release.trackListing.map((track: ITrack, index: number) => {
+          {release?.trackListing?.map((track: ITrack, index: number) => {
             return <DigitalTrack track={track} key={index} index={index} />;
           })}
         </div>
