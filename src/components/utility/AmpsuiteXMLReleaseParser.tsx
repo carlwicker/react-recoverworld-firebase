@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Row, Form, Button, Col } from "react-bootstrap";
+import { Row, Form, Button, Col } from "react-bootstrap";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
@@ -163,81 +163,75 @@ export default function AmpsuiteXMLReleaseParser() {
 
   return (
     <>
-      <Container style={{ textAlign: "left" }}>
-        <Form
-          onSubmit={(e) => {
-            e.preventDefault();
-            console.log(ampsuiteId);
-            getData();
-          }}
-        >
-          <Row>
-            <h2>AmpSuite XML Release Parser</h2>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(ampsuiteId);
+          getData();
+        }}
+      >
+        <Row>
+          <h2>AmpSuite XML Release Parser</h2>
 
-            <Col>
-              <Form.Control
-                type="number"
-                placeholder="Ampsuite Release ID"
-                maxLength={5}
-                onChange={(e: any) => {
-                  setAmpsuiteId(e.target.value);
-                }}
-              />
-            </Col>
-            <Col>
-              <Button type="submit">Fetch Release</Button>
-            </Col>
-          </Row>
-        </Form>
-
-        <Row style={{ padding: "20px 0" }}>
-          {tracklisting[0] !== undefined ? (
-            <>
-              <div>Cat Number: {jsonData?.cat_no}</div>
-              <div>Artist: {jsonData?.artists?.artist}</div>
-              <div>Title: {jsonData?.title}</div>
-              <div>Label: {jsonData?.label}</div>
-              <div>Release Date: {jsonData?.release_date}</div>
-              <h3 style={{ marginTop: "20px" }}>Tracklisting:</h3>{" "}
-            </>
-          ) : (
-            ""
-          )}
-
-          {tracklisting?.map((track: any, index: number) => {
-            return (
-              <div key={index}>
-                {track !== undefined ? (
-                  <div>
-                    {index + 1}: {track?.title} - {track?.artist} (
-                    {track?.mix_name})
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
-            );
-          })}
+          <Col>
+            <Form.Control
+              type="number"
+              placeholder="Ampsuite Release ID"
+              maxLength={5}
+              onChange={(e: any) => {
+                setAmpsuiteId(e.target.value);
+              }}
+            />
+          </Col>
+          <Col>
+            <Button type="submit">Fetch Release</Button>
+          </Col>
         </Row>
-        <Form
-          onSubmit={(e) => {
-            sendToFirebase();
-            navigate("../");
-          }}
-        >
-          <Row>
-            <div style={{ marginBottom: "50px" }}>
-              <Button
-                variant={tracklisting[0] !== undefined ? "primary" : "danger"}
-                disabled={tracklisting[0] === undefined}
-                type="submit"
-              >
-                Import Release
-              </Button>
+      </Form>
+
+      <Row style={{ padding: "20px 0" }}>
+        {tracklisting[0] !== undefined && (
+          <>
+            <div>Cat Number: {jsonData?.cat_no}</div>
+            <div>Artist: {jsonData?.artists?.artist}</div>
+            <div>Title: {jsonData?.title}</div>
+            <div>Label: {jsonData?.label}</div>
+            <div>Release Date: {jsonData?.release_date}</div>
+            <h3 style={{ marginTop: "20px" }}>Tracklisting:</h3>{" "}
+          </>
+        )}
+
+        {tracklisting?.map((track: any, index: number) => {
+          return (
+            <div key={index}>
+              {track !== undefined && (
+                <div>
+                  {index + 1}: {track?.title} - {track?.artist} (
+                  {track?.mix_name})
+                </div>
+              )}
             </div>
-          </Row>
-        </Form>
-      </Container>
+          );
+        })}
+      </Row>
+      <Form
+        onSubmit={(e) => {
+          sendToFirebase();
+          navigate("../");
+        }}
+      >
+        <Row>
+          <div style={{ marginBottom: "50px" }}>
+            <Button
+              variant={tracklisting[0] !== undefined ? "primary" : "danger"}
+              disabled={tracklisting[0] === undefined}
+              type="submit"
+            >
+              Import Release
+            </Button>
+          </div>
+        </Row>
+      </Form>
     </>
   );
 }

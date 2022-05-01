@@ -40,9 +40,18 @@ export default function DigitalReleaseItem({
             </Link>
           )}
 
+          {window.location.pathname.includes("new") && (
+            <Link
+              to={`../digital/${release?.catNum}`}
+              className={css["release-cat"]}
+            >
+              {release.catNum}
+            </Link>
+          )}
+
           {window.location.pathname === "/" && (
             <Link
-              to={`./digital/${release?.catNum}`}
+              to={`../digital/${release?.catNum}`}
               className={css["release-cat"]}
             >
               {release.catNum}

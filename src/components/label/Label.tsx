@@ -53,10 +53,6 @@ export default function Label({ isAdmin }: ILabel) {
     setFilteredResults(filteredArr);
   }, [search]);
 
-  useEffect(() => {
-    // console.log(filteredResults);
-  }, [filteredResults]);
-
   return (
     <>
       <h2>{label}</h2>

@@ -53,7 +53,7 @@ export default function NavBar({ isAdmin, labels }: INavBar) {
 
           <NavDropdown title="Digital" id="navbarScrollingDropdown">
             <NavDropdown.Item
-              href="#action5"
+              onClick={(e) => navigate("/digital/new")}
               style={{ textTransform: "capitalize" }}
             >
               New Releases
@@ -63,9 +63,7 @@ export default function NavBar({ isAdmin, labels }: INavBar) {
               return (
                 <NavDropdown.Item
                   key={index}
-                  onClick={(e) => {
-                    navigate(`/digital/label/${label}`);
-                  }}
+                  onClick={(e) => navigate(`/digital/label/${label}`)}
                   style={{ textTransform: "capitalize" }}
                 >
                   {label}

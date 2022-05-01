@@ -29,6 +29,7 @@ export default function FeaturedReleases({ isAdmin }: IFeaturedReleases) {
 
   return (
     <>
+      <h2>New Releases</h2>
       {featuredReleases?.map((release: any, index: number) => {
         return (
           <FeaturedItem
