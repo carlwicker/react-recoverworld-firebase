@@ -54,7 +54,7 @@ export default function Label({ isAdmin }: ILabel) {
   }, [search]);
 
   useEffect(() => {
-    console.log(filteredResults);
+    // console.log(filteredResults);
   }, [filteredResults]);
 
   return (
