@@ -16,14 +16,32 @@ import AddMerchandise from "./components/merchandise/AddProduct";
 import EditProduct from "./components/merchandise/EditProduct";
 import Release from "./components/digital/digitalRelease/DigitalRelease";
 import { ThemeProvider, Container } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Label from "./components/label/Label";
 import Admin from "./components/admin/Admin";
 import Login from "./components/admin/Login";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "./firebase";
 
 function App() {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [user, setUser] = useState<any>();
+  const [labels, setLabels] = useState<any>([]);
+
+  // Get Labels from Firestore
+  async function getLabelsFromFirestore() {
+    let labelsArr: any = ["Select A Label..."];
+    const querySnapshot = await getDocs(collection(db, "labels"));
+    querySnapshot.forEach((doc) => {
+      labelsArr.push(doc.data().labelName);
+    });
+    setLabels(labelsArr);
+  }
+
+  useEffect(() => {
+    getLabelsFromFirestore();
+    // console.log(labels);
+  }, []);
 
   return (
     <ThemeProvider
@@ -37,7 +55,10 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="demos" element={<Demos />} />
             <Route path="contact" element={<Contact />} />
-            <Route path="digital" element={<Digital isAdmin={isAdmin} />} />
+            <Route
+              path="digital"
+              element={<Digital isAdmin={isAdmin} labels={labels} setLabels />}
+            />
             <Route
               path="merchandise"
               element={<Merchandise isAdmin={isAdmin} />}

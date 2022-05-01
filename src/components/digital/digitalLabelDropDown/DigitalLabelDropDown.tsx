@@ -5,7 +5,7 @@ interface IDigitalSearchFilter {
   labels: any;
 }
 
-export default function DigitalSearchFilter({
+export default function DigitalLabelDropDown({
   setSelectedLabel,
   labels,
 }: IDigitalSearchFilter) {
@@ -17,7 +17,7 @@ export default function DigitalSearchFilter({
             setSelectedLabel(e.target.value);
           }}
         >
-          {labels.map((label: string, index: number) => {
+          {labels?.map((label: string, index: number) => {
             return (
               <option key={index} value={label}>
                 {label}

@@ -1,15 +1,8 @@
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import FeaturedReleases from "./featuredReleases/FeaturedReleases";
-import DigitalSearchFilter from "./digitalLabelDropDown/DigitalLabelDropDown";
-import {
-  collection,
-  getDocs,
-  orderBy,
-  query,
-  limit,
-  where,
-} from "firebase/firestore";
+import DigitalLabelDropDown from "./digitalLabelDropDown/DigitalLabelDropDown";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import DigitalReleaseList from "./digitalReleaseList/DigitalReleaseList";
@@ -17,29 +10,16 @@ import IRelease from "../../interfaces/IRelease";
 
 interface IDigital {
   isAdmin: boolean;
+  labels: any;
+  setLabels: any;
 }
 
-export default function Digital({ isAdmin }: IDigital) {
+export default function Digital({ isAdmin, labels, setLabels }: IDigital) {
   const [releases, setReleases] = useState<IRelease[] | []>([]);
   const [labelFilteredResults, setLabelFilteredResults] = useState<
     IRelease[] | []
   >([]);
   const [selectedLabel, setSelectedLabel] = useState<string>("");
-  const [labels, setLabels] = useState<any>([]);
-
-  // Get Labels from Firestore
-  async function getLabelsFromFirestore() {
-    let labelsArr: any = ["Select A Label..."];
-    const querySnapshot = await getDocs(collection(db, "labels"));
-    querySnapshot.forEach((doc) => {
-      labelsArr.push(doc.data().labelName);
-    });
-    setLabels(labelsArr);
-  }
-
-  useEffect(() => {
-    getLabelsFromFirestore();
-  }, []);
 
   // Get all releases from Firestore for selected record label.
   async function getReleases() {
@@ -96,7 +76,7 @@ export default function Digital({ isAdmin }: IDigital) {
       </Row>
 
       {/* SelectLabel */}
-      <DigitalSearchFilter
+      <DigitalLabelDropDown
         setSelectedLabel={setSelectedLabel}
         labels={labels}
       />
