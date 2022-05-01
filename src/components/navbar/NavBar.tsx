@@ -1,12 +1,15 @@
 import { NavDropdown, Navbar, Nav, NavLink } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import css from "./NavBar.module.css";
 
 interface INavBar {
   isAdmin: boolean;
+  labels: string[];
 }
 
-export default function NavBar({ isAdmin }: INavBar) {
+export default function NavBar({ isAdmin, labels }: INavBar) {
+  const navigate = useNavigate();
+
   return (
     <Navbar
       expand="lg"
@@ -48,18 +51,32 @@ export default function NavBar({ isAdmin }: INavBar) {
             About
           </Nav.Link>
 
-          {/* <NavDropdown title="Digital" id="navbarScrollingDropdown">
-            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action5">
-              Something else here
+          <NavDropdown title="Digital" id="navbarScrollingDropdown">
+            <NavDropdown.Item
+              href="#action5"
+              style={{ textTransform: "capitalize" }}
+            >
+              New Releases
             </NavDropdown.Item>
-          </NavDropdown> */}
+            <NavDropdown.Divider />
+            {labels?.map((label, index) => {
+              return (
+                <NavDropdown.Item
+                  key={index}
+                  onClick={(e) => {
+                    navigate(`/digital/label/${label}`);
+                  }}
+                  style={{ textTransform: "capitalize" }}
+                >
+                  {label}
+                </NavDropdown.Item>
+              );
+            })}
+          </NavDropdown>
 
-          <NavLink as={Link} to="/digital" eventKey="2">
+          {/* <NavLink as={Link} to="/digital" eventKey="2">
             Digital Hub
-          </NavLink>
+          </NavLink> */}
 
           <NavLink as={Link} to="/merchandise" eventKey="3">
             Merchandise

@@ -38,7 +38,7 @@ export default function Label({ isAdmin }: ILabel) {
 
   useEffect(() => {
     getReleasesForLabel();
-  }, []);
+  }, [label]);
 
   useEffect(() => {
     let filteredArr: any = [];

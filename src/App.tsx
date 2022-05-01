@@ -20,18 +20,21 @@ import { useState, useEffect } from "react";
 import Label from "./components/label/Label";
 import Admin from "./components/admin/Admin";
 import Login from "./components/admin/Login";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "./firebase";
 
 function App() {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [user, setUser] = useState<any>();
-  const [labels, setLabels] = useState<any>([]);
+  const [labels, setLabels] = useState<string[]>([]);
 
   // Get Labels from Firestore
   async function getLabelsFromFirestore() {
-    let labelsArr: any = ["Select A Label..."];
-    const querySnapshot = await getDocs(collection(db, "labels"));
+    let labelsArr: string[] = [];
+    const labelsRef = await collection(db, "labels");
+    const q = query(labelsRef, orderBy("labelName"));
+
+    const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       labelsArr.push(doc.data().labelName);
     });
@@ -40,8 +43,11 @@ function App() {
 
   useEffect(() => {
     getLabelsFromFirestore();
-    // console.log(labels);
   }, []);
+
+  useEffect(() => {
+    console.log(labels);
+  }, [labels]);
 
   return (
     <ThemeProvider
@@ -49,7 +55,7 @@ function App() {
     >
       <Container>
         <div className="App">
-          <NavBar isAdmin={isAdmin} />
+          <NavBar isAdmin={isAdmin} labels={labels} />
           <Routes>
             <Route path="/" element={<Home isAdmin={isAdmin} />} />
             <Route path="about" element={<About />} />
