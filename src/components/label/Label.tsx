@@ -28,7 +28,7 @@ export default function Label({ isAdmin }: ILabel) {
       orderBy("releaseDate", "desc")
     );
 
-    let releaseArr: any = [];
+    let releaseArr: IRelease[] = [];
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc: any) => {
       releaseArr.push({ id: doc.id, ...doc.data() });
@@ -43,14 +43,10 @@ export default function Label({ isAdmin }: ILabel) {
   useEffect(() => {
     let filteredArr: any = [];
     function filterReleases() {
-      console.log(releases);
       releases?.forEach((release: IRelease) => {
-        if (
-          release?.artist?.toLowerCase().includes(search) ||
-          release?.title?.toLowerCase().includes(search)
-        ) {
-          filteredArr.push(release);
-        }
+        release?.artist?.toLowerCase().includes(search) ||
+          (release?.title?.toLowerCase().includes(search) &&
+            filteredArr.push(release));
       });
     }
     filterReleases();
@@ -68,26 +64,19 @@ export default function Label({ isAdmin }: ILabel) {
       <Form
         onSubmit={(e: any) => {
           e.preventDefault();
-          console.log(e.target[0].value.toLowerCase());
           setSearch(e.target[0].value.toLowerCase());
         }}
       >
         <Form.Group controlId="releaseSearch">
           <div style={{ display: "flex", gap: "10px" }}>
-            <div style={{ width: "100%" }}>
-              <Form.Control
-                type="text"
-                placeholder="Search..."
-                onChange={(e: any) => {
-                  if (e.target.value === "") {
-                    setSearch("");
-                  }
-                }}
-              />
-            </div>
-            <div>
-              <Button type="submit">Search</Button>
-            </div>
+            <Form.Control
+              type="text"
+              placeholder="Search..."
+              onChange={(e: any) => {
+                e.target.value === "" && setSearch("");
+              }}
+            />
+            <Button type="submit">Search</Button>
           </div>
           <Form.Text className="text-muted">
             Search Release Artist, Release Name.
@@ -97,21 +86,14 @@ export default function Label({ isAdmin }: ILabel) {
 
       {search !== "" && (
         <>
-          {filteredResults?.map((release: any, index: number) => {
+          {filteredResults?.map((release: IRelease, index: number) => {
             return (
-              <div
+              <DigitalReleaseItem
                 key={index}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <DigitalReleaseItem
-                  release={release}
-                  updateReleaseList={updateReleaseList}
-                  isAdmin={isAdmin}
-                />
-              </div>
+                release={release}
+                updateReleaseList={updateReleaseList}
+                isAdmin={isAdmin}
+              />
             );
           })}
         </>
@@ -119,21 +101,14 @@ export default function Label({ isAdmin }: ILabel) {
 
       {search === "" && (
         <>
-          {releases?.map((release: any, index: number) => {
+          {releases?.map((release: IRelease, index: number) => {
             return (
-              <div
+              <DigitalReleaseItem
                 key={index}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <DigitalReleaseItem
-                  release={release}
-                  updateReleaseList={updateReleaseList}
-                  isAdmin={isAdmin}
-                />
-              </div>
+                release={release}
+                updateReleaseList={updateReleaseList}
+                isAdmin={isAdmin}
+              />
             );
           })}
         </>

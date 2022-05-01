@@ -1,5 +1,5 @@
 import { Modal, Button, Form } from "react-bootstrap";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useEffect, useState } from "react";
 
