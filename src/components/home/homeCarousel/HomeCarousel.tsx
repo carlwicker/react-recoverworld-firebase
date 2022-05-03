@@ -1,4 +1,4 @@
-import { Container, Carousel, Button } from "react-bootstrap";
+import { Carousel, Button } from "react-bootstrap";
 import { FaSoundcloud } from "react-icons/fa";
 import css from "./HomeCarousel.module.css";
 

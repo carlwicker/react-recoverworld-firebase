@@ -65,6 +65,7 @@ export default function NavBar({ isAdmin, labels }: INavBar) {
                   key={index}
                   onClick={(e) => navigate(`/digital/label/${label}`)}
                   style={{ textTransform: "capitalize" }}
+                  eventKey={5 + index}
                 >
                   {label}
                 </NavDropdown.Item>
@@ -72,24 +73,20 @@ export default function NavBar({ isAdmin, labels }: INavBar) {
             })}
           </NavDropdown>
 
-          {/* <NavLink as={Link} to="/digital" eventKey="2">
-            Digital Hub
-          </NavLink> */}
-
-          <NavLink as={Link} to="/merchandise" eventKey="3">
+          <NavLink as={Link} to="/merchandise" eventKey="2">
             Merchandise
           </NavLink>
 
-          <Nav.Link as={Link} to="/demos" eventKey="4">
+          <Nav.Link as={Link} to="/demos" eventKey="3">
             Demos
           </Nav.Link>
 
-          <Nav.Link as={Link} to="/contact" eventKey="5">
+          <Nav.Link as={Link} to="/contact" eventKey="4">
             Contact
           </Nav.Link>
 
           {isAdmin ? (
-            <Nav.Link as={Link} to="/admin" eventKey="6">
+            <Nav.Link as={Link} to="/admin" eventKey="5">
               Admin
             </Nav.Link>
           ) : null}
