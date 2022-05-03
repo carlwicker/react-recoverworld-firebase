@@ -39,7 +39,7 @@ app.get("/importAll", (req: any, res: any, next: any) => {
   async function getReleaseXML() {
     let jObj: any;
     let url =
-      "https://recoverworld.ampsuite.com/xml/releases?cid=10&s_date=1900-00-00&e_date=2999-01-01&order=release_date&dir=desc";
+      "https://recoverworld.ampsuite.com/xml/releases?cid=10&s_date=1900-00-00&e_date=2999-01-01&order=release_date&dir=desc&limit=2000";
 
     await axios
       .get(url)

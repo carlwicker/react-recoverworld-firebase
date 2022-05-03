@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { addDoc, collection, limit } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "./firebase";
 
 export default function Test() {
-  const data = require("./json/recoverworld.json");
+  const data = require("./json/importAll.json");
 
   async function addToFirebase(releaseObj: any) {
     const docRef = await addDoc(collection(db, "releases"), releaseObj);
@@ -26,7 +26,7 @@ export default function Test() {
       ampsuiteId: null,
     };
 
-    const releasesArr = data.releases.release;
+    const releasesArr = data;
 
     releasesArr.forEach((release: any, index: number) => {
       console.log(release);
@@ -44,7 +44,7 @@ export default function Test() {
 
       if (Array.isArray(retailerLinks)) {
         retailerLinks.forEach((link: any) => {
-          let url: string = link.link_url["#cdata-section"].slice(1, -1);
+          let url: string = link.link_url;
 
           if (url.includes("beatport")) {
             linksObj.beatport = url;
@@ -72,13 +72,10 @@ export default function Test() {
       );
 
       // Set Release Details
-      releaseObj.artist = release.artists.artist["#cdata-section"].slice(1, -1);
-      releaseObj.title = release.title["#cdata-section"].slice(1, -1);
-      releaseObj.label = release.label["#cdata-section"].slice(1, -1);
-      releaseObj.artwork = release.covers.cover[1]["#cdata-section"].slice(
-        1,
-        -1
-      );
+      releaseObj.artist = release.artists.artist;
+      releaseObj.title = release.title;
+      releaseObj.label = release.label;
+      releaseObj.artwork = release.covers.cover[1];
       releaseObj.catNum = release.cat_no;
       releaseObj.releaseDate = firebaseDateFormatted.getTime();
       releaseObj.ampsuiteId = release.id;
@@ -90,10 +87,10 @@ export default function Test() {
         let formattedTrackArr: any = [];
         tracks.forEach((track: any) => {
           let trackObj = {
-            artist: track.artist["#cdata-section"].slice(1, -1),
-            title: track.title["#cdata-section"].slice(1, -1),
-            mix: track.mix_name["#cdata-section"].slice(1, -1),
-            beatport: release.digital_link["#cdata-section"].slice(1, -1),
+            artist: track.artist,
+            title: track.title,
+            mix: track.mix_name,
+            beatport: release.digital_link,
             spotify: linksObj.spotify,
             soundcloud: linksObj.soundcloud,
             youtube: linksObj.youtube,
@@ -111,10 +108,10 @@ export default function Test() {
         let formattedTrackArr: any = [];
 
         let trackObj = {
-          artist: track.artist["#cdata-section"].slice(1, -1),
-          title: track.title["#cdata-section"].slice(1, -1),
-          mix: track.mix_name["#cdata-section"].slice(1, -1),
-          beatport: release.digital_link["#cdata-section"].slice(1, -1),
+          artist: track.artist,
+          title: track.title,
+          mix: track.mix_name,
+          beatport: release.digital_link,
           spotify: linksObj.spotify,
           soundcloud: linksObj.soundcloud,
           youtube: linksObj.youtube,

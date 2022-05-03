@@ -22,6 +22,8 @@ export default function AmpsuiteXMLReleaseParser() {
   const [linksObj, setLinksObj] = useState<any>({});
   const navigate = useNavigate();
 
+  var importedReleases = require("../../json/importAll.json");
+
   // Get Ampsuite Release from Google Cloud Functions
   async function getData() {
     await axios
@@ -32,15 +34,19 @@ export default function AmpsuiteXMLReleaseParser() {
       .catch((err) => console.log(err));
   }
 
-  // useEffect(() => {
-  //   console.log(jsonData);
-  //   console.log(linksObj);
-  // }, [linksObj]);
+  useEffect(() => {
+    // console.log(jsonData);
+    // console.log(linksObj);
+  }, [linksObj]);
 
   // useEffect(() => {
   // console.log(firebaseReleaseObj);
   // console.log(tracklisting);
   // }, [firebaseReleaseObj]);
+
+  useEffect(() => {
+    console.log(importedReleases);
+  }, [importedReleases]);
 
   // Write converted Release to Firebase
   async function sendToFirebase() {
@@ -162,7 +168,21 @@ export default function AmpsuiteXMLReleaseParser() {
   }, [tracklisting]);
 
   // Import ALL Releases
-  const [releaseIds, setReleaseIds] = useState<any[]>([]);
+
+  // Import works by using google cloud function endpoint to
+  // create a JSON file.  Due to the size of this file it's best saved
+  // and then imported to here via a require for further processing below.
+
+  function processReleases() {
+    importedReleases.forEach((release: any) => {
+      setJsonData(release);
+
+      setTimeout(() => {}, 5000);
+
+      console.log(firebaseReleaseObj);
+      // sendToFirebase();
+    });
+  }
 
   return (
     <>
@@ -186,8 +206,16 @@ export default function AmpsuiteXMLReleaseParser() {
               }}
             />
           </Col>
-          <Col>
+          <Col style={{ display: "flex", gap: "10px" }}>
             <Button type="submit">Fetch Release</Button>
+            <Button
+              onClick={(e) => {
+                processReleases();
+              }}
+              variant="danger"
+            >
+              Mass Import
+            </Button>
           </Col>
         </Row>
       </Form>

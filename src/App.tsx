@@ -23,6 +23,7 @@ import Login from "./components/admin/Login";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "./firebase";
 import FeaturedReleases from "./components/digital/featuredReleases/FeaturedReleases";
+import Test from "./AmpsuiteImporter";
 
 function App() {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
@@ -86,6 +87,8 @@ function App() {
                 path="/login"
                 element={<Login setUser={setUser} setIsAdmin={setIsAdmin} />}
               />
+
+              <Route path="/admin/massImport" element={<Test />} />
             </Routes>
 
             <Social />
