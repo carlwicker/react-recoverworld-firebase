@@ -37,6 +37,11 @@ export default function AmpsuiteXMLReleaseParser() {
   //   console.log(linksObj);
   // }, [linksObj]);
 
+  // useEffect(() => {
+  // console.log(firebaseReleaseObj);
+  // console.log(tracklisting);
+  // }, [firebaseReleaseObj]);
+
   // Write converted Release to Firebase
   async function sendToFirebase() {
     const docRef = await addDoc(collection(db, "releases"), firebaseReleaseObj);
@@ -156,10 +161,8 @@ export default function AmpsuiteXMLReleaseParser() {
     });
   }, [tracklisting]);
 
-  useEffect(() => {
-    // console.log(firebaseReleaseObj);
-    // console.log(tracklisting);
-  }, [firebaseReleaseObj]);
+  // Import ALL Releases
+  const [releaseIds, setReleaseIds] = useState<any[]>([]);
 
   return (
     <>

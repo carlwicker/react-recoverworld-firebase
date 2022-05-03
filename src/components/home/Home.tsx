@@ -1,6 +1,5 @@
 import FeaturedReleases from "../digital/featuredReleases/FeaturedReleases";
-import HomeCarousel from "../homeCarousel/HomeCarousel";
-import { useEffect } from "react";
+import HomeCarousel from "./homeCarousel/HomeCarousel";
 
 interface IHome {
   isAdmin: boolean;
