@@ -23,7 +23,6 @@ export default function Contact() {
         "https://us-central1-recoverworld-d5ab4.cloudfunctions.net/app/email/send",
         sendObj
       )
-      .then(() => console.log(sendObj))
       .catch((err) => {
         console.error(err);
       });

@@ -73,15 +73,19 @@ export default function NavBar({ isAdmin, labels }: INavBar) {
             })}
           </NavDropdown>
 
-          <NavLink as={Link} to="/merchandise" eventKey="2">
+          <NavLink as={Link} to="" eventKey="2">
+            MP3/WAV
+          </NavLink>
+
+          <NavLink as={Link} to="/merchandise" eventKey="3">
             Merchandise
           </NavLink>
 
-          <Nav.Link as={Link} to="/demos" eventKey="3">
+          <Nav.Link as={Link} to="/demos" eventKey="4">
             Demos
           </Nav.Link>
 
-          <Nav.Link as={Link} to="/contact" eventKey="4">
+          <Nav.Link as={Link} to="/contact" eventKey="5">
             Contact
           </Nav.Link>
 
