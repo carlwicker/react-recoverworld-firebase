@@ -85,11 +85,11 @@ export default function NavBar({ isAdmin, labels }: INavBar) {
             Contact
           </Nav.Link>
 
-          {isAdmin ? (
+          {isAdmin && (
             <Nav.Link as={Link} to="/admin" eventKey="5">
               Admin
             </Nav.Link>
-          ) : null}
+          )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

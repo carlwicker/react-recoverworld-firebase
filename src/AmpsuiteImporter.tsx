@@ -122,6 +122,7 @@ export default function Test() {
         releaseObj.trackListing = formattedTrackArr;
       }
       console.log(releaseObj);
+
       // addToFirebase(releaseObj);
     });
   }

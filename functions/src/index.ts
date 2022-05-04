@@ -1,6 +1,7 @@
 import * as functions from "firebase-functions";
 import axios from "axios";
 import { XMLParser } from "fast-xml-parser";
+import * as sgMail from "@sendgrid/mail";
 
 const express = require("express");
 const app = express();
@@ -56,6 +57,30 @@ app.get("/importAll", (req: any, res: any, next: any) => {
       .catch((err) => next(err));
   }
   getReleaseXML();
+});
+
+// Send Grid Email
+app.post("/email/send", (req: any, res: any, next: any) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
+  const msg = {
+    to: "hello@carlwicker.co.uk",
+    from: "hello@carlwicker.co.uk",
+    subject: "RecoverWorld Contact Form",
+    text: req.body.email + ": " + req.body.msg,
+    // html: req.body.email + ": " + req.body.msg,
+  };
+
+  sgMail.setApiKey(process.env.REACT_APP_SENDGRID_API_KEY as string);
+  sgMail
+    .send(msg)
+    .then(() => {
+      console.log("Email sent");
+      res.send(msg);
+    })
+    .catch((error: any) => {
+      console.error(error);
+    });
 });
 
 exports.app = functions.https.onRequest(app);

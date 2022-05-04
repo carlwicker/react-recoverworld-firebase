@@ -48,7 +48,9 @@ function App() {
   }, []);
 
   return (
+    // Wrapper for experimental parralax
     <div className="wrapper">
+      {/* BootStrap theme provider */}
       <ThemeProvider
         breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
       >
