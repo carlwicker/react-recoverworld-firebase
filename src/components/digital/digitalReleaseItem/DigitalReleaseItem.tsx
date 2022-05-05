@@ -19,10 +19,6 @@ export default function DigitalReleaseItem({
   updateReleaseList,
   isAdmin,
 }: IDigitalReleaseItem) {
-  useEffect(() => {
-    console.log(release);
-  }, [release]);
-
   async function deleteRelease(releaseId: string) {
     await deleteDoc(doc(db, "releases", releaseId));
     updateReleaseList();

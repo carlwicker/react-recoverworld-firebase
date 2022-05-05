@@ -6,11 +6,6 @@ import axios from "axios";
 export default function Contact() {
   const [email, setEmail] = useState<string>("");
   const [msg, setMsg] = useState<string>("");
-
-  useEffect(() => {
-    console.log(email, msg);
-  }, [email, msg]);
-
   const navigate = useNavigate();
 
   function sendMessageToSendGrid() {
@@ -18,14 +13,9 @@ export default function Contact() {
       email: email,
       msg: msg,
     };
-    axios
-      .post(
-        "https://us-central1-recoverworld-d5ab4.cloudfunctions.net/app/email/send",
-        sendObj
-      )
-      .catch((err) => {
-        console.error(err);
-      });
+    const url =
+      "https://us-central1-recoverworld-d5ab4.cloudfunctions.net/app/email/send";
+    axios.post(url, sendObj).catch((err) => console.error(err));
   }
 
   return (
