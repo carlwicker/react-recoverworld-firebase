@@ -8,4 +8,5 @@ export default interface ITrack {
   youtube: string;
   recoverworld: string;
   itunes: string;
+  ampsuiteId: number;
 }

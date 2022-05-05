@@ -25,6 +25,7 @@ export default function AddTrackModal({
     soundcloud: "",
     recoverworld: "",
     itunes: "",
+    ampsuiteId: 0,
   };
 
   useEffect(() => {

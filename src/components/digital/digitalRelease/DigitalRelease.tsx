@@ -51,7 +51,14 @@ export default function DigitalRelease({}: IDigitalRelease) {
           {/* Track Listing */}
           <div className={css["release-tracklisting"]}>
             {release.trackListing?.map((track: ITrack, index: number) => {
-              return <DigitalTrack track={track} key={index} index={index} />;
+              return (
+                <DigitalTrack
+                  track={track}
+                  key={index}
+                  index={index}
+                  ampsuiteId={release.ampsuiteReleaseId}
+                />
+              );
             })}
           </div>
         </Col>

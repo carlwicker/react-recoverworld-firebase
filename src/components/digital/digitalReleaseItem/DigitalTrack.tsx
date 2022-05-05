@@ -6,9 +6,14 @@ import ITrack from "../../../interfaces/ITrack";
 interface IDigitalTrack {
   track: ITrack;
   index: any;
+  ampsuiteId: number;
 }
 
-export default function DigitalTrack({ track, index }: IDigitalTrack) {
+export default function DigitalTrack({
+  track,
+  index,
+  ampsuiteId,
+}: IDigitalTrack) {
   return (
     <>
       <div className={css["digital-track"]}>

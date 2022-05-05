@@ -6,6 +6,7 @@ import { Card, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ITrack from "../../../interfaces/ITrack";
 import DigitalTrack from "./DigitalTrack";
+import { useEffect } from "react";
 
 interface IDigitalReleaseItem {
   release: IRelease;
@@ -18,6 +19,10 @@ export default function DigitalReleaseItem({
   updateReleaseList,
   isAdmin,
 }: IDigitalReleaseItem) {
+  useEffect(() => {
+    console.log(release);
+  }, [release]);
+
   async function deleteRelease(releaseId: string) {
     await deleteDoc(doc(db, "releases", releaseId));
     updateReleaseList();
@@ -67,7 +72,14 @@ export default function DigitalReleaseItem({
         {/* Track Listing */}
         <div className={css["release-tracklisting"]}>
           {release?.trackListing?.map((track: ITrack, index: number) => {
-            return <DigitalTrack track={track} key={index} index={index} />;
+            return (
+              <DigitalTrack
+                track={track}
+                key={index}
+                index={index}
+                ampsuiteId={release?.ampsuiteReleaseId}
+              />
+            );
           })}
         </div>
 
