@@ -12,7 +12,9 @@ export default function DigitalTrack({ track, index }: IDigitalTrack) {
   return (
     <>
       <div className={css["digital-track"]}>
-        <div className={css["digital-track-number"]}>{index + 1 + "  "}</div>
+        <div className={css["digital-track-number"]}>
+          {index ? ("0" + (index + 1)).slice(-2) : "0" + (index + 1)}
+        </div>
 
         <div className={css["digital-track-icons"]} style={{}}>
           {track.youtube !== "" && (
