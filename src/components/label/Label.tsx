@@ -44,9 +44,13 @@ export default function Label({ isAdmin }: ILabel) {
     let filteredArr: any = [];
     function filterReleases() {
       releases?.forEach((release: IRelease) => {
-        release?.artist?.toLowerCase().includes(search) ||
-          (release?.title?.toLowerCase().includes(search) &&
-            filteredArr.push(release));
+        console.log(release);
+        if (
+          release?.artist?.toLowerCase().includes(search) ||
+          release?.title?.toString().toLowerCase().includes(search)
+        ) {
+          filteredArr.push(release);
+        }
       });
     }
     filterReleases();
