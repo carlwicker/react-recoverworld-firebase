@@ -10,7 +10,11 @@ import AddForm from "./AddForm";
 import TrackList from "./TrackList";
 import AddFormButtons from "./AddFormButtons";
 
-export default function AddRelease() {
+interface IAddRelease {
+  isAdmin: boolean;
+}
+
+export default function AddRelease({ isAdmin }: IAddRelease) {
   const [release, setRelease] = useState<IRelease | {}>({});
   const [tracks, setTracks] = useState<ITrack[] | []>([]);
   const [showAddTrackModal, setAddShowTrackModal] = useState<boolean>(false);
@@ -62,49 +66,53 @@ export default function AddRelease() {
 
   return (
     <>
-      {/* Add / Edit Modals */}
-      <AddTrackModal
-        showAddTrackModal={showAddTrackModal}
-        hideTrackModal={hideAddTrackModal}
-        applyTrackToTracklisting={applyTrackToTracklisting}
-      />
+      {isAdmin && (
+        <>
+          {/* Add / Edit Modals */}
+          <AddTrackModal
+            showAddTrackModal={showAddTrackModal}
+            hideTrackModal={hideAddTrackModal}
+            applyTrackToTracklisting={applyTrackToTracklisting}
+          />
 
-      <EditTrackModal
-        showEditTrackModal={showEditTrackModal}
-        hideEditTrackModal={hideEditTrackModal}
-        applyEditToTracklisting={applyEditToTracklisting}
-        tracks={tracks}
-        trackIndex={trackIndex}
-      />
+          <EditTrackModal
+            showEditTrackModal={showEditTrackModal}
+            hideEditTrackModal={hideEditTrackModal}
+            applyEditToTracklisting={applyEditToTracklisting}
+            tracks={tracks}
+            trackIndex={trackIndex}
+          />
 
-      {/* Main Page */}
-      <Container>
-        <Row style={{ textAlign: "left" }}>
-          <h1>Add Release</h1>
-          <Form
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            {/* Track Details Form */}
-            <AddForm setRelease={setRelease} release={release} />
+          {/* Main Page */}
+          <Container>
+            <Row style={{ textAlign: "left" }}>
+              <h1>Add Release</h1>
+              <Form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
+                {/* Track Details Form */}
+                <AddForm setRelease={setRelease} release={release} />
 
-            {/* Tracklisting Table */}
-            <TrackList
-              tracks={tracks}
-              setEditShowTrackModal={setEditShowTrackModal}
-              setTrackIndex={setTrackIndex}
-              deleteTrackFromTrackListing={deleteTrackFromTrackListing}
-            />
+                {/* Tracklisting Table */}
+                <TrackList
+                  tracks={tracks}
+                  setEditShowTrackModal={setEditShowTrackModal}
+                  setTrackIndex={setTrackIndex}
+                  deleteTrackFromTrackListing={deleteTrackFromTrackListing}
+                />
 
-            {/* Buttons */}
-            <AddFormButtons
-              setAddShowTrackModal={setAddShowTrackModal}
-              addToFireStoreReleases={addToFireStoreReleases}
-            />
-          </Form>
-        </Row>
-      </Container>
+                {/* Buttons */}
+                <AddFormButtons
+                  setAddShowTrackModal={setAddShowTrackModal}
+                  addToFireStoreReleases={addToFireStoreReleases}
+                />
+              </Form>
+            </Row>
+          </Container>
+        </>
+      )}
     </>
   );
 }

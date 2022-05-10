@@ -71,19 +71,31 @@ function App() {
                 path="merchandise"
                 element={<Merchandise isAdmin={isAdmin} />}
               />
-              <Route path="digital/addRelease" element={<AddRelease />} />
-              <Route path="digital/:releaseId/edit" element={<EditRelease />} />
-              <Route path="merchandise/add" element={<AddMerchandise />} />
-              <Route path="merchandise/:id/edit" element={<EditProduct />} />
+              <Route
+                path="digital/addRelease"
+                element={<AddRelease isAdmin={isAdmin} />}
+              />
+              <Route
+                path="digital/:releaseId/edit"
+                element={<EditRelease isAdmin={isAdmin} />}
+              />
+              <Route
+                path="merchandise/add"
+                element={<AddMerchandise isAdmin={isAdmin} />}
+              />
+              <Route
+                path="merchandise/:id/edit"
+                element={<EditProduct isAdmin={isAdmin} />}
+              />
               <Route path="digital/:catNum" element={<Release />} />
               <Route
                 path="digital/label/:label"
                 element={<Label isAdmin={isAdmin} />}
               />
-              <Route path="/admin" element={<Admin />} />
+              <Route path="/admin" element={<Admin isAdmin={isAdmin} />} />
               <Route
                 path="/admin/import"
-                element={<AmpsuiteXMLReleaseParser />}
+                element={<AmpsuiteXMLReleaseParser isAdmin={isAdmin} />}
               />
               <Route
                 path="/login"

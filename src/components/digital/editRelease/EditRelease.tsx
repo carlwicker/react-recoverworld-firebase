@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Form } from "react-bootstrap";
+import { Row, Form } from "react-bootstrap";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { db } from "../../../firebase";
@@ -10,7 +10,11 @@ import TrackList from "./TrackList";
 import EditForm from "./EditForm";
 import EditFomButtons from "./EditFomButtons";
 
-export default function EditRelease() {
+interface IEditRelease {
+  isAdmin: boolean;
+}
+
+export default function EditRelease({ isAdmin }: IEditRelease) {
   let { releaseId }: any = useParams();
   const [releaseObj, setReleaseObj] = useState<any | {}>({});
 
@@ -87,48 +91,52 @@ export default function EditRelease() {
 
   return (
     <>
-      {/* Add / Edit Modals */}
-      <AddTrackModal
-        showAddTrackModal={showAddTrackModal}
-        hideTrackModal={hideAddTrackModal}
-        applyTrackToTracklisting={applyTrackToTracklisting}
-      />
+      {isAdmin && (
+        <>
+          {/* Add / Edit Modals */}
+          <AddTrackModal
+            showAddTrackModal={showAddTrackModal}
+            hideTrackModal={hideAddTrackModal}
+            applyTrackToTracklisting={applyTrackToTracklisting}
+          />
 
-      <EditTrackModal
-        showEditTrackModal={showEditTrackModal}
-        hideEditTrackModal={hideEditTrackModal}
-        applyEditToTracklisting={applyEditToTracklisting}
-        tracks={tracks}
-        trackIndex={trackIndex}
-      />
-
-      {/* Main Page */}
-      <Row style={{ textAlign: "left" }}>
-        <h2>Edit Release</h2>
-        <Form
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          {/* Track Details Form */}
-          <EditForm releaseObj={releaseObj} setReleaseObj={setReleaseObj} />
-
-          {/* Tracklisting Table */}
-          <TrackList
+          <EditTrackModal
+            showEditTrackModal={showEditTrackModal}
+            hideEditTrackModal={hideEditTrackModal}
+            applyEditToTracklisting={applyEditToTracklisting}
             tracks={tracks}
-            setTrackIndex={setTrackIndex}
-            setEditShowTrackModal={setEditShowTrackModal}
             trackIndex={trackIndex}
-            deleteTrackFromTrackListing={deleteTrackFromTrackListing}
           />
 
-          {/* Buttons */}
-          <EditFomButtons
-            setAddShowTrackModal={setAddShowTrackModal}
-            updateFireStoreReleases={updateFireStoreReleases}
-          />
-        </Form>
-      </Row>
+          {/* Main Page */}
+          <Row style={{ textAlign: "left" }}>
+            <h2>Edit Release</h2>
+            <Form
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              {/* Track Details Form */}
+              <EditForm releaseObj={releaseObj} setReleaseObj={setReleaseObj} />
+
+              {/* Tracklisting Table */}
+              <TrackList
+                tracks={tracks}
+                setTrackIndex={setTrackIndex}
+                setEditShowTrackModal={setEditShowTrackModal}
+                trackIndex={trackIndex}
+                deleteTrackFromTrackListing={deleteTrackFromTrackListing}
+              />
+
+              {/* Buttons */}
+              <EditFomButtons
+                setAddShowTrackModal={setAddShowTrackModal}
+                updateFireStoreReleases={updateFireStoreReleases}
+              />
+            </Form>
+          </Row>
+        </>
+      )}
     </>
   );
 }

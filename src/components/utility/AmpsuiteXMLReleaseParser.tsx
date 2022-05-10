@@ -5,7 +5,13 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 
-export default function AmpsuiteXMLReleaseParser() {
+interface IAmpsuiteXMLReleaseParser {
+  isAdmin: boolean;
+}
+
+export default function AmpsuiteXMLReleaseParser({
+  isAdmin,
+}: IAmpsuiteXMLReleaseParser) {
   const [jsonData, setJsonData] = useState<any>([]);
   const [ampsuiteId, setAmpsuiteId] = useState<string | undefined>();
   const [tracklisting, setTracklisting] = useState<any>([]);
@@ -22,7 +28,7 @@ export default function AmpsuiteXMLReleaseParser() {
   const [linksObj, setLinksObj] = useState<any>({});
   const navigate = useNavigate();
 
-  var importedReleases = require("../../json/importAll.json");
+  // var importedReleases = require("../../json/importAll.json");
 
   // Get Ampsuite Release from Google Cloud Functions
   async function getData() {
@@ -44,9 +50,9 @@ export default function AmpsuiteXMLReleaseParser() {
   // console.log(tracklisting);
   // }, [firebaseReleaseObj]);
 
-  useEffect(() => {
-    console.log(importedReleases);
-  }, [importedReleases]);
+  // useEffect(() => {
+  // console.log(importedReleases);
+  // }, [importedReleases]);
 
   // Write converted Release to Firebase
   async function sendToFirebase() {
@@ -173,96 +179,100 @@ export default function AmpsuiteXMLReleaseParser() {
   // create a JSON file.  Due to the size of this file it's best saved
   // and then imported to here via a require for further processing below.
 
-  function processReleases() {
-    importedReleases.forEach((release: any) => {
-      setJsonData(release);
+  // function processReleases() {
+  //   importedReleases.forEach((release: any) => {
+  //     setJsonData(release);
 
-      setTimeout(() => {}, 5000);
+  //     setTimeout(() => {}, 5000);
 
-      console.log(firebaseReleaseObj);
-      // sendToFirebase();
-    });
-  }
+  //     console.log(firebaseReleaseObj);
+  //     // sendToFirebase();
+  //   });
+  // }
 
   return (
     <>
-      <Form
-        onSubmit={(e) => {
-          e.preventDefault();
-          console.log(ampsuiteId);
-          getData();
-        }}
-      >
-        <Row>
-          <h2>AmpSuite XML Release Parser</h2>
+      {isAdmin && (
+        <>
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              console.log(ampsuiteId);
+              getData();
+            }}
+          >
+            <Row>
+              <h2>AmpSuite XML Release Parser</h2>
 
-          <Col>
-            <Form.Control
-              type="number"
-              placeholder="Ampsuite Release ID"
-              maxLength={5}
-              onChange={(e: any) => {
-                setAmpsuiteId(e.target.value);
-              }}
-            />
-          </Col>
-          <Col style={{ display: "flex", gap: "10px" }}>
-            <Button type="submit">Fetch Release</Button>
-            <Button
+              <Col>
+                <Form.Control
+                  type="number"
+                  placeholder="Ampsuite Release ID"
+                  maxLength={5}
+                  onChange={(e: any) => {
+                    setAmpsuiteId(e.target.value);
+                  }}
+                />
+              </Col>
+              <Col style={{ display: "flex", gap: "10px" }}>
+                <Button type="submit">Fetch Release</Button>
+                {/* <Button
               onClick={(e) => {
                 processReleases();
               }}
               variant="danger"
             >
               Mass Import
-            </Button>
-          </Col>
-        </Row>
-      </Form>
+            </Button> */}
+              </Col>
+            </Row>
+          </Form>
 
-      <Row style={{ padding: "20px 0" }}>
-        {tracklisting[0] !== undefined && (
-          <>
-            <div>Cat Number: {jsonData?.cat_no}</div>
-            <div>Artist: {jsonData?.artists?.artist}</div>
-            <div>Title: {jsonData?.title}</div>
-            <div>Label: {jsonData?.label}</div>
-            <div>Release Date: {jsonData?.release_date}</div>
-            <h3 style={{ marginTop: "20px" }}>Tracklisting:</h3>{" "}
-          </>
-        )}
+          <Row style={{ padding: "20px 0" }}>
+            {tracklisting[0] !== undefined && (
+              <>
+                <div>Cat Number: {jsonData?.cat_no}</div>
+                <div>Artist: {jsonData?.artists?.artist}</div>
+                <div>Title: {jsonData?.title}</div>
+                <div>Label: {jsonData?.label}</div>
+                <div>Release Date: {jsonData?.release_date}</div>
+                <h3 style={{ marginTop: "20px" }}>Tracklisting:</h3>{" "}
+              </>
+            )}
 
-        {tracklisting?.map((track: any, index: number) => {
-          return (
-            <div key={index}>
-              {track !== undefined && (
-                <div>
-                  {index + 1}: {track?.title} - {track?.artist} (
-                  {track?.mix_name})
+            {tracklisting?.map((track: any, index: number) => {
+              return (
+                <div key={index}>
+                  {track !== undefined && (
+                    <div>
+                      {index + 1}: {track?.title} - {track?.artist} (
+                      {track?.mix_name})
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          );
-        })}
-      </Row>
-      <Form
-        onSubmit={(e) => {
-          sendToFirebase();
-          navigate("../");
-        }}
-      >
-        <Row>
-          <div style={{ marginBottom: "50px" }}>
-            <Button
-              variant={tracklisting[0] !== undefined ? "primary" : "danger"}
-              disabled={tracklisting[0] === undefined}
-              type="submit"
-            >
-              Import Release
-            </Button>
-          </div>
-        </Row>
-      </Form>
+              );
+            })}
+          </Row>
+          <Form
+            onSubmit={(e) => {
+              sendToFirebase();
+              navigate("../");
+            }}
+          >
+            <Row>
+              <div style={{ marginBottom: "50px" }}>
+                <Button
+                  variant={tracklisting[0] !== undefined ? "primary" : "danger"}
+                  disabled={tracklisting[0] === undefined}
+                  type="submit"
+                >
+                  Import Release
+                </Button>
+              </div>
+            </Row>
+          </Form>
+        </>
+      )}
     </>
   );
 }

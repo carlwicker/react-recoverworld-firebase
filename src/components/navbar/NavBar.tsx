@@ -1,4 +1,4 @@
-import { NavDropdown, Navbar, Nav, NavLink, Badge } from "react-bootstrap";
+import { NavDropdown, Navbar, Nav, NavLink } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import css from "./NavBar.module.css";
 
@@ -74,7 +74,7 @@ export default function NavBar({ isAdmin, labels }: INavBar) {
           </NavDropdown>
 
           {/* <NavLink as={Link} to="" eventKey="2">
-            MP3/WAV<Badge>Coming Soon</Badge>
+            MP3/WAV
           </NavLink> */}
 
           <NavLink as={Link} to="/merchandise" eventKey="3">
