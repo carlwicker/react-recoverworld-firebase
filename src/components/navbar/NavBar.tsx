@@ -73,9 +73,14 @@ export default function NavBar({ isAdmin, labels }: INavBar) {
             })}
           </NavDropdown>
 
-          {/* <NavLink as={Link} to="" eventKey="2">
+          <NavLink
+            eventKey="2"
+            href="https://store.recoverworld.com"
+            target="_blank"
+            rel="noreferrer"
+          >
             MP3/WAV
-          </NavLink> */}
+          </NavLink>
 
           <NavLink as={Link} to="/merchandise" eventKey="3">
             Merchandise
