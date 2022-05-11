@@ -44,6 +44,8 @@ export default function HomeCarousel() {
                   gap: "10px",
                   alignItems: "center",
                 }}
+                href="https://soundcloud.com/recoverworld"
+                target="_blank"
               >
                 <FaSoundcloud style={{ fontSize: "2em" }} />
                 <div style={{ opacity: "1", textAlign: "left" }}>
