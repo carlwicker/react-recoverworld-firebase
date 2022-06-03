@@ -24,6 +24,8 @@ import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "./firebase";
 import FeaturedReleases from "./components/digital/featuredReleases/FeaturedReleases";
 import Test from "./AmpsuiteImporter";
+
+import { LazyVideo } from "react-lazy-media";
 import video from "./img/theCube.webm";
 import img from "./img/theCube..webp";
 
@@ -51,9 +53,17 @@ function App() {
 
   return (
     <>
-      <video autoPlay muted loop id="the-cube" poster={img}>
-        <source src={video} type="video/webm" />
-      </video>
+      <LazyVideo
+        src={video}
+        poster={img}
+        id="the-cube"
+        controls={false}
+        autoplay={true}
+        loop={true}
+        muted={true}
+        preload={false}
+      />
+
       <div className="wrapper">
         {/* BootStrap theme provider */}
         <ThemeProvider
