@@ -24,6 +24,8 @@ import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "./firebase";
 import FeaturedReleases from "./components/digital/featuredReleases/FeaturedReleases";
 import Test from "./AmpsuiteImporter";
+import video from "./img/theCube.webm";
+import img from "./img/theCube..webp";
 
 function App() {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
@@ -48,68 +50,72 @@ function App() {
   }, []);
 
   return (
-    // Wrapper for experimental parralax
-    <div className="wrapper">
-      {/* BootStrap theme provider */}
-      <ThemeProvider
-        breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
-      >
-        <Container>
+    <>
+      <video autoPlay muted loop id="the-cube" poster={img}>
+        <source src={video} type="video/webm" />
+      </video>
+      <div className="wrapper">
+        {/* BootStrap theme provider */}
+        <ThemeProvider
+          breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
+        >
           <div className="App">
-            <NavBar isAdmin={isAdmin} labels={labels} />
-            <Routes>
-              <Route path="/" element={<Home isAdmin={isAdmin} />} />
-              <Route path="about" element={<About />} />
-              <Route path="demos" element={<Demos />} />
-              <Route path="contact" element={<Contact />} />
-              <Route path="digital" element={<Digital isAdmin={isAdmin} />} />
-              <Route
-                path="digital/new"
-                element={<FeaturedReleases isAdmin={isAdmin} />}
-              />
-              <Route
-                path="merchandise"
-                element={<Merchandise isAdmin={isAdmin} />}
-              />
-              <Route
-                path="digital/addRelease"
-                element={<AddRelease isAdmin={isAdmin} />}
-              />
-              <Route
-                path="digital/:releaseId/edit"
-                element={<EditRelease isAdmin={isAdmin} />}
-              />
-              <Route
-                path="merchandise/add"
-                element={<AddMerchandise isAdmin={isAdmin} />}
-              />
-              <Route
-                path="merchandise/:id/edit"
-                element={<EditProduct isAdmin={isAdmin} />}
-              />
-              <Route path="digital/:catNum" element={<Release />} />
-              <Route
-                path="digital/label/:label"
-                element={<Label isAdmin={isAdmin} />}
-              />
-              <Route path="/admin" element={<Admin isAdmin={isAdmin} />} />
-              <Route
-                path="/admin/import"
-                element={<AmpsuiteXMLReleaseParser isAdmin={isAdmin} />}
-              />
-              <Route
-                path="/login"
-                element={<Login setUser={setUser} setIsAdmin={setIsAdmin} />}
-              />
+            <Container>
+              <NavBar isAdmin={isAdmin} labels={labels} />
+              <Routes>
+                <Route path="/" element={<Home isAdmin={isAdmin} />} />
+                <Route path="about" element={<About />} />
+                <Route path="demos" element={<Demos />} />
+                <Route path="contact" element={<Contact />} />
+                <Route path="digital" element={<Digital isAdmin={isAdmin} />} />
+                <Route
+                  path="digital/new"
+                  element={<FeaturedReleases isAdmin={isAdmin} />}
+                />
+                <Route
+                  path="merchandise"
+                  element={<Merchandise isAdmin={isAdmin} />}
+                />
+                <Route
+                  path="digital/addRelease"
+                  element={<AddRelease isAdmin={isAdmin} />}
+                />
+                <Route
+                  path="digital/:releaseId/edit"
+                  element={<EditRelease isAdmin={isAdmin} />}
+                />
+                <Route
+                  path="merchandise/add"
+                  element={<AddMerchandise isAdmin={isAdmin} />}
+                />
+                <Route
+                  path="merchandise/:id/edit"
+                  element={<EditProduct isAdmin={isAdmin} />}
+                />
+                <Route path="digital/:catNum" element={<Release />} />
+                <Route
+                  path="digital/label/:label"
+                  element={<Label isAdmin={isAdmin} />}
+                />
+                <Route path="/admin" element={<Admin isAdmin={isAdmin} />} />
+                <Route
+                  path="/admin/import"
+                  element={<AmpsuiteXMLReleaseParser isAdmin={isAdmin} />}
+                />
+                <Route
+                  path="/login"
+                  element={<Login setUser={setUser} setIsAdmin={setIsAdmin} />}
+                />
 
-              <Route path="/admin/massImport" element={<Test />} />
-            </Routes>
+                <Route path="/admin/massImport" element={<Test />} />
+              </Routes>
 
-            <Social />
+              <Social />
+            </Container>
           </div>
-        </Container>
-      </ThemeProvider>
-    </div>
+        </ThemeProvider>
+      </div>
+    </>
   );
 }
 
