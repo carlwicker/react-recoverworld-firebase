@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Auth } from "../../firebase";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 interface ILogin {
   setUser: any;
@@ -31,6 +32,10 @@ export default function Login({ setUser, setIsAdmin }: ILogin) {
 
   return (
     <>
+      <Helmet>
+        <meta name="robots" content="noindex"></meta>
+      </Helmet>
+
       <h2>Login</h2>
 
       <Form

@@ -12,6 +12,7 @@ import { db } from "../../firebase";
 import { useEffect, useState } from "react";
 import EditLabelModal from "./EditLabelModal";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 interface IAdmin {
   isAdmin: boolean;
@@ -55,6 +56,10 @@ export default function Admin({ isAdmin }: IAdmin) {
 
   return (
     <>
+      <Helmet>
+        <meta name="robots" content="noindex"></meta>
+      </Helmet>
+
       {isAdmin && (
         <>
           <EditLabelModal

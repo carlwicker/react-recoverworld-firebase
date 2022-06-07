@@ -17,3 +17,4 @@ declare module "*.webp" {
 }
 
 declare module "react-lazy-media";
+declare module "react-helmet";

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Container, Button, Badge, Carousel } from "react-bootstrap";
+import { Button, Badge, Carousel } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
 import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { Helmet } from "react-helmet-async";
 
 interface IMerchandise {
   isAdmin: boolean;
@@ -41,92 +42,109 @@ export default function Merchandise({ isAdmin }: IMerchandise) {
   }
 
   return (
-    <Carousel activeIndex={indexCarousel} onSelect={handleSelect}>
-      {merchandise.map((product: any, idx: number) => {
-        return (
-          <div key={idx}>
-            {indexCarousel === idx ? (
-              <Carousel.Item
-                key={indexCarousel}
-                className="mb-2"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "400px",
-                }}
-              >
-                <Carousel.Caption>
-                  <div key={indexCarousel}>
-                    <a href={product.salesUrl} target="_blank">
-                      <Image
-                        src={product?.imageUrl}
-                        style={{ height: "250px" }}
-                      />
-                    </a>
-                    <div>
+    <>
+      <Helmet>
+        <title>RecoverWorld Online: Merchandise</title>
+        <link href="http://recoverworld.com/merchandise" />
+        <meta
+          name="keywords"
+          content="RecoverWorld, Dance Music, EDM, Trance, MP3, Wav, Digital, Techno, Chris Hampshire, AmpSuite, Music distribution, Music Publishing, Record Label, Record Label Services"
+        ></meta>
+        <meta name="author" content="Chris Hampshire"></meta>
+
+        <meta
+          property="og:image"
+          content="https://firebasestorage.googleapis.com/v0/b/recoverworld-d5ab4.appspot.com/o/theCube..webp?alt=media&token=b7f4f864-5e92-4990-b9a5-2f75215852a6"
+        />
+      </Helmet>
+
+      <Carousel activeIndex={indexCarousel} onSelect={handleSelect}>
+        {merchandise.map((product: any, idx: number) => {
+          return (
+            <div key={idx}>
+              {indexCarousel === idx ? (
+                <Carousel.Item
+                  key={indexCarousel}
+                  className="mb-2"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "400px",
+                  }}
+                >
+                  <Carousel.Caption>
+                    <div key={indexCarousel}>
                       <a href={product.salesUrl} target="_blank">
-                        <title>{product?.productName}</title>
+                        <Image
+                          src={product?.imageUrl}
+                          style={{ height: "250px" }}
+                        />
                       </a>
-                      <p
-                        style={{
-                          textTransform: "capitalize",
-                          textAlign: "center",
-                        }}
-                      >
-                        {product?.amountOfColours} Colours /{" "}
-                        {product?.amountOfSizes} sizes
-                      </p>
-                      <a href={product.salesUrl} target="_blank">
-                        <Badge
-                          pill
-                          bg="primary"
+                      <div>
+                        <a href={product.salesUrl} target="_blank">
+                          <title>{product?.productName}</title>
+                        </a>
+                        <p
                           style={{
                             textTransform: "capitalize",
                             textAlign: "center",
                           }}
                         >
-                          <div style={{ fontSize: "2em" }}>
-                            {product?.price} GBP
-                          </div>
-                        </Badge>
-                      </a>
-                      <div className="mt-3">
-                        {isAdmin ? (
-                          <div
+                          {product?.amountOfColours} Colours /{" "}
+                          {product?.amountOfSizes} sizes
+                        </p>
+                        <a href={product.salesUrl} target="_blank">
+                          <Badge
+                            pill
+                            bg="primary"
                             style={{
-                              display: "flex",
-                              gap: "10px",
-                              width: "100%",
-                              justifyContent: "center",
+                              textTransform: "capitalize",
+                              textAlign: "center",
                             }}
                           >
-                            <Link to="/merchandise/add">
-                              <Button variant="outline-primary">
-                                Add Product
-                              </Button>
-                            </Link>
-                            <Link to={product.id + "/edit"}>
-                              <Button variant="outline-warning">Edit</Button>
-                            </Link>
-                            <Button
-                              variant="outline-danger"
-                              onClick={() => {
-                                removeProductFromFirebase(product?.id);
+                            <div style={{ fontSize: "2em" }}>
+                              {product?.price} GBP
+                            </div>
+                          </Badge>
+                        </a>
+                        <div className="mt-3">
+                          {isAdmin ? (
+                            <div
+                              style={{
+                                display: "flex",
+                                gap: "10px",
+                                width: "100%",
+                                justifyContent: "center",
                               }}
                             >
-                              Remove This Product
-                            </Button>
-                          </div>
-                        ) : null}
+                              <Link to="/merchandise/add">
+                                <Button variant="outline-primary">
+                                  Add Product
+                                </Button>
+                              </Link>
+                              <Link to={product.id + "/edit"}>
+                                <Button variant="outline-warning">Edit</Button>
+                              </Link>
+                              <Button
+                                variant="outline-danger"
+                                onClick={() => {
+                                  removeProductFromFirebase(product?.id);
+                                }}
+                              >
+                                Remove This Product
+                              </Button>
+                            </div>
+                          ) : null}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Carousel.Caption>
-              </Carousel.Item>
-            ) : null}
-          </div>
-        );
-      })}
-    </Carousel>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              ) : null}
+            </div>
+          );
+        })}
+      </Carousel>
+    </>
   );
 }

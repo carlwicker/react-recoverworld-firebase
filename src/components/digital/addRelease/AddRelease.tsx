@@ -9,6 +9,7 @@ import IRelease from "../../../interfaces/IRelease";
 import AddForm from "./AddForm";
 import TrackList from "./TrackList";
 import AddFormButtons from "./AddFormButtons";
+import { Helmet } from "react-helmet-async";
 
 interface IAddRelease {
   isAdmin: boolean;
@@ -66,6 +67,10 @@ export default function AddRelease({ isAdmin }: IAddRelease) {
 
   return (
     <>
+      <Helmet>
+        <meta name="robots" content="noindex"></meta>
+      </Helmet>
+
       {isAdmin && (
         <>
           {/* Add / Edit Modals */}

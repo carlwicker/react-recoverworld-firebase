@@ -1,10 +1,26 @@
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import { Helmet } from "react-helmet-async";
 
 interface IDemos {}
 
 export default function Demos({}: IDemos) {
   return (
     <Row style={{ marginTop: "50vh" }}>
+      <Helmet>
+        <title>RecoverWorld Online: Demos</title>
+        <link href="http://recoverworld.com/demos" />
+        <meta
+          name="keywords"
+          content="RecoverWorld, Dance Music, EDM, Trance, MP3, Wav, Digital, Techno, Chris Hampshire, AmpSuite, Music distribution, Music Publishing, Record Label, Record Label Services"
+        ></meta>
+        <meta name="author" content="Chris Hampshire"></meta>
+
+        <meta
+          property="og:image"
+          content="https://firebasestorage.googleapis.com/v0/b/recoverworld-d5ab4.appspot.com/o/theCube..webp?alt=media&token=b7f4f864-5e92-4990-b9a5-2f75215852a6"
+        />
+      </Helmet>
+
       <Col md={8}>
         <p>
           We love new music and are proud to say that a significant number of

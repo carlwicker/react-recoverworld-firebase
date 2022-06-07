@@ -2,6 +2,7 @@ import { Form, InputGroup, FormControl } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../../firebase";
+import { Helmet } from "react-helmet-async";
 
 interface IAddForm {
   setRelease: any;
@@ -27,6 +28,10 @@ export default function AddForm({ setRelease, release }: IAddForm) {
 
   return (
     <>
+      <Helmet>
+        <meta name="robots" content="noindex"></meta>
+      </Helmet>
+
       <Form.Group
         className="mb-3"
         controlId="editRelease"

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import ITrack from "../../../interfaces/ITrack";
 import DigitalTrack from "../digitalReleaseItem/DigitalTrack";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 interface IDigitalRelease {}
 
@@ -29,6 +30,26 @@ export default function DigitalRelease({}: IDigitalRelease) {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{`${catNum}: ${release?.artist} - ${release?.title}`}</title>
+        <link href={`http://recoverworld.com/digital/${catNum}`} />
+        <meta name="og:description" content={`${release?.label}`}></meta>
+        <meta
+          name="og:title"
+          content={`${catNum}: ${release?.artist} - ${release?.title}`}
+        ></meta>
+        <meta name="author" content="Chris Hampshire"></meta>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
+        <meta
+          property="og:image"
+          content="https://firebasestorage.googleapis.com/v0/b/recoverworld-d5ab4.appspot.com/o/theCube..webp?alt=media&token=b7f4f864-5e92-4990-b9a5-2f75215852a6"
+        />
+      </Helmet>
+
       <h2>{catNum}</h2>
       <Row className={css["release-item"]}>
         <Col md="auto">

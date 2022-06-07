@@ -4,6 +4,7 @@ import { Row, Form, Button, Col } from "react-bootstrap";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 interface IAmpsuiteXMLReleaseParser {
   isAdmin: boolean;
@@ -192,6 +193,10 @@ export default function AmpsuiteXMLReleaseParser({
 
   return (
     <>
+      <Helmet>
+        <meta name="robots" content="noindex"></meta>
+      </Helmet>
+
       {isAdmin && (
         <>
           <Form
