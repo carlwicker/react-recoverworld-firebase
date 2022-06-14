@@ -77,7 +77,7 @@ export default function DigitalRelease({}: IDigitalRelease) {
                   track={track}
                   key={index}
                   index={index}
-                  ampsuiteId={release.ampsuiteReleaseId}
+                  ampsuiteId={release?.ampsuiteId}
                 />
               );
             })}

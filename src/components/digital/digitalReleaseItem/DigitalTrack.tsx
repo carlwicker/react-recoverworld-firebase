@@ -27,30 +27,35 @@ export default function DigitalTrack({
               <BsYoutube style={{ fontSize: "20px" }} className={css.icon} />
             </a>
           )}
-
           {track.spotify !== "" && (
             <a href={track.spotify} target="blank">
               <BsSpotify style={{ fontSize: "20px" }} className={css.icon} />
             </a>
           )}
-
           {track.soundcloud !== "" && (
             <a href={track.soundcloud} target="blank">
               <SiSoundcloud style={{ fontSize: "20px" }} className={css.icon} />
             </a>
           )}
-
           {track.beatport !== "" && (
             <a href={track.beatport} target="blank">
               <SiBeatport style={{ fontSize: "20px" }} className={css.icon} />
             </a>
           )}
-
           {track.itunes !== "" && (
             <a href={track.itunes} target="blank">
               <SiItunes style={{ fontSize: "20px" }} className={css.icon} />
             </a>
           )}
+
+          <a
+            href={`https://store.recoverworld.com/store/view_release?release=${ampsuiteId}`}
+            target="blank"
+          >
+            <div className={css.icon} style={{ fontSize: "12px" }}>
+              MP3
+            </div>
+          </a>
         </div>
 
         <div className="ms-2 me-auto">
