@@ -1,5 +1,5 @@
 # RecoverWorld Hub (TypeScript/React/Firebase)
 
-Work in Progress
+Project using React, Firebase, FireStore, Google Cloud Functions, Express & Firebase hosting.
 
-https://recoverworld-d5ab4.web.app
+https://recoverworld.com
