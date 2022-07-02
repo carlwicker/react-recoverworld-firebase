@@ -90,6 +90,14 @@ export default function NavBar({ isAdmin, labels }: INavBar) {
             Demos
           </Nav.Link>
 
+          <Nav.Link
+            href="https://chrishampshire.co.uk"
+            target="_blank"
+            eventKey="5"
+          >
+            CHRIS HAMPSHIRE
+          </Nav.Link>
+
           <Nav.Link as={Link} to="/contact" eventKey="5">
             Contact
           </Nav.Link>
