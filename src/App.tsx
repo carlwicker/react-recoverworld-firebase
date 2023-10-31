@@ -5,6 +5,8 @@ import NavBar from "./components/navbar/NavBar";
 import Home from "./components/home/Home";
 import Demos from "./components/demos/Demos";
 import Contact from "./components/contact/Contact";
+import Mastering from "./components/mastering/Mastering";
+import Studio from "./components/studio/Studio";
 import { Routes, Route } from "react-router-dom";
 import Digital from "./components/digital/Digital";
 import Social from "./components/social/Social";
@@ -93,6 +95,8 @@ function App() {
                 <Route path="about" element={<About />} />
                 <Route path="demos" element={<Demos />} />
                 <Route path="contact" element={<Contact />} />
+                <Route path="mastering" element={<Mastering />} />
+                <Route path="studio" element={<Studio />} />
                 <Route path="digital" element={<Digital isAdmin={isAdmin} />} />
                 <Route
                   path="digital/new"

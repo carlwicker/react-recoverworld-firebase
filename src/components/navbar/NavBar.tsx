@@ -98,7 +98,15 @@ export default function NavBar({ isAdmin, labels }: INavBar) {
             CHRIS HAMPSHIRE
           </Nav.Link>
 
-          <Nav.Link as={Link} to="/contact" eventKey="5">
+          <Nav.Link as={Link} to="/mastering" eventKey="6">
+            Mastering
+          </Nav.Link>
+
+          <Nav.Link as={Link} to="/studio" eventKey="7">
+            Studio
+          </Nav.Link>
+
+          <Nav.Link as={Link} to="/contact" eventKey="8">
             Contact
           </Nav.Link>
 
