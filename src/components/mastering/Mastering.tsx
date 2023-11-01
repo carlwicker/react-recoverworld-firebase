@@ -8,7 +8,7 @@ export default function Mastering({}: IMastering) {
   return (
     <div
       style={{
-        marginTop: "50vh",
+        marginTop: "30vh",
         display: "flex",
         flexDirection: "column",
       }}
